@@ -64,7 +64,7 @@ public class JavaBeans {
     private int quilometragem;
     private String imagem;
     private String carroceria;
-    private String porta;
+    private int portas;
     private String cambio;
 
     // =========================================
@@ -454,12 +454,12 @@ public class JavaBeans {
         this.carroceria = carroceria;
     }
 
-    public String getPorta() {
-        return porta;
+    public int getPortas() {
+        return portas;
     }
 
-    public void setPorta(String porta) {
-        this.porta = porta;
+    public void setPortas(int portas) {
+        this.portas = portas;
     }
 
     public String getCambio() {
