@@ -19,23 +19,18 @@ public class DAO {
     private final String password = "";
 
     public Connection conectar() {
+    	Connection conn = null;
 
-        Connection conn = null;
+    	try {
+    		Class.forName("com.mysql.cj.jdbc.Driver");
+    		conn = DriverManager.getConnection(url, user, password);
+    		
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		
+    	}
 
-        try {
-
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            conn = DriverManager.getConnection(url, user, password);
-
-        } catch (Exception e) {
-
-            System.out.println(e);
-
-        }
-
-        return conn;
-
+    	return conn;
     }
 
     // =========================================
@@ -88,42 +83,30 @@ public class DAO {
     // LOGIN USUÁRIO
     // =========================================
 
-    public boolean loginUsuario(JavaBeans usuario) {
+   public boolean loginUsuario(JavaBeans usuario) {
 
-        String sql =
-        "SELECT * FROM usuarios WHERE email=? AND senha=?";
+		String sql = "SELECT * FROM usuarios WHERE email=? AND senha=?";
+		boolean acesso = false;
 
-        boolean acesso = false;
+		try (Connection con = conectar();
+			 PreparedStatement pst = con.prepareStatement(sql)) {
 
-        try {
+			pst.setString(1, usuario.getEmail());
+			pst.setString(2, usuario.getSenha());
 
-            Connection con = conectar();
+			try (ResultSet rs = pst.executeQuery()) {
+				if (rs.next()) {
+					acesso = true;
+				}
+			}
 
-            PreparedStatement pst = con.prepareStatement(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-            pst.setString(1, usuario.getEmail());
-            pst.setString(2, usuario.getSenha());
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                acesso = true;
-
-            }
-
-            con.close();
-
-        } catch (Exception e) {
-
-            System.out.println(e);
-
-        }
-
-        return acesso;
-
-    }
-
+		return acesso;
+	}
+   
     // =========================================
     // LISTAR USUÁRIOS
     // =========================================
@@ -338,7 +321,7 @@ public class DAO {
             pst.setDouble(5, anuncio.getPreco());
             pst.setInt(6, anuncio.getQuilometragem());
             pst.setString(7, anuncio.getCambio());
-            pst.setString(8, anuncio.getPorta());
+            pst.setInt(8, anuncio.getPortas());
             pst.setString(9, anuncio.getFinalPlaca());
             pst.setString(10, anuncio.getCidade());
             pst.setString(11, anuncio.getEstado());
@@ -362,49 +345,39 @@ public class DAO {
 
     public ArrayList<JavaBeans> listarAnuncios() {
 
-        ArrayList<JavaBeans> lista = new ArrayList<>();
+    	ArrayList<JavaBeans> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM veiculos_venda";
+    	String sql = "SELECT * FROM veiculos_venda";
 
-        try {
+    	try (Connection con = conectar();
+    		 PreparedStatement pst = con.prepareStatement(sql);
+    		 ResultSet rs = pst.executeQuery()) {
 
-            Connection con = conectar();
+    		while (rs.next()) {
 
-            PreparedStatement pst = con.prepareStatement(sql);
+    			JavaBeans anuncio = new JavaBeans();
 
-            ResultSet rs = pst.executeQuery();
+    			anuncio.setIdVenda(rs.getInt("id_venda"));
+    			anuncio.setIdUsuario(rs.getInt("id_usuario"));
+    			anuncio.setIdCarro(rs.getInt("id_carro"));
+    			anuncio.setTituloAnuncio(rs.getString("titulo_anuncio"));
+    			anuncio.setDescricao(rs.getString("descricao"));
+    			anuncio.setPreco(rs.getDouble("preco"));
+    			anuncio.setQuilometragem(rs.getInt("km_rodados"));
+    			anuncio.setCambio(rs.getString("cambio"));
+    			anuncio.setPortas(rs.getInt("portas")); // ✔ CORRIGIDO
+    			anuncio.setFinalPlaca(rs.getString("final_placa"));
+    			anuncio.setCidade(rs.getString("cidade"));
+    			anuncio.setEstado(rs.getString("estado"));
 
-            while (rs.next()) {
+    			lista.add(anuncio);
+    		}
 
-                JavaBeans anuncio = new JavaBeans();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
 
-                anuncio.setIdVenda(rs.getInt("id_venda"));
-                anuncio.setIdUsuario(rs.getInt("id_usuario"));
-                anuncio.setIdCarro(rs.getInt("id_carro"));
-                anuncio.setTituloAnuncio(rs.getString("titulo_anuncio"));
-                anuncio.setDescricao(rs.getString("descricao"));
-                anuncio.setPreco(rs.getDouble("preco"));
-                anuncio.setQuilometragem(rs.getInt("km_rodados"));
-                anuncio.setCambio(rs.getString("cambio"));
-                anuncio.setPorta(rs.getString("portas"));
-                anuncio.setFinalPlaca(rs.getString("final_placa"));
-                anuncio.setCidade(rs.getString("cidade"));
-                anuncio.setEstado(rs.getString("estado"));
-
-                lista.add(anuncio);
-
-            }
-
-            con.close();
-
-        } catch (Exception e) {
-
-            System.out.println(e);
-
-        }
-
-        return lista;
-
+    	return lista;
     }
 
     // =========================================
@@ -511,4 +484,6 @@ public JavaBeans buscarAnuncio(int idVenda) {
 
     return anuncio;
 }
+
+
 }
