@@ -42,32 +42,47 @@ public class DAO {
     // CADASTRAR USUÁRIO
     // =========================================
 
-    public void cadastrarUsuario(JavaBeans usuario) {
+   public int cadastrarUsuario(JavaBeans usuario) {
 
-        String sql =
-        "INSERT INTO usuarios(nome,email,senha,telefone,cpf,tipo_usuario) VALUES(?,?,?,?,?,?)";
+    int idGerado = 0;
 
-        try (
-            Connection con = conectar();
-            PreparedStatement pst = con.prepareStatement(sql)
-        ) {
+    String sql =
+    "INSERT INTO usuarios(nome,email,senha,telefone,cpf,tipo_usuario) VALUES(?,?,?,?,?,?)";
 
-            pst.setString(1, usuario.getNome());
-            pst.setString(2, usuario.getEmail());
-            pst.setString(3, usuario.getSenha());
-            pst.setString(4, usuario.getNumeroTelefone());
-            pst.setString(5, usuario.getCpf());
-            pst.setString(6, usuario.getTipoUsuario());
+    try {
 
-            pst.executeUpdate();
+        Connection con = conectar();
 
-        } catch (Exception e) {
+        PreparedStatement pst =
+        con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-            System.out.println(e);
+        pst.setString(1, usuario.getNome());
+        pst.setString(2, usuario.getEmail());
+        pst.setString(3, usuario.getSenha());
+        pst.setString(4, usuario.getNumeroTelefone());
+        pst.setString(5, usuario.getCpf());
+        pst.setString(6, usuario.getTipoUsuario());
+
+        pst.executeUpdate();
+
+        ResultSet rs = pst.getGeneratedKeys();
+
+        if (rs.next()) {
+
+            idGerado = rs.getInt(1);
 
         }
 
+        con.close();
+
+    } catch (Exception e) {
+
+        System.out.println(e);
+
     }
+
+    return idGerado;
+}
 
     // =========================================
     // LOGIN USUÁRIO
