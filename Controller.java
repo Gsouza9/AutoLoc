@@ -367,15 +367,26 @@ public class Controller extends HttpServlet {
         response.sendRedirect("listarAnuncios");
     }
 
-    // =========================================================
-    // EDITAR ANÚNCIO
-    // =========================================================
+   // =========================================================
+   // EDITAR ANÚNCIO
+   // =========================================================
 
-    protected void editarAnuncio(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+protected void editarAnuncio(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
 
-        response.sendRedirect("listarAnuncios");
-    }
+    int idVenda = Integer.parseInt(
+            request.getParameter("idVenda")
+    );
+
+    JavaBeans anuncio = dao.buscarAnuncio(idVenda);
+
+    request.setAttribute("anuncio", anuncio);
+
+    RequestDispatcher rd =
+            request.getRequestDispatcher("editarAnuncio.jsp");
+
+    rd.forward(request, response);
+}
 
     // =========================================================
     // UPDATE ANÚNCIO
