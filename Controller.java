@@ -167,10 +167,10 @@ public class Controller extends HttpServlet {
         empresa.setTipoUsuario("EMPRESA");
 
         // CADASTRA PRIMEIRO NA TABELA USUARIOS
-        dao.cadastrarUsuario(empresa);
+        int idUsuarioGerado = dao.cadastrarUsuario(empresa);
 
-        // DADOS EMPRESA
-        empresa.setIdUsuario(1);
+        // DADOS DA EMPRESA
+        empresa.setIdUsuario(idUsuarioGerado);
 
         empresa.setNomeEmpresa(
                 request.getParameter("nomeFantasia")
