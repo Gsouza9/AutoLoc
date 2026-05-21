@@ -499,4 +499,46 @@ public class DAO {
 
     }
 }
+	// =========================================
+	// BUSCAR ANÚNCIO POR ID
+	// =========================================
+
+public JavaBeans buscarAnuncio(int idVenda) {
+
+    JavaBeans anuncio = new JavaBeans();
+
+    String sql =
+    "SELECT * FROM veiculos_venda WHERE id_venda=?";
+
+    try {
+
+        Connection con = conectar();
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, idVenda);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+
+            anuncio.setIdVenda(rs.getInt("id_venda"));
+            anuncio.setTituloAnuncio(rs.getString("titulo_anuncio"));
+            anuncio.setDescricao(rs.getString("descricao"));
+            anuncio.setPreco(rs.getDouble("preco"));
+            anuncio.setCidade(rs.getString("cidade"));
+            anuncio.setEstado(rs.getString("estado"));
+
+        }
+
+        con.close();
+
+    } catch (Exception e) {
+
+        System.out.println(e);
+
+    }
+
+    return anuncio;
+}
 }
