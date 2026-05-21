@@ -468,37 +468,7 @@ public class DAO {
 		
 		 }
     }
-	// =========================================
-	// ATUALIZAR ANÚNCIO
-	// =========================================
-
-	public void atualizarAnuncio(JavaBeans anuncio) {
-
-  	  String sql = "UPDATE veiculos_venda SET titulo_anuncio=?, descricao=?, preco=?, cidade=?, estado=? WHERE id_venda=?";
-
-   		 try {
-
-      		  Connection con = conectar();
-
-      		  PreparedStatement pst = con.prepareStatement(sql);
-
-       			pst.setString(1, anuncio.getTituloAnuncio());
-       			pst.setString(2, anuncio.getDescricao());
-       			pst.setDouble(3, anuncio.getPreco());
-       			pst.setString(4, anuncio.getCidade();
-			 	pst.setString(5, anuncio.getEstado());
-       			pst.setInt(6, anuncio.getIdVenda());
-
-        		pst.executeUpdate();
-
-       	 con.close();
-
-    	} catch (Exception e) {
-
-       		 System.out.println(e);
-
-    }
-}
+	
 	// =========================================
 	// BUSCAR ANÚNCIO POR ID
 	// =========================================
