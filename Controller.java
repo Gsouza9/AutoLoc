@@ -381,9 +381,36 @@ public class Controller extends HttpServlet {
     // UPDATE ANÚNCIO
     // =========================================================
 
-    protected void atualizarAnuncio(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+   protected void atualizarAnuncio(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
 
-        response.sendRedirect("listarAnuncios");
-    }
+    JavaBeans anuncio = new JavaBeans();
+
+    anuncio.setIdVenda(
+            Integer.parseInt(request.getParameter("idVenda"))
+    );
+
+    anuncio.setTituloAnuncio(
+            request.getParameter("tituloAnuncio")
+    );
+
+    anuncio.setDescricao(
+            request.getParameter("descricao")
+    );
+
+    anuncio.setPreco(
+            Double.parseDouble(request.getParameter("preco"))
+    );
+
+    anuncio.setCidade(
+            request.getParameter("cidade")
+    );
+
+    anuncio.setEstado(
+            request.getParameter("estado")
+    );
+
+    dao.editarAnuncio(anuncio);
+
+    response.sendRedirect("listarAnuncios");
 }
