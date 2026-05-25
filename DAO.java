@@ -25,14 +25,25 @@ public class DAO {
 
         try {
 
+            System.out.println("INICIANDO CONEXAO MYSQL");
+
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            con = DriverManager.getConnection(url, user, password);
+            con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/autoloc?useSSL=false&serverTimezone=UTC",
+                "root",
+                "123@senac"
+            );
 
-        } catch (Exception e) {
+            System.out.println("MYSQL CONECTADO");
+
+        }
+
+        catch (Exception e) {
+
+            System.out.println("ERRO MYSQL");
 
             e.printStackTrace();
-
         }
 
         return con;
@@ -44,40 +55,75 @@ public class DAO {
 
     public int cadastrarUsuario(JavaBeans usuario) {
 
-        int idGerado = 0;
+    	int idGerado = 0;
 
-        String sql =
-        "INSERT INTO usuarios(nome,email,senha,telefone,cpf,tipo_usuario) VALUES(?,?,?,?,?,?)";
+    	String sql =
+    	"INSERT INTO usuarios(nome,email,senha,telefone,cpf,tipo_usuario) VALUES(?,?,?,?,?,?)";
 
-        try {
+    	try {
 
-            Connection con = conectar();
+    		Connection con = conectar();
 
-            PreparedStatement pst =
-            con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+    		if (con == null) {
 
-            pst.setString(1, usuario.getNome());
-            pst.setString(2, usuario.getEmail());
-            pst.setString(3, usuario.getSenha());
-            pst.setString(4, usuario.getNumeroTelefone());
-            pst.setString(5, usuario.getCpf());
-            pst.setString(6, usuario.getTipoUsuario());
+    			System.out.println("ERRO: CONEXAO NULL AO CADASTRAR USUARIO");
+    			return 0;
 
-            pst.executeUpdate();
+    		}
 
-            ResultSet rs = pst.getGeneratedKeys();
+    		System.out.println("================================");
+    		System.out.println("TENTANDO INSERIR USUARIO");
+    		System.out.println("NOME: " + usuario.getNome());
+    		System.out.println("EMAIL: " + usuario.getEmail());
+    		System.out.println("SENHA: " + usuario.getSenha());
+    		System.out.println("TELEFONE: " + usuario.getNumeroTelefone());
+    		System.out.println("CPF: " + usuario.getCpf());
+    		System.out.println("TIPO: " + usuario.getTipoUsuario());
+    		System.out.println("================================");
 
-            if (rs.next()) {
-                idGerado = rs.getInt(1);
-            }
+    		PreparedStatement pst =
+    		con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-            con.close();
+    		pst.setString(1, usuario.getNome());
+    		pst.setString(2, usuario.getEmail());
+    		pst.setString(3, usuario.getSenha());
+    		pst.setString(4, usuario.getNumeroTelefone());
+    		pst.setString(5, usuario.getCpf());
+    		pst.setString(6, usuario.getTipoUsuario());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    		int linhas = pst.executeUpdate();
 
-        return idGerado;
+    		System.out.println("LINHAS INSERIDAS EM USUARIOS: " + linhas);
+
+    		ResultSet rs = pst.getGeneratedKeys();
+
+    		if (rs.next()) {
+
+    			idGerado = rs.getInt(1);
+
+    			System.out.println("ID GERADO EM USUARIOS: " + idGerado);
+
+    		} else {
+
+    			System.out.println("NENHUM ID FOI GERADO PELO MYSQL");
+
+    		}
+
+    		rs.close();
+    		pst.close();
+    		con.close();
+
+    	} catch (Exception e) {
+
+    		System.out.println("ERRO AO CADASTRAR USUARIO NO MYSQL");
+    		System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+
+    		e.printStackTrace();
+
+    	}
+
+    	return idGerado;
+
     }
 
     public boolean loginUsuario(JavaBeans usuario) {
@@ -150,33 +196,76 @@ public class DAO {
     // EMPRESA
     // =========================================================
 
-    public void cadastrarEmpresa(JavaBeans empresa) {
+    public boolean cadastrarEmpresa(JavaBeans empresa) {
 
-        String sql =
-        "INSERT INTO empresas(id_usuario,nome_fantasia,razao_social,cnpj,descricao,telefone,email,categoria) VALUES(?,?,?,?,?,?,?,?)";
+    	String sql =
+    	"INSERT INTO empresas " +
+    	"(id_usuario, nome_fantasia, razao_social, cnpj, descricao, telefone, email, categoria) " +
+    	"VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try {
+    	try {
 
-            Connection con = conectar();
+    		Connection con = conectar();
 
-            PreparedStatement pst = con.prepareStatement(sql);
+    		if (con == null) {
 
-            pst.setInt(1, empresa.getIdUsuario());
-            pst.setString(2, empresa.getNomeEmpresa());
-            pst.setString(3, empresa.getRazaoSocial());
-            pst.setString(4, empresa.getCnpj());
-            pst.setString(5, empresa.getDescricao());
-            pst.setString(6, empresa.getNumeroTelefone());
-            pst.setString(7, empresa.getEmail());
-            pst.setString(8, empresa.getCategoria());
+    			System.out.println("CONEXAO NULL AO CADASTRAR EMPRESA");
+    			return false;
 
-            pst.executeUpdate();
+    		}
 
-            con.close();
+    		if (empresa.getIdUsuario() <= 0) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    			System.out.println("ID USUARIO INVALIDO PARA CADASTRAR EMPRESA");
+    			return false;
+
+    		}
+
+    		System.out.println("================================");
+    		System.out.println("TENTANDO INSERIR EMPRESA");
+    		System.out.println("ID USUARIO: " + empresa.getIdUsuario());
+    		System.out.println("NOME FANTASIA: " + empresa.getNomeEmpresa());
+    		System.out.println("RAZAO SOCIAL: " + empresa.getRazaoSocial());
+    		System.out.println("CNPJ: " + empresa.getCnpj());
+    		System.out.println("DESCRICAO: " + empresa.getDescricao());
+    		System.out.println("TELEFONE: " + empresa.getNumeroTelefone());
+    		System.out.println("EMAIL: " + empresa.getEmail());
+    		System.out.println("CATEGORIA: " + empresa.getCategoria());
+    		System.out.println("================================");
+
+    		PreparedStatement pst = con.prepareStatement(sql);
+
+    		pst.setInt(1, empresa.getIdUsuario());
+    		pst.setString(2, empresa.getNomeEmpresa());
+    		pst.setString(3, empresa.getRazaoSocial());
+    		pst.setString(4, empresa.getCnpj());
+    		pst.setString(5, empresa.getDescricao());
+    		pst.setString(6, empresa.getNumeroTelefone());
+    		pst.setString(7, empresa.getEmail());
+    		pst.setString(8, empresa.getCategoria());
+
+    		System.out.println("EXECUTANDO INSERT EMPRESA");
+
+    		int resultado = pst.executeUpdate();
+
+    		System.out.println("LINHAS EMPRESA AFETADAS: " + resultado);
+
+    		pst.close();
+    		con.close();
+
+    		return resultado > 0;
+
+    	} catch (Exception e) {
+
+    		System.out.println("ERRO AO CADASTRAR EMPRESA");
+    		System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+
+    		e.printStackTrace();
+
+    		return false;
+
+    	}
+
     }
 
     public boolean loginEmpresa(JavaBeans empresa) {
@@ -401,5 +490,82 @@ public class DAO {
         }
 
         return a;
+    }
+    public JavaBeans loginGeral(JavaBeans login) {
+
+    	JavaBeans usuario = null;
+
+    	String sql =
+    	"SELECT u.id_usuario, u.nome, u.email, u.tipo_usuario, e.id_empresa " +
+    	"FROM usuarios u " +
+    	"LEFT JOIN empresas e ON u.id_usuario = e.id_usuario " +
+    	"WHERE u.email = ? " +
+    	"AND u.senha = ? " +
+    	"AND u.status_conta = 'ATIVO'";
+
+    	try {
+
+    		Connection con = conectar();
+
+    		if (con == null) {
+
+    			System.out.println("CONEXAO NULL AO FAZER LOGIN");
+    			return null;
+
+    		}
+
+    		PreparedStatement pst = con.prepareStatement(sql);
+
+    		pst.setString(1, login.getEmail());
+    		pst.setString(2, login.getSenha());
+
+    		System.out.println("TENTANDO LOGIN GERAL");
+    		System.out.println("EMAIL: " + login.getEmail());
+
+    		ResultSet rs = pst.executeQuery();
+
+    		if (rs.next()) {
+
+    			usuario = new JavaBeans();
+
+    			usuario.setIdUsuario(rs.getInt("id_usuario"));
+    			usuario.setNome(rs.getString("nome"));
+    			usuario.setEmail(rs.getString("email"));
+    			usuario.setTipoUsuario(rs.getString("tipo_usuario"));
+
+    			int idEmpresa = rs.getInt("id_empresa");
+
+    			if (!rs.wasNull()) {
+
+    				usuario.setIdEmpresa(idEmpresa);
+
+    			}
+
+    			System.out.println("LOGIN OK");
+    			System.out.println("ID USUARIO: " + usuario.getIdUsuario());
+    			System.out.println("TIPO USUARIO: " + usuario.getTipoUsuario());
+    			System.out.println("ID EMPRESA: " + usuario.getIdEmpresa());
+
+    		} else {
+
+    			System.out.println("LOGIN FALHOU");
+
+    		}
+
+    		rs.close();
+    		pst.close();
+    		con.close();
+
+    	} catch (Exception e) {
+
+    		System.out.println("ERRO AO FAZER LOGIN");
+    		System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+
+    		e.printStackTrace();
+
+    	}
+
+    	return usuario;
+
     }
 }
