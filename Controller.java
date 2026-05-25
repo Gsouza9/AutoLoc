@@ -13,21 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet({
-"/cadastro",
-"/deletar",
-"/edit",
-"/navegacao",
-"/cadastrou",
-"/cadastrol",
-"/loginu",
-"/logine",
-"/update",
-"/cadveiculo",
-"/cadservico",
-"/buscarEditar",
-"/updateAnuncio"
-})
+@WebServlet({ "/cadastro", "/deletar", "/edit", "/navegacao", "/cadastrou", "/cadastrol", "/loginu", "/logine",
+		"/update", "/cadveiculo", "/cadservico", "/buscarEditar", "/updateAnuncio" })
 
 public class Controller extends HttpServlet {
 
@@ -47,8 +34,7 @@ public class Controller extends HttpServlet {
 	// =========================================================
 
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String action = request.getServletPath();
@@ -89,8 +75,7 @@ public class Controller extends HttpServlet {
 	// =========================================================
 
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String action = request.getServletPath();
@@ -173,102 +158,213 @@ public class Controller extends HttpServlet {
 	// =========================================================
 
 	protected void cadastrarUsuario(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+			throws ServletException, IOException {
 
-	    JavaBeans usuario = new JavaBeans();
+		System.out.println("CHEGOU CADASTRO USUARIO");
 
-	    usuario.setNome(request.getParameter("nome"));
-	    usuario.setEmail(request.getParameter("email"));
-	    usuario.setSenha(request.getParameter("senha"));
-	    usuario.setNumeroTelefone(request.getParameter("telefone"));
+		JavaBeans usuario = new JavaBeans();
 
-	    String cpf = request.getParameter("cpf");
+		usuario.setNome(request.getParameter("nome"));
+		usuario.setEmail(request.getParameter("email"));
+		usuario.setSenha(request.getParameter("senha"));
+		usuario.setNumeroTelefone(request.getParameter("telefone"));
 
-	    if (cpf != null) {
-	        cpf = cpf.replace(".", "").replace("-", "");
-	    }
+		String cpf = request.getParameter("cpf");
 
-	    usuario.setCpf(cpf);
+		if (cpf != null) {
 
-	    usuario.setTipoUsuario("CLIENTE");
+			cpf = cpf.replace(".", "").replace("-", "");
 
-	    // TESTE
-	    System.out.println("===== DADOS RECEBIDOS =====");
-	    System.out.println(usuario.getNome());
-	    System.out.println(usuario.getEmail());
-	    System.out.println(usuario.getSenha());
-	    System.out.println(usuario.getNumeroTelefone());
-	    System.out.println(usuario.getCpf());
+		}
 
-	    dao.cadastrarUsuario(usuario);
+		usuario.setCpf(cpf);
+		usuario.setTipoUsuario("CLIENTE");
 
-	    System.out.println("USUARIO CADASTRADO");
+		System.out.println("NOME RECEBIDO: " + usuario.getNome());
+		System.out.println("EMAIL RECEBIDO: " + usuario.getEmail());
+		System.out.println("TELEFONE RECEBIDO: " + usuario.getNumeroTelefone());
+		System.out.println("CPF RECEBIDO: " + usuario.getCpf());
 
-	    response.sendRedirect("loginUsuario.jsp");
+		if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()) {
+
+			System.out.println("ERRO: NOME DO USUARIO VEIO VAZIO");
+
+			response.sendRedirect("cadastro.jsp?erro=nome");
+			return;
+
+		}
+
+		int idUsuarioGerado = dao.cadastrarUsuario(usuario);
+
+		System.out.println("ID USUARIO GERADO: " + idUsuarioGerado);
+
+		if (idUsuarioGerado <= 0) {
+
+			System.out.println("ERRO: USUARIO NAO FOI CADASTRADO");
+
+			response.sendRedirect("cadastro.jsp?erro=banco");
+			return;
+
+		}
+
+		System.out.println("USUARIO CADASTRADO");
+
+		response.sendRedirect("loginUsuario.jsp");
+
 	}
 
 	// =========================================================
 	// CADASTRO EMPRESA
 	// =========================================================
 
-	protected void cadastrarEmpresa(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void cadastrarEmpresa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		JavaBeans empresa = new JavaBeans();
+		System.out.println("CHEGOU NO CADASTRO EMPRESA");
 
-		// DADOS USUARIO
+		JavaBeans usuario = new JavaBeans();
 
-		empresa.setNome(request.getParameter("nome"));
-		empresa.setEmail(request.getParameter("email"));
-		empresa.setSenha(request.getParameter("senha"));
-		empresa.setNumeroTelefone(request.getParameter("telefone"));
+		usuario.setNome(request.getParameter("nome"));
+		usuario.setEmail(request.getParameter("email"));
+		usuario.setSenha(request.getParameter("senha"));
+		usuario.setNumeroTelefone(request.getParameter("telefone"));
 
 		String cpf = request.getParameter("cpf");
 
 		if (cpf != null) {
 
-			cpf = cpf.replace(".", "")
-					 .replace("-", "");
+			cpf = cpf.replace(".", "").replace("-", "");
 
 		}
 
-		empresa.setCpf(cpf);
+		usuario.setCpf(cpf);
+		usuario.setTipoUsuario("EMPRESA");
 
-		empresa.setTipoUsuario("EMPRESA");
+		System.out.println("================================");
+		System.out.println("DADOS DO USUARIO DA EMPRESA");
+		System.out.println("NOME: " + usuario.getNome());
+		System.out.println("EMAIL: " + usuario.getEmail());
+		System.out.println("SENHA: " + usuario.getSenha());
+		System.out.println("TELEFONE: " + usuario.getNumeroTelefone());
+		System.out.println("CPF: " + usuario.getCpf());
+		System.out.println("TIPO: " + usuario.getTipoUsuario());
+		System.out.println("================================");
 
-		// CADASTRA USUARIO
+		if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()) {
 
-		int idUsuarioGerado = dao.cadastrarUsuario(empresa);
+			System.out.println("ERRO: NOME DO RESPONSAVEL VEIO VAZIO");
 
-		// DADOS EMPRESA
+			response.sendRedirect("cadastro.jsp?erro=nome");
+			return;
+
+		}
+
+		if (usuario.getEmail() == null || usuario.getEmail().trim().isEmpty()) {
+
+			System.out.println("ERRO: EMAIL DO RESPONSAVEL VEIO VAZIO");
+
+			response.sendRedirect("cadastro.jsp?erro=email");
+			return;
+
+		}
+
+		if (usuario.getSenha() == null || usuario.getSenha().trim().isEmpty()) {
+
+			System.out.println("ERRO: SENHA DO RESPONSAVEL VEIO VAZIA");
+
+			response.sendRedirect("cadastro.jsp?erro=senha");
+			return;
+
+		}
+
+		System.out.println("CADASTRANDO USUARIO DA EMPRESA...");
+
+		int idUsuarioGerado = dao.cadastrarUsuario(usuario);
+
+		System.out.println("ID USUARIO GERADO: " + idUsuarioGerado);
+
+		if (idUsuarioGerado <= 0) {
+
+			System.out.println("ERRO: USUARIO DA EMPRESA NAO FOI CADASTRADO");
+
+			response.sendRedirect("cadastro.jsp?erro=usuario");
+			return;
+
+		}
+
+		JavaBeans empresa = new JavaBeans();
 
 		empresa.setIdUsuario(idUsuarioGerado);
-
 		empresa.setNomeEmpresa(request.getParameter("nomeFantasia"));
-
 		empresa.setRazaoSocial(request.getParameter("razaoSocial"));
 
 		String cnpj = request.getParameter("cnpj");
 
 		if (cnpj != null) {
 
-			cnpj = cnpj.replace(".", "")
-					   .replace("/", "")
-					   .replace("-", "");
+			cnpj = cnpj.replace(".", "").replace("/", "").replace("-", "");
 
 		}
 
 		empresa.setCnpj(cnpj);
-
+		empresa.setDescricao(request.getParameter("descricao"));
+		empresa.setNumeroTelefone(request.getParameter("telefone"));
+		empresa.setEmail(request.getParameter("email"));
 		empresa.setCategoria(request.getParameter("categoria"));
 
-		empresa.setDescricao(request.getParameter("descricao"));
+		System.out.println("================================");
+		System.out.println("DADOS DA EMPRESA");
+		System.out.println("NOME EMPRESA: " + empresa.getNomeEmpresa());
+		System.out.println("RAZAO SOCIAL: " + empresa.getRazaoSocial());
+		System.out.println("CNPJ: " + empresa.getCnpj());
+		System.out.println("DESCRICAO: " + empresa.getDescricao());
+		System.out.println("TELEFONE: " + empresa.getNumeroTelefone());
+		System.out.println("EMAIL: " + empresa.getEmail());
+		System.out.println("CATEGORIA: " + empresa.getCategoria());
+		System.out.println("ID USUARIO FK: " + empresa.getIdUsuario());
+		System.out.println("================================");
 
-		dao.cadastrarEmpresa(empresa);
+		if (empresa.getNomeEmpresa() == null || empresa.getNomeEmpresa().trim().isEmpty()) {
+
+			System.out.println("ERRO: NOME DA EMPRESA VEIO VAZIO");
+
+			response.sendRedirect("cadastro.jsp?erro=empresa");
+			return;
+
+		}
+
+		if (empresa.getCnpj() == null || empresa.getCnpj().trim().isEmpty()) {
+
+			System.out.println("ERRO: CNPJ VEIO VAZIO");
+
+			response.sendRedirect("cadastro.jsp?erro=cnpj");
+			return;
+
+		}
+
+		if (empresa.getCategoria() == null || empresa.getCategoria().trim().isEmpty()) {
+
+			System.out.println("ERRO: CATEGORIA VEIO VAZIA");
+
+			response.sendRedirect("cadastro.jsp?erro=categoria");
+			return;
+
+		}
+
+		boolean empresaCadastrada = dao.cadastrarEmpresa(empresa);
+
+		if (!empresaCadastrada) {
+
+			System.out.println("ERRO: EMPRESA NAO FOI CADASTRADA");
+
+			response.sendRedirect("cadastro.jsp?erro=empresa");
+			return;
+
+		}
+
+		System.out.println("EMPRESA CADASTRADA");
 
 		response.sendRedirect("loginEmpresa.jsp");
-
 	}
 
 	// =========================================================
@@ -282,24 +378,54 @@ public class Controller extends HttpServlet {
 		JavaBeans login = new JavaBeans();
 
 		login.setEmail(request.getParameter("email"));
-
 		login.setSenha(request.getParameter("senha"));
 
-		boolean autenticado = dao.loginUsuario(login);
+		System.out.println("LOGIN GERAL");
+		System.out.println("EMAIL: " + login.getEmail());
 
-		if (autenticado) {
+		JavaBeans usuarioLogado = dao.loginGeral(login);
+
+		if (usuarioLogado != null) {
 
 			request.getSession().setAttribute(
 					"usuarioLogado",
-					login.getEmail());
+					usuarioLogado.getEmail());
 
-			response.sendRedirect("index.jsp");
+			request.getSession().setAttribute(
+					"nomeUsuario",
+					usuarioLogado.getNome());
 
-		}
+			request.getSession().setAttribute(
+					"idUsuario",
+					usuarioLogado.getIdUsuario());
 
-		else {
+			request.getSession().setAttribute(
+					"tipoUsuario",
+					usuarioLogado.getTipoUsuario());
 
-			response.sendRedirect("loginUsuario.jsp?erro=1");
+			if ("EMPRESA".equals(usuarioLogado.getTipoUsuario())) {
+
+				request.getSession().setAttribute(
+						"idEmpresa",
+						usuarioLogado.getIdEmpresa());
+
+				System.out.println("REDIRECIONANDO PARA TELA DO LOJISTA");
+
+				response.sendRedirect("vendedorpainel.jsp");
+
+			} else {
+
+				System.out.println("REDIRECIONANDO PARA TELA DO USUARIO");
+
+				response.sendRedirect("consumidor.jsp");
+
+			}
+		
+		} else {
+
+			System.out.println("LOGIN INVALIDO - REDIRECIONANDO PARA CADASTRO");
+
+			response.sendRedirect("cadastro.jsp");
 
 		}
 	}
@@ -308,8 +434,7 @@ public class Controller extends HttpServlet {
 	// LOGIN EMPRESA
 	// =========================================================
 
-	protected void loginEmpresa(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void loginEmpresa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		JavaBeans login = new JavaBeans();
@@ -322,9 +447,7 @@ public class Controller extends HttpServlet {
 
 		if (autenticado) {
 
-			request.getSession().setAttribute(
-					"empresaLogada",
-					login.getEmail());
+			request.getSession().setAttribute("empresaLogada", login.getEmail());
 
 			response.sendRedirect("dashboardEmpresa.jsp");
 
@@ -341,34 +464,26 @@ public class Controller extends HttpServlet {
 	// CADASTRAR VEICULO
 	// =========================================================
 
-	protected void cadastrarVeiculo(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void cadastrarVeiculo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		JavaBeans carro = new JavaBeans();
 
-		carro.setIdUsuario(
-				Integer.parseInt(
-						request.getParameter("idUsuario")));
+		carro.setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
 
 		carro.setMarca(request.getParameter("marca"));
 
 		carro.setModelo(request.getParameter("modelo"));
 
-		carro.setAno(
-				Integer.parseInt(
-						request.getParameter("ano")));
+		carro.setAno(Integer.parseInt(request.getParameter("ano")));
 
 		carro.setCor(request.getParameter("cor"));
 
 		carro.setPlaca(request.getParameter("placa"));
 
-		carro.setCombustivel(
-				request.getParameter("combustivel"));
+		carro.setCombustivel(request.getParameter("combustivel"));
 
-		carro.setQuilometragem(
-				Integer.parseInt(
-						request.getParameter("quilometragem")));
+		carro.setQuilometragem(Integer.parseInt(request.getParameter("quilometragem")));
 
 		carro.setImagem(request.getParameter("foto"));
 
@@ -382,31 +497,22 @@ public class Controller extends HttpServlet {
 	// CADASTRAR SERVICO
 	// =========================================================
 
-	protected void cadastrarServico(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void cadastrarServico(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		JavaBeans servico = new JavaBeans();
 
-		servico.setIdEmpresa(
-				Integer.parseInt(
-						request.getParameter("idEmpresa")));
+		servico.setIdEmpresa(Integer.parseInt(request.getParameter("idEmpresa")));
 
-		servico.setServico(
-				request.getParameter("nomeServico"));
+		servico.setServico(request.getParameter("nomeServico"));
 
-		servico.setDescricao(
-				request.getParameter("descricao"));
+		servico.setDescricao(request.getParameter("descricao"));
 
-		servico.setPreco(
-				Double.parseDouble(
-						request.getParameter("preco")));
+		servico.setPreco(Double.parseDouble(request.getParameter("preco")));
 
-		servico.setPrazo(
-				request.getParameter("tempoEstimado"));
+		servico.setPrazo(request.getParameter("tempoEstimado"));
 
-		servico.setStatus(
-				request.getParameter("statusServico"));
+		servico.setStatus(request.getParameter("statusServico"));
 
 		dao.cadastrarServico(servico);
 
@@ -418,17 +524,14 @@ public class Controller extends HttpServlet {
 	// LISTAR ANUNCIOS
 	// =========================================================
 
-	protected void listarAnuncios(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void listarAnuncios(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList<JavaBeans> lista =
-				dao.listarAnuncios();
+		ArrayList<JavaBeans> lista = dao.listarAnuncios();
 
 		request.setAttribute("anuncios", lista);
 
-		RequestDispatcher rd =
-				request.getRequestDispatcher("listar.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("listar.jsp");
 
 		rd.forward(request, response);
 
@@ -438,15 +541,12 @@ public class Controller extends HttpServlet {
 	// DELETAR ANUNCIO
 	// =========================================================
 
-	protected void deletarAnuncio(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void deletarAnuncio(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		JavaBeans anuncio = new JavaBeans();
 
-		anuncio.setIdVenda(
-				Integer.parseInt(
-						request.getParameter("idVenda")));
+		anuncio.setIdVenda(Integer.parseInt(request.getParameter("idVenda")));
 
 		dao.deletarAnuncio(anuncio);
 
@@ -458,22 +558,16 @@ public class Controller extends HttpServlet {
 	// EDITAR ANUNCIO
 	// =========================================================
 
-	protected void editarAnuncio(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void editarAnuncio(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int idVenda =
-				Integer.parseInt(
-						request.getParameter("idVenda"));
+		int idVenda = Integer.parseInt(request.getParameter("idVenda"));
 
-		JavaBeans anuncio =
-				dao.buscarAnuncio(idVenda);
+		JavaBeans anuncio = dao.buscarAnuncio(idVenda);
 
 		request.setAttribute("anuncio", anuncio);
 
-		RequestDispatcher rd =
-				request.getRequestDispatcher(
-						"editarAnuncio.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("editarAnuncio.jsp");
 
 		rd.forward(request, response);
 
@@ -483,31 +577,22 @@ public class Controller extends HttpServlet {
 	// UPDATE ANUNCIO
 	// =========================================================
 
-	protected void atualizarAnuncio(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void atualizarAnuncio(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		JavaBeans anuncio = new JavaBeans();
 
-		anuncio.setIdVenda(
-				Integer.parseInt(
-						request.getParameter("idVenda")));
+		anuncio.setIdVenda(Integer.parseInt(request.getParameter("idVenda")));
 
-		anuncio.setTituloAnuncio(
-				request.getParameter("tituloAnuncio"));
+		anuncio.setTituloAnuncio(request.getParameter("tituloAnuncio"));
 
-		anuncio.setDescricao(
-				request.getParameter("descricao"));
+		anuncio.setDescricao(request.getParameter("descricao"));
 
-		anuncio.setPreco(
-				Double.parseDouble(
-						request.getParameter("preco")));
+		anuncio.setPreco(Double.parseDouble(request.getParameter("preco")));
 
-		anuncio.setCidade(
-				request.getParameter("cidade"));
+		anuncio.setCidade(request.getParameter("cidade"));
 
-		anuncio.setEstado(
-				request.getParameter("estado"));
+		anuncio.setEstado(request.getParameter("estado"));
 
 		dao.editarAnuncio(anuncio);
 
