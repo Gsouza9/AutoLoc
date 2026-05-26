@@ -6,19 +6,29 @@ USE autoloc;
 -- =========================================
 
 CREATE TABLE usuarios (
+
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+
     nome VARCHAR(150) NOT NULL,
+
     email VARCHAR(150) NOT NULL UNIQUE,
+
     senha VARCHAR(255) NOT NULL,
+
     telefone VARCHAR(20),
+
     cpf VARCHAR(14) UNIQUE,
+
     data_nascimento DATE,
+
     foto_perfil VARCHAR(255),
+
     tipo_usuario ENUM(
         'CLIENTE',
         'EMPRESA',
         'ADMIN'
     ) DEFAULT 'CLIENTE',
+
     status_conta ENUM(
         'ATIVO',
         'INATIVO',
@@ -34,16 +44,27 @@ CREATE TABLE usuarios (
 -- =========================================
 
 CREATE TABLE empresas (
+
     id_empresa INT PRIMARY KEY AUTO_INCREMENT,
+
     id_usuario INT NOT NULL,
+
     nome_fantasia VARCHAR(150) NOT NULL,
+
     razao_social VARCHAR(150),
+
     cnpj VARCHAR(18) UNIQUE NOT NULL,
+
     descricao TEXT,
+
     telefone VARCHAR(20),
+
     email VARCHAR(150),
+
     site VARCHAR(255),
+
     logo VARCHAR(255),
+
     categoria ENUM(
         'OFICINA',
         'LOCADORA',
@@ -62,6 +83,10 @@ CREATE TABLE empresas (
 
     avaliacao_media DECIMAL(2,1) DEFAULT 0.0,
 
+    latitude DOUBLE,
+
+    longitude DOUBLE,
+
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (id_usuario)
@@ -74,18 +99,31 @@ CREATE TABLE empresas (
 -- =========================================
 
 CREATE TABLE locais (
+
     id_local INT PRIMARY KEY AUTO_INCREMENT,
+
     id_empresa INT NOT NULL,
+
     cep VARCHAR(10),
+
     rua VARCHAR(150),
+
     numero VARCHAR(10),
+
     bairro VARCHAR(100),
+
     cidade VARCHAR(100),
+
     estado VARCHAR(2),
-	complemento VARCHAR(100),
+
+    complemento VARCHAR(100),
+
     latitude DECIMAL(10,8),
+
     longitude DECIMAL(11,8),
+
     referencia TEXT,
+
     FOREIGN KEY (id_empresa)
     REFERENCES empresas(id_empresa)
 
@@ -96,14 +134,23 @@ CREATE TABLE locais (
 -- =========================================
 
 CREATE TABLE carros (
+
     id_carro INT PRIMARY KEY AUTO_INCREMENT,
-	id_usuario INT NOT NULL,
+
+    id_usuario INT NOT NULL,
+
     marca VARCHAR(100) NOT NULL,
+
     modelo VARCHAR(100) NOT NULL,
+
     ano INT NOT NULL,
-	cor VARCHAR(50),
+
+    cor VARCHAR(50),
+
     placa VARCHAR(10) UNIQUE NOT NULL,
+
     chassi VARCHAR(50) UNIQUE,
+
     combustivel ENUM(
         'GASOLINA',
         'ETANOL',
@@ -112,9 +159,13 @@ CREATE TABLE carros (
         'ELETRICO',
         'HIBRIDO'
     ),
+
     quilometragem INT,
+
     foto VARCHAR(255),
+
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     FOREIGN KEY (id_usuario)
     REFERENCES usuarios(id_usuario)
 
@@ -125,12 +176,19 @@ CREATE TABLE carros (
 -- =========================================
 
 CREATE TABLE servicos (
+
     id_servico INT PRIMARY KEY AUTO_INCREMENT,
+
     id_empresa INT NOT NULL,
+
     nome_servico VARCHAR(150) NOT NULL,
-	descricao TEXT,
+
+    descricao TEXT,
+
     preco DECIMAL(10,2),
+
     tempo_estimado VARCHAR(50),
+
     status_servico ENUM(
         'ATIVO',
         'INATIVO'
@@ -146,12 +204,19 @@ CREATE TABLE servicos (
 -- =========================================
 
 CREATE TABLE agendamentos (
+
     id_agendamento INT PRIMARY KEY AUTO_INCREMENT,
+
     id_usuario INT NOT NULL,
+
     id_empresa INT NOT NULL,
+
     id_carro INT NOT NULL,
+
     id_servico INT NOT NULL,
+
     data_agendamento DATETIME NOT NULL,
+
     status_agendamento ENUM(
         'PENDENTE',
         'CONFIRMADO',
@@ -159,14 +224,20 @@ CREATE TABLE agendamentos (
         'FINALIZADO',
         'CANCELADO'
     ) DEFAULT 'PENDENTE',
+
     observacoes TEXT,
+
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     FOREIGN KEY (id_usuario)
     REFERENCES usuarios(id_usuario),
+
     FOREIGN KEY (id_empresa)
     REFERENCES empresas(id_empresa),
+
     FOREIGN KEY (id_carro)
     REFERENCES carros(id_carro),
+
     FOREIGN KEY (id_servico)
     REFERENCES servicos(id_servico)
 
@@ -177,14 +248,22 @@ CREATE TABLE agendamentos (
 -- =========================================
 
 CREATE TABLE avaliacoes (
+
     id_avaliacao INT PRIMARY KEY AUTO_INCREMENT,
+
     id_usuario INT NOT NULL,
+
     id_empresa INT NOT NULL,
+
     nota INT CHECK (nota BETWEEN 1 AND 5),
+
     comentario TEXT,
+
     data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     FOREIGN KEY (id_usuario)
     REFERENCES usuarios(id_usuario),
+
     FOREIGN KEY (id_empresa)
     REFERENCES empresas(id_empresa)
 
@@ -195,10 +274,15 @@ CREATE TABLE avaliacoes (
 -- =========================================
 
 CREATE TABLE empresa_imagens (
+
     id_imagem INT PRIMARY KEY AUTO_INCREMENT,
+
     id_empresa INT NOT NULL,
+
     imagem VARCHAR(255) NOT NULL,
+
     descricao VARCHAR(255),
+
     FOREIGN KEY (id_empresa)
     REFERENCES empresas(id_empresa)
 
@@ -209,79 +293,21 @@ CREATE TABLE empresa_imagens (
 -- =========================================
 
 CREATE TABLE favoritos (
+
     id_favorito INT PRIMARY KEY AUTO_INCREMENT,
-	id_usuario INT NOT NULL,
+
+    id_usuario INT NOT NULL,
+
     id_empresa INT NOT NULL,
+
     data_favorito TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     FOREIGN KEY (id_usuario)
     REFERENCES usuarios(id_usuario),
+
     FOREIGN KEY (id_empresa)
     REFERENCES empresas(id_empresa)
 
-);
-
--- =========================================
--- DADOS DE TESTE
--- =========================================
-
-INSERT INTO usuarios (
-    nome,
-    email,
-    senha,
-    telefone,
-    tipo_usuario
-)
-VALUES
-(
-    'Gustavo Souza',
-    'gustavo@gmail.com',
-    '123456',
-    '(11)99999-9999',
-    'CLIENTE'
-);
-
-INSERT INTO empresas (
-    id_usuario,
-    nome_fantasia,
-    razao_social,
-    cnpj,
-    descricao,
-    telefone,
-    categoria
-)
-VALUES
-(
-    1,
-    'Auto Center Prime',
-    'Auto Center Prime LTDA',
-    '12.345.678/0001-99',
-    'Especializada em manutenção automotiva.',
-    '(11)98888-7777',
-    'OFICINA'
-);
-
-INSERT INTO locais (
-    id_empresa,
-    cep,
-    rua,
-    numero,
-    bairro,
-    cidade,
-    estado,
-    latitude,
-    longitude
-)
-VALUES
-(
-    1,
-    '01000-000',
-    'Av Paulista',
-    '1000',
-    'Bela Vista',
-    'São Paulo',
-    'SP',
-    -23.561684,
-    -46.655981
 );
 
 -- =========================================
@@ -385,72 +411,38 @@ CREATE TABLE interesses_veiculos (
 
 );
 
--- =========================================
--- EXEMPLO DE ANÚNCIO
--- =========================================
+CREATE TABLE produtos (
 
-INSERT INTO veiculos_venda (
+    id_produto INT PRIMARY KEY AUTO_INCREMENT,
 
-    id_usuario,
-    id_carro,
-    titulo_anuncio,
-    descricao,
-    preco,
-    km_rodados,
-    cambio,
-    portas,
-    final_placa,
-    cidade,
-    estado,
-    aceita_troca
+    id_empresa INT NOT NULL,
 
-)
+    nome_produto VARCHAR(150) NOT NULL,
 
-VALUES
-(
-    1,
-    1,
-    'Honda Civic EXL 2020',
-    'Carro completo, revisado e muito conservado.',
-    98000.00,
-    45000,
-    'AUTOMATICO',
-    4,
-    '7',
-    'São Paulo',
-    'SP',
-    TRUE
+    categoria VARCHAR(100),
+
+    descricao TEXT,
+
+    preco DECIMAL(10,2),
+
+    estoque INT DEFAULT 0,
+
+    status_produto ENUM(
+        'ATIVO',
+        'INATIVO',
+        'ESGOTADO'
+    ) DEFAULT 'ATIVO',
+
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_empresa)
+    REFERENCES empresas(id_empresa)
+
 );
 
-INSERT INTO carros (
+select * from empresas;
+select * from usuarios;
+select * from servicos;
 
-    id_usuario,
-    marca,
-    modelo,
-    ano,
-    cor,
-    placa,
-    combustivel,
-    quilometragem
 
-)
-
-VALUES
-(
-    1,
-    'Honda',
-    'Civic EXL',
-    2020,
-    'Preto',
-    'ABC1D23',
-    'FLEX',
-    45000
-);
-
-ALTER TABLE empresas 
-ADD latitude DOUBLE,
-ADD longitude DOUBLE;
-
-UPDATE servicos 
-SET latitude = -23.5505,
-    longitude = -46.6333;
+delete from produtos where id_produto = 1;
