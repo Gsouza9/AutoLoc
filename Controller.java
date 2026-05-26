@@ -387,21 +387,15 @@ public class Controller extends HttpServlet {
 
 		if (usuarioLogado != null) {
 
-			request.getSession().setAttribute(
-					"usuarioLogado",
-					usuarioLogado.getEmail());
+			request.getSession().setAttribute("usuarioLogado", usuarioLogado.getEmail());
 
-			request.getSession().setAttribute(
-					"nomeUsuario",
-					usuarioLogado.getNome());
+			request.getSession().setAttribute("nomeUsuario", usuarioLogado.getNome());
+			request.getSession().setAttribute("emailUsuario", usuarioLogado.getEmail());
+			request.getSession().setAttribute("telefoneUsuario", usuarioLogado.getNumeroTelefone());
+			request.getSession().setAttribute("cpfUsuario", usuarioLogado.getCpf());
 
-			request.getSession().setAttribute(
-					"idUsuario",
-					usuarioLogado.getIdUsuario());
-
-			request.getSession().setAttribute(
-					"tipoUsuario",
-					usuarioLogado.getTipoUsuario());
+			request.getSession().setAttribute("idUsuario", usuarioLogado.getIdUsuario());
+			request.getSession().setAttribute("tipoUsuario", usuarioLogado.getTipoUsuario());
 
 			if ("EMPRESA".equals(usuarioLogado.getTipoUsuario())) {
 
