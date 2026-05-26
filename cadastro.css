@@ -1,0 +1,360 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(120deg, #D4AF37, #000, #D4AF37);
+	padding: 30px;
+}
+
+.container {
+	width: 100%;
+	max-width: 1400px;
+	display: flex;
+	background: #050505;
+	border-radius: 25px;
+	overflow: hidden;
+	border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.lado-cadastro {
+	width: 550px;
+	background: #151515;
+	padding: 40px;
+	display: flex;
+	align-items: center;
+	border-right: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.caixa-cadastro {
+	width: 100%;
+}
+
+.botoes-topo {
+	display: flex;
+	background: #151515;
+	border-radius: 16px;
+	padding: 6px;
+	margin-bottom: 25px;
+	gap: 6px;
+	border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.botoes-topo button {
+	flex: 1;
+	height: 50px;
+	border: none;
+	background: transparent;
+	color: white;
+	border-radius: 12px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.botoes-topo .ativo {
+	background: linear-gradient(135deg, #8B6914, #D4AF37);
+	color: black;
+	font-weight: bold;
+}
+
+h1 {
+	color: white;
+	font-size: 40px;
+}
+
+.subtitulo {
+	color: #aaa;
+	margin-bottom: 25px;
+}
+
+form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+}
+
+.grupo-input {
+	display: flex;
+	flex-direction: column;
+}
+
+.grupo-input label {
+	color: white;
+	margin-bottom: 5px;
+	font-size: 14px;
+}
+
+.grupo-input input,
+.grupo-input select {
+	padding: 14px;
+	border-radius: 12px;
+	border: 1px solid rgba(212, 175, 55, 0.20);
+	background: #1b1b1b;
+	color: white;
+	outline: none;
+}
+
+.grupo-input input::placeholder {
+	color: #777;
+}
+
+.grupo-input select {
+	cursor: pointer;
+}
+
+.full {
+	grid-column: 1 / -1;
+}
+
+.opcoes {
+	grid-column: 1 / -1;
+	color: white;
+	font-size: 14px;
+}
+
+.botao-cadastro {
+	grid-column: 1 / -1;
+	padding: 16px;
+	border: none;
+	border-radius: 14px;
+	background: linear-gradient(135deg, #8B6914, #D4AF37, #FFD966);
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.tipo-conta {
+	grid-column: 1 / -1;
+	display: flex;
+	gap: 12px;
+	margin-bottom: 10px;
+}
+
+.tipo-btn {
+	flex: 1;
+	height: 52px;
+	border: 1px solid rgba(212, 175, 55, .18);
+	border-radius: 14px;
+	background: #151515;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: .2s ease;
+}
+
+.tipo-btn:hover {
+	transform: translateY(-1px);
+}
+
+.tipo-btn.ativo {
+	background: linear-gradient(135deg, #8B6914, #D4AF37, #FFD966);
+	color: black;
+}
+
+.lado-info {
+	flex: 1;
+	padding: 60px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.logo {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+.logo img {
+	width: 320px;
+}
+
+.texto-principal {
+	color: white;
+	font-size: 42px;
+	margin-bottom: 40px;
+}
+
+.item-info {
+	width: 100%;
+	max-width: 420px;
+	display: grid;
+	grid-template-columns: 70px 1fr;
+	align-items: center;
+	column-gap: 18px;
+	margin-bottom: 28px;
+	text-align: left;
+}
+
+.icone {
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	border: 2px solid #D4AF37;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	margin: 0 auto;
+}
+
+.item-info h3 {
+	color: white;
+	font-size: 18px;
+	font-weight: 700;
+	margin-bottom: 2px;
+}
+
+.item-info p {
+	color: #ccc;
+	font-size: 15px;
+	line-height: 1.4;
+}
+
+.cards {
+	display: flex;
+	gap: 15px;
+	margin-top: 30px;
+}
+
+.card {
+	background: white;
+	padding: 20px;
+	border-radius: 15px;
+	text-align: center;
+	width: 130px;
+}
+
+.card h2 {
+	color: #D4AF37;
+}
+
+.card span {
+	color: #777;
+}
+
+.logo-mobile {
+	display: none;
+}
+
+#formVendedor,
+#formUsuario {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+}
+
+@media(max-width: 768px) {
+	body {
+		padding: 0;
+		background: #000;
+	}
+
+	.container {
+		flex-direction: column;
+		border-radius: 0;
+	}
+
+	.lado-cadastro {
+		width: 100%;
+		padding: 25px 20px;
+		background: #111111;
+		border-right: none;
+	}
+
+	form {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+
+	h1 {
+		font-size: 28px;
+	}
+
+	.subtitulo {
+		font-size: 14px;
+	}
+
+	.lado-info {
+		width: 100%;
+		padding: 40px 22px;
+		text-align: center;
+		align-items: center;
+		border-top: 1px solid rgba(212, 175, 55, 0.308);
+	}
+
+	.texto-principal {
+		font-size: 24px;
+		text-align: center;
+		margin-bottom: 35px;
+	}
+
+	.logo {
+		display: none;
+	}
+
+	.logo-mobile {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.logo-mobile img {
+		width: 220px;
+	}
+
+	.item-info {
+		width: 100%;
+		max-width: 320px;
+		margin: 0 auto 28px auto;
+		display: flex;
+		align-items: center;
+		gap: 18px;
+		text-align: left;
+	}
+
+	.icone {
+		flex-shrink: 0;
+	}
+
+	.item-info h3 {
+		font-size: 22px;
+		margin-bottom: 4px;
+	}
+
+	.item-info p {
+		font-size: 15px;
+		line-height: 1.5;
+	}
+
+	.cards {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 14px;
+		margin-top: 25px;
+		width: 100%;
+	}
+
+	.card {
+		width: 130px;
+	}
+
+	#formVendedor,
+	#formUsuario {
+		grid-template-columns: 1fr;
+	}
+}
