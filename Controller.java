@@ -253,23 +253,54 @@ public class Controller extends HttpServlet {
 	}
 
 	protected void cadastrarVeiculo(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	        throws ServletException, IOException {
 
-		JavaBeans carro = new JavaBeans();
+	    JavaBeans carro = new JavaBeans();
 
-		carro.setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
-		carro.setMarca(request.getParameter("marca"));
-		carro.setModelo(request.getParameter("modelo"));
-		carro.setAno(Integer.parseInt(request.getParameter("ano")));
-		carro.setCor(request.getParameter("cor"));
-		carro.setPlaca(request.getParameter("placa"));
-		carro.setCombustivel(request.getParameter("combustivel"));
-		carro.setQuilometragem(Integer.parseInt(request.getParameter("quilometragem")));
-		carro.setImagem(request.getParameter("foto"));
+	    Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
 
-		dao.cadastrarCarro(carro);
+	    if (idUsuarioSessao == null) {
+	        response.sendRedirect(request.getContextPath() + "/login.jsp");
+	        return;
+	    }
 
-		response.sendRedirect("vendedorveiculos.jsp");
+	    carro.setIdUsuario(Integer.parseInt(idUsuarioSessao.toString()));
+	    carro.setMarca(request.getParameter("marca"));
+	    carro.setModelo(request.getParameter("modelo"));
+
+	    String anoTexto = request.getParameter("ano");
+	    int ano = 0;
+	    if (anoTexto != null && !anoTexto.trim().isEmpty()) {
+	        ano = Integer.parseInt(anoTexto);
+	    }
+	    carro.setAno(ano);
+
+	    carro.setCor(request.getParameter("cor"));
+	    carro.setPlaca(request.getParameter("placa"));
+	    carro.setCombustivel(request.getParameter("combustivel"));
+
+	    String kmTexto = request.getParameter("quilometragem");
+	    int quilometragem = 0;
+	    if (kmTexto != null && !kmTexto.trim().isEmpty()) {
+	        quilometragem = Integer.parseInt(kmTexto);
+	    }
+	    carro.setQuilometragem(quilometragem);
+
+	    carro.setImagem(request.getParameter("foto"));
+
+	    dao.cadastrarCarro(carro);
+
+	    response.sendRedirect(request.getContextPath() + "/vendedorveiculos.jsp");
+	    
+	    System.out.println("ID USUARIO: " + carro.getIdUsuario());
+	    System.out.println("MARCA: " + carro.getMarca());
+	    System.out.println("MODELO: " + carro.getModelo());
+	    System.out.println("ANO: " + carro.getAno());
+	    System.out.println("COR: " + carro.getCor());
+	    System.out.println("PLACA: " + carro.getPlaca());
+	    System.out.println("COMBUSTIVEL: " + carro.getCombustivel());
+	    System.out.println("KM: " + carro.getQuilometragem());
+	    System.out.println("FOTO: " + carro.getImagem());
 	}
 
 	protected void cadastrarServico(HttpServletRequest request, HttpServletResponse response)
@@ -431,5 +462,25 @@ public class Controller extends HttpServlet {
 		dao.editarAnuncio(anuncio);
 
 		response.sendRedirect("navegacao");
+	}
+	
+	protected void carregarVeiculos(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+
+	    Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
+
+	    if (idUsuarioSessao == null) {
+	        response.sendRedirect(request.getContextPath() + "/login.jsp");
+	        return;
+	    }
+
+	    int idUsuario = Integer.parseInt(idUsuarioSessao.toString());
+
+	    ArrayList<JavaBeans> veiculos = dao.listarCarrosPorUsuario(idUsuario);
+
+	    request.setAttribute("veiculos", veiculos);
+
+	    RequestDispatcher rd = request.getRequestDispatcher("vendedorveiculos.jsp");
+	    rd.forward(request, response);
 	}
 }
