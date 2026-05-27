@@ -223,31 +223,84 @@ public class DAO {
 
 	public void cadastrarCarro(JavaBeans carro) {
 
-		String sql = "INSERT INTO carros(id_usuario,marca,modelo,ano,cor,placa,combustivel,quilometragem,foto) VALUES(?,?,?,?,?,?,?,?,?)";
+	    String sql = "INSERT INTO carros(id_usuario,marca,modelo,ano,cor,placa,combustivel,quilometragem,foto) VALUES(?,?,?,?,?,?,?,?,?)";
 
-		try {
-			Connection con = conectar();
+	    try {
+	        Connection con = conectar();
 
-			PreparedStatement pst = con.prepareStatement(sql);
+	        if (con == null) {
+	            System.out.println("CONEXAO NULL AO CADASTRAR CARRO");
+	            return;
+	        }
 
-			pst.setInt(1, carro.getIdUsuario());
-			pst.setString(2, carro.getMarca());
-			pst.setString(3, carro.getModelo());
-			pst.setInt(4, carro.getAno());
-			pst.setString(5, carro.getCor());
-			pst.setString(6, carro.getPlaca());
-			pst.setString(7, carro.getCombustivel());
-			pst.setInt(8, carro.getQuilometragem());
-			pst.setString(9, carro.getImagem());
+	        PreparedStatement pst = con.prepareStatement(sql);
 
-			pst.executeUpdate();
+	        pst.setInt(1, carro.getIdUsuario());
+	        pst.setString(2, carro.getMarca());
+	        pst.setString(3, carro.getModelo());
+	        pst.setInt(4, carro.getAno());
+	        pst.setString(5, carro.getCor());
+	        pst.setString(6, carro.getPlaca());
+	        pst.setString(7, carro.getCombustivel());
+	        pst.setInt(8, carro.getQuilometragem());
+	        pst.setString(9, carro.getImagem());
 
-			pst.close();
-			con.close();
+	        int linhas = pst.executeUpdate();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	        System.out.println("LINHAS INSERIDAS EM CARROS: " + linhas);
+
+	        pst.close();
+	        con.close();
+
+	    } catch (Exception e) {
+	        System.out.println("ERRO AO CADASTRAR CARRO");
+	        System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
+	
+	public ArrayList<JavaBeans> listarCarrosPorUsuario(int idUsuario) {
+
+	    ArrayList<JavaBeans> lista = new ArrayList<>();
+
+	    String sql = "SELECT * FROM carros WHERE id_usuario = ? ORDER BY id_carro DESC";
+
+	    try {
+	        Connection con = conectar();
+
+	        PreparedStatement pst = con.prepareStatement(sql);
+	        pst.setInt(1, idUsuario);
+
+	        ResultSet rs = pst.executeQuery();
+
+	        while (rs.next()) {
+	            JavaBeans c = new JavaBeans();
+
+	            c.setIdCarro(rs.getInt("id_carro"));
+	            c.setIdUsuario(rs.getInt("id_usuario"));
+	            c.setMarca(rs.getString("marca"));
+	            c.setModelo(rs.getString("modelo"));
+	            c.setAno(rs.getInt("ano"));
+	            c.setCor(rs.getString("cor"));
+	            c.setPlaca(rs.getString("placa"));
+	            c.setCombustivel(rs.getString("combustivel"));
+	            c.setQuilometragem(rs.getInt("quilometragem"));
+	            c.setImagem(rs.getString("foto"));
+
+	            lista.add(c);
+	        }
+
+	        rs.close();
+	        pst.close();
+	        con.close();
+
+	    } catch (Exception e) {
+	        System.out.println("ERRO AO LISTAR CARROS DO USUARIO");
+	        System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+
+	    return lista;
 	}
 
 	public void cadastrarServico(JavaBeans servico) {
