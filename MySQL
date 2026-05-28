@@ -443,6 +443,6 @@ CREATE TABLE produtos (
 select * from empresas;
 select * from usuarios;
 select * from servicos;
+select * from carros;
 
-
-delete from produtos where id_produto = 1;
+delete from carros where id_carro = 1;
