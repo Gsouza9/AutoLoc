@@ -14,7 +14,8 @@ import model.DAO;
 import model.JavaBeans;
 
 @WebServlet({ "/cadastro", "/deletar", "/edit", "/navegacao", "/cadastrou", "/cadastrol", "/loginu", "/logine",
-		"/update", "/cadveiculo", "/cadservico", "/cadproduto", "/vendedorservicos", "/buscarEditar", "/updateAnuncio" })
+	"/update", "/cadveiculo", "/cadservico", "/cadproduto", "/vendedorservicos", "/vendedorveiculos",
+	"/buscarEditar", "/updateAnuncio", "/vendedorpainel", "/atualizarLoja", "/editarDadosVeiculo" })
 
 public class Controller extends HttpServlet {
 
@@ -43,8 +44,12 @@ public class Controller extends HttpServlet {
 			deletarAnuncio(request, response);
 		} else if (action.equals("/vendedorservicos")) {
 			carregarServicosProdutos(request, response);
+		} else if (action.equals("/vendedorveiculos")) {
+			carregarVeiculos(request, response);
+		} else if (action.equals("/vendedorpainel")) {
+			carregarDadosLoja(request, response);  
 		} else {
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("login.jsp");
 		}
 	}
 
@@ -74,8 +79,12 @@ public class Controller extends HttpServlet {
 			cadastrarProduto(request, response);
 		} else if (action.equals("/updateAnuncio")) {
 			atualizarAnuncio(request, response);
-		} else {
-			response.sendRedirect("index.jsp");
+		} else if (action.equals("/atualizarLoja")) {
+			atualizarLoja(request, response);
+		}  else if (action.equals("/editarDadosVeiculo")) {
+			atualizarDadosVeiculo(request, response);
+		}	else {
+			response.sendRedirect("login.jsp");
 		}
 	}
 
@@ -246,61 +255,83 @@ public class Controller extends HttpServlet {
 
 		if (autenticado) {
 			request.getSession().setAttribute("empresaLogada", login.getEmail());
-			response.sendRedirect("vendedorinicio.jsp");
+			response.sendRedirect("vendedorpainel.jsp");
 		} else {
-			response.sendRedirect("login.jsp?erro=1");
+			response.sendRedirect("cadastro.jsp?erro=1");
 		}
 	}
 
 	protected void cadastrarVeiculo(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+			throws ServletException, IOException {
 
-	    JavaBeans carro = new JavaBeans();
+		JavaBeans veiculo = new JavaBeans();
 
-	    Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
+		Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
 
-	    if (idUsuarioSessao == null) {
-	        response.sendRedirect(request.getContextPath() + "/login.jsp");
-	        return;
-	    }
+		if (idUsuarioSessao == null) {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			return;
+		}
 
-	    carro.setIdUsuario(Integer.parseInt(idUsuarioSessao.toString()));
-	    carro.setMarca(request.getParameter("marca"));
-	    carro.setModelo(request.getParameter("modelo"));
+		veiculo.setIdUsuario(Integer.parseInt(idUsuarioSessao.toString()));
+		veiculo.setMarca(request.getParameter("marca"));
+		veiculo.setModelo(request.getParameter("modelo"));
+		veiculo.setCor(request.getParameter("cor"));
+		veiculo.setPlaca(request.getParameter("placa"));
+		veiculo.setChassi(request.getParameter("chassi"));
+		veiculo.setCombustivel(request.getParameter("combustivel"));
+		veiculo.setImagem(request.getParameter("foto"));
 
-	    String anoTexto = request.getParameter("ano");
-	    int ano = 0;
-	    if (anoTexto != null && !anoTexto.trim().isEmpty()) {
-	        ano = Integer.parseInt(anoTexto);
-	    }
-	    carro.setAno(ano);
+		veiculo.setTituloAnuncio(request.getParameter("tituloAnuncio"));
+		veiculo.setDescricao(request.getParameter("descricao"));
+		veiculo.setStatus(request.getParameter("statusVenda"));
+		veiculo.setCambio(request.getParameter("cambio"));
+		veiculo.setCidade(request.getParameter("cidade"));
+		veiculo.setEstado(request.getParameter("estado"));
 
-	    carro.setCor(request.getParameter("cor"));
-	    carro.setPlaca(request.getParameter("placa"));
-	    carro.setCombustivel(request.getParameter("combustivel"));
+		String anoTexto = request.getParameter("ano");
+		int ano = 0;
+		if (anoTexto != null && !anoTexto.trim().isEmpty()) {
+			ano = Integer.parseInt(anoTexto);
+		}
+		veiculo.setAno(ano);
 
-	    String kmTexto = request.getParameter("quilometragem");
-	    int quilometragem = 0;
-	    if (kmTexto != null && !kmTexto.trim().isEmpty()) {
-	        quilometragem = Integer.parseInt(kmTexto);
-	    }
-	    carro.setQuilometragem(quilometragem);
+		String precoTexto = request.getParameter("preco");
+		double preco = 0;
+		if (precoTexto != null && !precoTexto.trim().isEmpty()) {
+			precoTexto = precoTexto.trim().replace(".", "").replace(",", ".");
+			preco = Double.parseDouble(precoTexto);
+		}
+		veiculo.setPreco(preco);
 
-	    carro.setImagem(request.getParameter("foto"));
+		String kmTexto = request.getParameter("kmRodados");
+		int km = 0;
+		if (kmTexto != null && !kmTexto.trim().isEmpty()) {
+			km = Integer.parseInt(kmTexto);
+		}
+		veiculo.setQuilometragem(km);
 
-	    dao.cadastrarCarro(carro);
+		String portasTexto = request.getParameter("portas");
+		int portas = 0;
+		if (portasTexto != null && !portasTexto.trim().isEmpty()) {
+			portas = Integer.parseInt(portasTexto);
+		}
+		veiculo.setPortas(portas);
 
-	    response.sendRedirect(request.getContextPath() + "/vendedorveiculos.jsp");
-	    
-	    System.out.println("ID USUARIO: " + carro.getIdUsuario());
-	    System.out.println("MARCA: " + carro.getMarca());
-	    System.out.println("MODELO: " + carro.getModelo());
-	    System.out.println("ANO: " + carro.getAno());
-	    System.out.println("COR: " + carro.getCor());
-	    System.out.println("PLACA: " + carro.getPlaca());
-	    System.out.println("COMBUSTIVEL: " + carro.getCombustivel());
-	    System.out.println("KM: " + carro.getQuilometragem());
-	    System.out.println("FOTO: " + carro.getImagem());
+		String finalPlaca = request.getParameter("finalPlaca");
+		if ((finalPlaca == null || finalPlaca.trim().isEmpty()) && veiculo.getPlaca() != null && !veiculo.getPlaca().isEmpty()) {
+			finalPlaca = veiculo.getPlaca().substring(veiculo.getPlaca().length() - 1);
+		}
+		veiculo.setFinalPlaca(finalPlaca);
+
+		String aceitaTroca = request.getParameter("aceitaTroca");
+		veiculo.setAceitaTroca("SIM".equalsIgnoreCase(aceitaTroca));
+
+		boolean cadastrou = dao.cadastrarVeiculoVenda(veiculo);
+
+		System.out.println("CADASTROU VEICULO VENDA? " + cadastrou);
+
+		response.sendRedirect(request.getContextPath() + "/vendedorveiculos");
 	}
 
 	protected void cadastrarServico(HttpServletRequest request, HttpServletResponse response)
@@ -384,7 +415,7 @@ public class Controller extends HttpServlet {
 		Object idEmpresaSessao = request.getSession().getAttribute("idEmpresa");
 
 		if (idEmpresaSessao == null) {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("vendedorservicos.jsp");
 			return;
 		}
 
@@ -463,24 +494,98 @@ public class Controller extends HttpServlet {
 
 		response.sendRedirect("navegacao");
 	}
-	
+
 	protected void carregarVeiculos(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+			throws ServletException, IOException {
 
-	    Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
+		Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
 
-	    if (idUsuarioSessao == null) {
-	        response.sendRedirect(request.getContextPath() + "/login.jsp");
-	        return;
-	    }
+		if (idUsuarioSessao == null) {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			return;
+		}
 
-	    int idUsuario = Integer.parseInt(idUsuarioSessao.toString());
+		int idUsuario = Integer.parseInt(idUsuarioSessao.toString());
 
-	    ArrayList<JavaBeans> veiculos = dao.listarCarrosPorUsuario(idUsuario);
+		ArrayList<JavaBeans> veiculos = dao.listarVeiculosVendaPorUsuario(idUsuario);
 
-	    request.setAttribute("veiculos", veiculos);
+		request.setAttribute("veiculos", veiculos);
 
-	    RequestDispatcher rd = request.getRequestDispatcher("vendedorveiculos.jsp");
-	    rd.forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("vendedorveiculos.jsp");
+		rd.forward(request, response);
+	}
+	
+	protected void carregarDadosLoja(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Object idEmpresaSessao = request.getSession().getAttribute("idEmpresa");
+
+		if (idEmpresaSessao == null) {
+			response.sendRedirect("login.jsp");
+			return;
+		}
+
+		int idEmpresa = Integer.parseInt(idEmpresaSessao.toString());
+
+		JavaBeans loja = dao.buscarEmpresaPorId(idEmpresa);
+
+		request.setAttribute("loja", loja);
+
+		RequestDispatcher rd = request.getRequestDispatcher("vendedorpainel.jsp");
+		rd.forward(request, response);
+	}
+
+	protected void atualizarLoja(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+
+		Object idEmpresaSessao = request.getSession().getAttribute("idEmpresa");
+
+		if (idEmpresaSessao == null) {
+			response.sendRedirect("login.jsp");
+			return;
+		}
+
+		JavaBeans loja = new JavaBeans();
+
+		loja.setIdEmpresa(Integer.parseInt(idEmpresaSessao.toString()));
+		loja.setNumeroTelefone(request.getParameter("telefone"));
+		loja.setEndereco(request.getParameter("endereco"));
+		loja.setHorario(request.getParameter("horario"));
+
+		dao.atualizarDadosLoja(loja);
+
+		response.sendRedirect("vendedorpainel");
+	}
+	
+	protected void atualizarDadosVeiculo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
+
+		if (idUsuarioSessao == null) {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			return;
+		}
+
+		JavaBeans veiculo = new JavaBeans();
+
+		veiculo.setIdVenda(Integer.parseInt(request.getParameter("idVenda")));
+		veiculo.setStatus(request.getParameter("statusVenda"));
+		veiculo.setCidade(request.getParameter("cidade"));
+
+		String kmTexto = request.getParameter("kmRodados");
+		int km = 0;
+
+		if (kmTexto != null && !kmTexto.trim().isEmpty()) {
+			km = Integer.parseInt(kmTexto);
+		}
+
+		veiculo.setQuilometragem(km);
+
+		dao.atualizarDadosVeiculoVenda(veiculo);
+
+		response.sendRedirect(request.getContextPath() + "/vendedorveiculos");
 	}
 }
