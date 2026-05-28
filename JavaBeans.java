@@ -27,6 +27,9 @@ public class JavaBeans {
 	private String combustivel;
 	private int quilometragem;
 	private String imagem;
+	private String chassi;
+	private String carroceria;
+	private boolean aceitaTroca;
 
 	private String servico;
 	private double preco;
@@ -42,6 +45,9 @@ public class JavaBeans {
 
 	private String nomeProduto;
 	private int estoque;
+	
+	private String endereco;
+	private String horario;
 
 	public JavaBeans() {
 		super();
@@ -231,6 +237,30 @@ public class JavaBeans {
 		this.imagem = imagem;
 	}
 
+	public String getChassi() {
+		return chassi;
+	}
+
+	public void setChassi(String chassi) {
+		this.chassi = chassi;
+	}
+
+	public String getCarroceria() {
+		return carroceria;
+	}
+
+	public void setCarroceria(String carroceria) {
+		this.carroceria = carroceria;
+	}
+
+	public boolean isAceitaTroca() {
+		return aceitaTroca;
+	}
+
+	public void setAceitaTroca(boolean aceitaTroca) {
+		this.aceitaTroca = aceitaTroca;
+	}
+
 	public String getServico() {
 		return servico;
 	}
@@ -326,6 +356,20 @@ public class JavaBeans {
 	public void setEstoque(int estoque) {
 		this.estoque = estoque;
 	}
-	
-	
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
 }
