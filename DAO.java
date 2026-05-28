@@ -8,29 +8,31 @@ import java.util.ArrayList;
 
 public class DAO {
 
-	private final String url = "jdbc:mysql://localhost:3306/autoloc?useTimezone=true&serverTimezone=UTC";
-	private final String user = "root";
-	private final String password = "123@senac";
+	private String driver = "com.mysql.cj.jdbc.Driver";
+	private String url = "jdbc:mysql://127.0.0.1:3306/autoloc?useTimezone=true&serverTimezone=UTC";
+	private String user = "root";
+	private String password = "123@senac";
 
-	public Connection conectar() {
-
+	private Connection conectar() {
 		Connection con = null;
-
 		try {
-			System.out.println("INICIANDO CONEXAO MYSQL");
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/autoloc?useSSL=false&serverTimezone=UTC",
-					"root", "123@senac");
-
-			System.out.println("MYSQL CONECTADO");
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, user, password);
+			return con;
 		} catch (Exception e) {
-			System.out.println("ERRO MYSQL");
-			e.printStackTrace();
+			System.out.println(e);
+			return null;
 		}
+	}
 
-		return con;
+	public void testeConexao() {
+		try {
+			Connection con = conectar();
+			System.out.println(con);
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	public int cadastrarUsuario(JavaBeans usuario) {
@@ -221,86 +223,118 @@ public class DAO {
 		return ok;
 	}
 
-	public void cadastrarCarro(JavaBeans carro) {
+	public boolean cadastrarVeiculoVenda(JavaBeans veiculo) {
 
-	    String sql = "INSERT INTO carros(id_usuario,marca,modelo,ano,cor,placa,combustivel,quilometragem,foto) VALUES(?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO veiculos_venda "
+				+ "(id_usuario, marca, modelo, ano, cor, placa, chassi, combustivel, foto, "
+				+ "titulo_anuncio, descricao, preco, status_venda, km_rodados, cambio, portas, "
+				+ "final_placa, cidade, estado, aceita_troca) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	    try {
-	        Connection con = conectar();
+		try {
+			Connection con = conectar();
 
-	        if (con == null) {
-	            System.out.println("CONEXAO NULL AO CADASTRAR CARRO");
-	            return;
-	        }
+			if (con == null) {
+				System.out.println("CONEXAO NULL AO CADASTRAR VEICULO VENDA");
+				return false;
+			}
 
-	        PreparedStatement pst = con.prepareStatement(sql);
+			PreparedStatement pst = con.prepareStatement(sql);
 
-	        pst.setInt(1, carro.getIdUsuario());
-	        pst.setString(2, carro.getMarca());
-	        pst.setString(3, carro.getModelo());
-	        pst.setInt(4, carro.getAno());
-	        pst.setString(5, carro.getCor());
-	        pst.setString(6, carro.getPlaca());
-	        pst.setString(7, carro.getCombustivel());
-	        pst.setInt(8, carro.getQuilometragem());
-	        pst.setString(9, carro.getImagem());
+			pst.setInt(1, veiculo.getIdUsuario());
+			pst.setString(2, veiculo.getMarca());
+			pst.setString(3, veiculo.getModelo());
+			pst.setInt(4, veiculo.getAno());
+			pst.setString(5, veiculo.getCor());
+			pst.setString(6, veiculo.getPlaca());
+			pst.setString(7, veiculo.getChassi());
+			pst.setString(8, veiculo.getCombustivel());
+			pst.setString(9, veiculo.getImagem());
+			pst.setString(10, veiculo.getTituloAnuncio());
+			pst.setString(11, veiculo.getDescricao());
+			pst.setDouble(12, veiculo.getPreco());
+			pst.setString(13, veiculo.getStatus());
+			pst.setInt(14, veiculo.getQuilometragem());
+			pst.setString(15, veiculo.getCambio());
+			pst.setInt(16, veiculo.getPortas());
+			pst.setString(17, veiculo.getFinalPlaca());
+			pst.setString(18, veiculo.getCidade());
+			pst.setString(19, veiculo.getEstado());
+			pst.setBoolean(20, veiculo.isAceitaTroca());
 
-	        int linhas = pst.executeUpdate();
+			int resultado = pst.executeUpdate();
 
-	        System.out.println("LINHAS INSERIDAS EM CARROS: " + linhas);
+			pst.close();
+			con.close();
 
-	        pst.close();
-	        con.close();
+			return resultado > 0;
 
-	    } catch (Exception e) {
-	        System.out.println("ERRO AO CADASTRAR CARRO");
-	        System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
-	        e.printStackTrace();
-	    }
+		} catch (Exception e) {
+			System.out.println("ERRO AO CADASTRAR VEICULO VENDA");
+			System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
 	}
-	
-	public ArrayList<JavaBeans> listarCarrosPorUsuario(int idUsuario) {
 
-	    ArrayList<JavaBeans> lista = new ArrayList<>();
+	public ArrayList<JavaBeans> listarVeiculosVendaPorUsuario(int idUsuario) {
 
-	    String sql = "SELECT * FROM carros WHERE id_usuario = ? ORDER BY id_carro DESC";
+		ArrayList<JavaBeans> lista = new ArrayList<>();
 
-	    try {
-	        Connection con = conectar();
+		String sql = "SELECT * FROM veiculos_venda WHERE id_usuario = ? ORDER BY id_venda DESC";
 
-	        PreparedStatement pst = con.prepareStatement(sql);
-	        pst.setInt(1, idUsuario);
+		try {
+			Connection con = conectar();
 
-	        ResultSet rs = pst.executeQuery();
+			if (con == null) {
+				System.out.println("CONEXAO NULL AO LISTAR VEICULOS");
+				return lista;
+			}
 
-	        while (rs.next()) {
-	            JavaBeans c = new JavaBeans();
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setInt(1, idUsuario);
 
-	            c.setIdCarro(rs.getInt("id_carro"));
-	            c.setIdUsuario(rs.getInt("id_usuario"));
-	            c.setMarca(rs.getString("marca"));
-	            c.setModelo(rs.getString("modelo"));
-	            c.setAno(rs.getInt("ano"));
-	            c.setCor(rs.getString("cor"));
-	            c.setPlaca(rs.getString("placa"));
-	            c.setCombustivel(rs.getString("combustivel"));
-	            c.setQuilometragem(rs.getInt("quilometragem"));
-	            c.setImagem(rs.getString("foto"));
+			ResultSet rs = pst.executeQuery();
 
-	            lista.add(c);
-	        }
+			while (rs.next()) {
+				JavaBeans v = new JavaBeans();
 
-	        rs.close();
-	        pst.close();
-	        con.close();
+				v.setIdVenda(rs.getInt("id_venda"));
+				v.setIdUsuario(rs.getInt("id_usuario"));
+				v.setMarca(rs.getString("marca"));
+				v.setModelo(rs.getString("modelo"));
+				v.setAno(rs.getInt("ano"));
+				v.setCor(rs.getString("cor"));
+				v.setPlaca(rs.getString("placa"));
+				v.setChassi(rs.getString("chassi"));
+				v.setCombustivel(rs.getString("combustivel"));
+				v.setImagem(rs.getString("foto"));
+				v.setTituloAnuncio(rs.getString("titulo_anuncio"));
+				v.setDescricao(rs.getString("descricao"));
+				v.setPreco(rs.getDouble("preco"));
+				v.setStatus(rs.getString("status_venda"));
+				v.setQuilometragem(rs.getInt("km_rodados"));
+				v.setCambio(rs.getString("cambio"));
+				v.setPortas(rs.getInt("portas"));
+				v.setFinalPlaca(rs.getString("final_placa"));
+				v.setCidade(rs.getString("cidade"));
+				v.setEstado(rs.getString("estado"));
+				v.setAceitaTroca(rs.getBoolean("aceita_troca"));
 
-	    } catch (Exception e) {
-	        System.out.println("ERRO AO LISTAR CARROS DO USUARIO");
-	        System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
-	        e.printStackTrace();
-	    }
+				lista.add(v);
+			}
 
-	    return lista;
+			rs.close();
+			pst.close();
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println("ERRO AO LISTAR VEICULOS VENDA POR USUARIO");
+			System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return lista;
 	}
 
 	public void cadastrarServico(JavaBeans servico) {
@@ -612,5 +646,121 @@ public class DAO {
 		}
 
 		return usuario;
+	}
+	
+	public JavaBeans buscarEmpresaPorId(int idEmpresa) {
+
+		JavaBeans loja = null;
+
+		String sql = "SELECT * FROM empresas WHERE id_empresa = ?";
+
+		try {
+			Connection con = conectar();
+
+			if (con == null) {
+				System.out.println("CONEXAO NULL AO BUSCAR EMPRESA");
+				return null;
+			}
+
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setInt(1, idEmpresa);
+
+			ResultSet rs = pst.executeQuery();
+
+			if (rs.next()) {
+				loja = new JavaBeans();
+
+				loja.setIdEmpresa(rs.getInt("id_empresa"));
+				loja.setIdUsuario(rs.getInt("id_usuario"));
+				loja.setNomeEmpresa(rs.getString("nome_fantasia"));
+				loja.setRazaoSocial(rs.getString("razao_social"));
+				loja.setCnpj(rs.getString("cnpj"));
+				loja.setDescricao(rs.getString("descricao"));
+				loja.setNumeroTelefone(rs.getString("telefone"));
+				loja.setEmail(rs.getString("email"));
+				loja.setCategoria(rs.getString("categoria"));
+				loja.setEndereco(rs.getString("endereco"));
+				loja.setHorario(rs.getString("horario"));
+			}
+
+			rs.close();
+			pst.close();
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println("ERRO AO BUSCAR EMPRESA");
+			System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return loja;
+	}
+
+	public boolean atualizarDadosLoja(JavaBeans loja) {
+
+		String sql = "UPDATE empresas SET telefone = ?, endereco = ?, horario = ? WHERE id_empresa = ?";
+
+		try {
+			Connection con = conectar();
+
+			if (con == null) {
+				System.out.println("CONEXAO NULL AO ATUALIZAR LOJA");
+				return false;
+			}
+
+			PreparedStatement pst = con.prepareStatement(sql);
+
+			pst.setString(1, loja.getNumeroTelefone());
+			pst.setString(2, loja.getEndereco());
+			pst.setString(3, loja.getHorario());
+			pst.setInt(4, loja.getIdEmpresa());
+
+			int resultado = pst.executeUpdate();
+
+			pst.close();
+			con.close();
+
+			return resultado > 0;
+
+		} catch (Exception e) {
+			System.out.println("ERRO AO ATUALIZAR DADOS DA LOJA");
+			System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean atualizarDadosVeiculoVenda(JavaBeans veiculo) {
+
+		String sql = "UPDATE veiculos_venda SET status_venda = ?, km_rodados = ?, cidade = ? WHERE id_venda = ?";
+
+		try {
+			Connection con = conectar();
+
+			if (con == null) {
+				System.out.println("CONEXAO NULL AO ATUALIZAR VEICULO VENDA");
+				return false;
+			}
+
+			PreparedStatement pst = con.prepareStatement(sql);
+
+			pst.setString(1, veiculo.getStatus());
+			pst.setInt(2, veiculo.getQuilometragem());
+			pst.setString(3, veiculo.getCidade());
+			pst.setInt(4, veiculo.getIdVenda());
+
+			int resultado = pst.executeUpdate();
+
+			pst.close();
+			con.close();
+
+			return resultado > 0;
+
+		} catch (Exception e) {
+			System.out.println("ERRO AO ATUALIZAR DADOS DO VEICULO VENDA");
+			System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
