@@ -1634,10 +1634,10 @@ body[data-page="home"] .hero p {
 	at
 	 
 	12
-	%
+	
 	 
 	18
-	%
+	
 	,
 	rgba
 	(
@@ -1662,10 +1662,10 @@ body[data-page="home"] .hero p {
 	at
 	 
 	85
-	%
+	
 	 
 	78
-	%
+	
 	,
 	rgba
 	(
@@ -1690,17 +1690,17 @@ body[data-page="home"] .hero p {
 	#d4af37
 	 
 	0
-	%
+	
 	,
 	#050505
 	 
 	44
-	%
+	
 	,
 	#d4af37
 	 
 	100
-	%
+	
 	)
 	;
 	
@@ -2697,7 +2697,7 @@ body[data-page="home"] .hero p {
 	align-items: center;
 }
 
-}
+
 
 /* ========================= */
 /* SERVICE MAP PAGE */
@@ -3802,7 +3802,7 @@ body[data-page="seller-services"] .seller-list {
 	animation: fadeSlide .3s ease;
 }
 
-@
+
 keyframes fadeSlide {from { opacity:0;
 	transform: translateY(-8px);
 }
@@ -4053,4 +4053,5 @@ to {
 			height: 160px;
 		}
 	}
+}
 }
