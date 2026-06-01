@@ -410,7 +410,3 @@ select * from empresas;
 select * from usuarios;
 select * from servicos;
 select * from veiculos_venda;
-
-
-
-
