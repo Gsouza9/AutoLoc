@@ -1,18 +1,17 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.annotation.MultipartConfig;
-import java.io.File;
 import jakarta.servlet.http.Part;
-
 import model.DAO;
 import model.JavaBeans;
 
@@ -285,7 +284,7 @@ public class Controller extends HttpServlet {
 		    String nomeArquivo = System.currentTimeMillis() + "_" + foto.getSubmittedFileName();
 
 		    // Salva na pasta fixa fora do projeto
-		    String caminhoUpload = "C:/autoloc/uploads";
+		    String caminhoUpload = request.getServletContext().getRealPath("/uploads");
 
 		    File pasta = new File(caminhoUpload);
 		    if (!pasta.exists()) {
