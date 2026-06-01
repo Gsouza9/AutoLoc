@@ -11,7 +11,7 @@ public class DAO {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://127.0.0.1:3306/autoloc?useTimezone=true&serverTimezone=UTC";
 	private String user = "root";
-	private String password = "123@senac";
+	private String password = "";
 
 	private Connection conectar() {
 		Connection con = null;
@@ -467,47 +467,101 @@ public class DAO {
 		return lista;
 	}
 
-	public ArrayList<JavaBeans> listarAnuncios() {
-
+	public ArrayList<JavaBeans> listarAnuncio() {
 		ArrayList<JavaBeans> lista = new ArrayList<>();
-
 		String sql = "SELECT * FROM veiculos_venda";
-
 		try {
 			Connection con = conectar();
-
 			PreparedStatement pst = con.prepareStatement(sql);
-
 			ResultSet rs = pst.executeQuery();
-
+			
 			while (rs.next()) {
 				JavaBeans a = new JavaBeans();
-
-				a.setIdVenda(rs.getInt("id_venda"));
-				a.setIdUsuario(rs.getInt("id_usuario"));
-				a.setIdCarro(rs.getInt("id_carro"));
-				a.setTituloAnuncio(rs.getString("titulo_anuncio"));
-				a.setDescricao(rs.getString("descricao"));
-				a.setPreco(rs.getDouble("preco"));
-				a.setQuilometragem(rs.getInt("km_rodados"));
-				a.setCambio(rs.getString("cambio"));
-				a.setPortas(rs.getInt("portas"));
-				a.setFinalPlaca(rs.getString("final_placa"));
-				a.setCidade(rs.getString("cidade"));
-				a.setEstado(rs.getString("estado"));
+				 	a.setIdVenda(rs.getInt("id_venda"));
+		            a.setIdUsuario(rs.getInt("id_usuario"));
+		            a.setMarca(rs.getString("marca"));
+		            a.setModelo(rs.getString("modelo"));
+		            a.setAno(rs.getInt("ano"));
+		            a.setCombustivel(rs.getString("combustivel"));
+		            a.setImagem(rs.getString("foto")); 
+		            a.setTituloAnuncio(rs.getString("titulo_anuncio"));
+		            a.setDescricao(rs.getString("descricao"));
+		            a.setPreco(rs.getDouble("preco"));
+		            a.setQuilometragem(rs.getInt("km_rodados"));
+		            a.setCambio(rs.getString("cambio"));
+		            a.setPortas(rs.getInt("portas"));
+		            a.setFinalPlaca(rs.getString("final_placa"));
+		            a.setCidade(rs.getString("cidade"));
+		            a.setEstado(rs.getString("estado"));
+		            a.setStatus(rs.getString("status_venda"));
 
 				lista.add(a);
 			}
-
 			rs.close();
 			pst.close();
 			con.close();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return lista;
+	}
+	
+	// COM paginação - para a página de veículos
+	public ArrayList<JavaBeans> listarAnuncio(int pagina) {
+	    ArrayList<JavaBeans> lista = new ArrayList<>();
+	    int limite = 6;
+	    int offset = (pagina - 1) * limite;
+	    String sql = "SELECT * FROM veiculos_venda ORDER BY id_venda DESC LIMIT ? OFFSET ?";
+	    try {
+	        Connection con = conectar();
+	        PreparedStatement pst = con.prepareStatement(sql);
+	        pst.setInt(1, limite);
+	        pst.setInt(2, offset);
+	        ResultSet rs = pst.executeQuery();
+	        while (rs.next()) {
+	            JavaBeans a = new JavaBeans();
+	            a.setIdVenda(rs.getInt("id_venda"));
+	            a.setIdUsuario(rs.getInt("id_usuario"));
+	            a.setMarca(rs.getString("marca"));
+	            a.setModelo(rs.getString("modelo"));
+	            a.setAno(rs.getInt("ano"));
+	            a.setCombustivel(rs.getString("combustivel"));
+	            a.setImagem(rs.getString("foto"));
+	            a.setTituloAnuncio(rs.getString("titulo_anuncio"));
+	            a.setDescricao(rs.getString("descricao"));
+	            a.setPreco(rs.getDouble("preco"));
+	            a.setQuilometragem(rs.getInt("km_rodados"));
+	            a.setCambio(rs.getString("cambio"));
+	            a.setPortas(rs.getInt("portas"));
+	            a.setCidade(rs.getString("cidade"));
+	            a.setEstado(rs.getString("estado"));
+	            a.setStatus(rs.getString("status_venda"));
+	            lista.add(a);
+	        }
+	        rs.close();
+	        pst.close();
+	        con.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return lista;
+	}
+	
+	public int contarAnuncios() {
+	    int total = 0;
+	    String sql = "SELECT COUNT(*) FROM veiculos_venda";
+	    try {
+	        Connection con = conectar();
+	        PreparedStatement pst = con.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        if (rs.next()) total = rs.getInt(1);
+	        rs.close();
+	        pst.close();
+	        con.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return total;
 	}
 
 	public void deletarAnuncio(JavaBeans anuncio) {
