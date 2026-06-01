@@ -9,13 +9,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.MultipartConfig;
+import java.io.File;
+import jakarta.servlet.http.Part;
 
 import model.DAO;
 import model.JavaBeans;
 
+@MultipartConfig
 @WebServlet({ "/cadastro", "/deletar", "/edit", "/navegacao", "/cadastrou", "/cadastrol", "/loginu", "/logine",
 	"/update", "/cadveiculo", "/cadservico", "/cadproduto", "/vendedorservicos", "/vendedorveiculos",
-	"/buscarEditar", "/updateAnuncio", "/vendedorpainel", "/atualizarLoja", "/editarDadosVeiculo" })
+	"/buscarEditar", "/updateAnuncio", "/vendedorpainel", "/atualizarLoja", "/editarDadosVeiculo","/consumidor" })
 
 public class Controller extends HttpServlet {
 
@@ -41,14 +45,16 @@ public class Controller extends HttpServlet {
 		} else if (action.equals("/edit")) {
 			editarAnuncio(request, response);
 		} else if (action.equals("/deletar")) {
-			deletarAnuncio(request, response);
+			deletarAnuncios(request, response);
 		} else if (action.equals("/vendedorservicos")) {
 			carregarServicosProdutos(request, response);
 		} else if (action.equals("/vendedorveiculos")) {
 			carregarVeiculos(request, response);
 		} else if (action.equals("/vendedorpainel")) {
 			carregarDadosLoja(request, response);  
-		} else {
+		} else if (action.equals("/consumidor")) {
+		    carregarHome(request, response);
+		}else {
 			response.sendRedirect("login.jsp");
 		}
 	}
@@ -236,7 +242,7 @@ public class Controller extends HttpServlet {
 				request.getSession().setAttribute("idEmpresa", usuarioLogado.getIdEmpresa());
 				response.sendRedirect("vendedorpainel.jsp");
 			} else {
-				response.sendRedirect("consumidor.jsp");
+				response.sendRedirect(request.getContextPath() + "/consumidor");
 			}
 		} else {
 			response.sendRedirect("cadastro.jsp");
@@ -260,11 +266,35 @@ public class Controller extends HttpServlet {
 			response.sendRedirect("cadastro.jsp?erro=1");
 		}
 	}
+	
+	protected void carregarHome(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+
+	    ArrayList<JavaBeans> destaques = dao.listarAnuncio();
+	    request.setAttribute("destaques", destaques);
+	    request.getRequestDispatcher("consumidor.jsp").forward(request, response);
+	}
 
 	protected void cadastrarVeiculo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		JavaBeans veiculo = new JavaBeans();
+		
+		Part foto = request.getPart("foto");
+		if (foto != null && foto.getSize() > 0) {
+		    String nomeArquivo = System.currentTimeMillis() + "_" + foto.getSubmittedFileName();
+
+		    // Salva na pasta fixa fora do projeto
+		    String caminhoUpload = "C:/autoloc/uploads";
+
+		    File pasta = new File(caminhoUpload);
+		    if (!pasta.exists()) {
+		        pasta.mkdirs();
+		    }
+
+		    foto.write(caminhoUpload + File.separator + nomeArquivo);
+		    veiculo.setImagem(nomeArquivo); // salva só o nome no banco
+		}
 
 		Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
 
@@ -280,8 +310,8 @@ public class Controller extends HttpServlet {
 		veiculo.setPlaca(request.getParameter("placa"));
 		veiculo.setChassi(request.getParameter("chassi"));
 		veiculo.setCombustivel(request.getParameter("combustivel"));
-		veiculo.setImagem(request.getParameter("foto"));
-
+		//veiculo.setImagem(request.getParameter("foto"));
+		
 		veiculo.setTituloAnuncio(request.getParameter("tituloAnuncio"));
 		veiculo.setDescricao(request.getParameter("descricao"));
 		veiculo.setStatus(request.getParameter("statusVenda"));
@@ -432,18 +462,33 @@ public class Controller extends HttpServlet {
 	}
 
 	protected void listarAnuncios(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	        throws ServletException, IOException {
 
-		ArrayList<JavaBeans> lista = dao.listarAnuncios();
+	    int pagina = 1;
+	    String paginaParam = request.getParameter("pagina");
+	    if (paginaParam != null && !paginaParam.isEmpty()) {
+	        pagina = Integer.parseInt(paginaParam);
+	    }
 
-		request.setAttribute("anuncios", lista);
+	    int total = dao.contarAnuncios();
+	    int totalPaginas = (int) Math.ceil((double) total / 6);
 
-		RequestDispatcher rd = request.getRequestDispatcher("listar.jsp");
+	    ArrayList<JavaBeans> lista = dao.listarAnuncio(pagina);
 
-		rd.forward(request, response);
+	    System.out.println("TOTAL DE ANUNCIOS: " + lista.size());
+	    for (JavaBeans a : lista) {
+	        System.out.println("TITULO: " + a.getTituloAnuncio() + " | FOTO: " + a.getImagem());
+	    }
+
+	    request.setAttribute("anuncios", lista);
+	    request.setAttribute("paginaAtual", pagina);
+	    request.setAttribute("totalPaginas", totalPaginas);
+
+	    request.getRequestDispatcher("veiculos.jsp").forward(request, response);
 	}
+	
 
-	protected void deletarAnuncio(HttpServletRequest request, HttpServletResponse response)
+	protected void deletarAnuncios(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		JavaBeans anuncio = new JavaBeans();
@@ -452,7 +497,7 @@ public class Controller extends HttpServlet {
 
 		dao.deletarAnuncio(anuncio);
 
-		response.sendRedirect("navegacao");
+		response.sendRedirect(request.getContextPath() + "/vendedorveiculos");
 	}
 
 	protected void editarAnuncio(HttpServletRequest request, HttpServletResponse response)
