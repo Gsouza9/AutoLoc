@@ -938,4 +938,501 @@ textarea::placeholder {
 	.modal-footer strong {
 		font-size: 24px;
 	}
+/* =========================================================
+   AUTOLOC PREMIUM UI
+========================================================= */
+
+:root {
+
+	--transition-fast: .18s ease;
+	--transition-medium: .28s ease;
+	--transition-slow: .45s ease;
+
+	--shadow-sm:
+		0 4px 12px rgba(0,0,0,.08);
+
+	--shadow-md:
+		0 10px 30px rgba(0,0,0,.12);
+
+	--shadow-lg:
+		0 20px 50px rgba(0,0,0,.18);
+
+	--blur-bg: blur(14px);
+
+	--success: #22c55e;
+	--danger: #ef4444;
+	--warning: #f59e0b;
+	--info: #3b82f6;
+}
+
+/* =========================================================
+   ANIMAÇÕES GLOBAIS
+========================================================= */
+
+@keyframes fadeUp {
+
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes pulseGlow {
+
+	0% {
+		box-shadow: 0 0 0 rgba(212,175,55,0);
+	}
+
+	50% {
+		box-shadow: 0 0 25px rgba(212,175,55,.35);
+	}
+
+	100% {
+		box-shadow: 0 0 0 rgba(212,175,55,0);
+	}
+}
+
+@keyframes skeleton {
+
+	0% {
+		background-position: -200px 0;
+	}
+
+	100% {
+		background-position: calc(200px + 100%) 0;
+	}
+}
+
+/* =========================================================
+   ANIMAÇÕES BASE
+========================================================= */
+
+.site-header,
+.hero,
+.card,
+.vehicle-card,
+.seller-card,
+.modal-card,
+.stat-card,
+.mini-card {
+
+	animation: fadeUp .45s ease;
+}
+
+.primary-btn,
+.secondary-btn,
+.filter,
+.icon-btn,
+.favorite-btn,
+.nav-item {
+
+	transition:
+		transform var(--transition-fast),
+		background var(--transition-medium),
+		color var(--transition-medium),
+		border var(--transition-medium),
+		box-shadow var(--transition-medium);
+}
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.filter:hover,
+.icon-btn:hover,
+.favorite-btn:hover {
+
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+}
+
+.primary-btn:active,
+.secondary-btn:active {
+
+	transform: scale(.98);
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card,
+.vehicle-card,
+.seller-card,
+.stat-card,
+.mini-card {
+
+	transition:
+		transform .25s ease,
+		box-shadow .25s ease,
+		border-color .25s ease;
+}
+
+.card:hover,
+.vehicle-card:hover,
+.seller-card:hover,
+.stat-card:hover,
+.mini-card:hover {
+
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
+	border-color: rgba(212,175,55,.28);
+}
+
+/* =========================================================
+   FAVORITOS
+========================================================= */
+
+.favorite-btn.active,
+.nav-item.favorite-active {
+
+	background:
+		linear-gradient(
+			135deg,
+			#8B6914,
+			#D4AF37
+		);
+
+	color: black;
+
+	animation: pulseGlow 1.8s infinite;
+}
+
+.favorite-btn.active svg {
+	fill: currentColor;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+input,
+textarea,
+select {
+
+	transition:
+		border-color .2s ease,
+		box-shadow .2s ease,
+		background .2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+
+	border-color: #D4AF37;
+	box-shadow:
+		0 0 0 4px rgba(212,175,55,.12);
+
+	outline: none;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+
+	backdrop-filter: blur(6px);
+
+	transition:
+		opacity .25s ease,
+		visibility .25s ease;
+}
+
+.modal-card {
+
+	border:
+		1px solid rgba(255,255,255,.08);
+
+	box-shadow: var(--shadow-lg);
+
+	animation:
+		fadeUp .35s ease;
+}
+
+.modal img {
+
+	transition: transform .4s ease;
+}
+
+.modal img:hover {
+
+	transform: scale(1.02);
+}
+
+/* =========================================================
+   TOAST NOTIFICATIONS
+========================================================= */
+
+.toast-container {
+
+	position: fixed;
+	top: 24px;
+	right: 24px;
+	z-index: 9999;
+
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.toast {
+
+	min-width: 280px;
+
+	padding: 16px 18px;
+
+	border-radius: 16px;
+
+	background: rgba(15,15,15,.92);
+
+	backdrop-filter: var(--blur-bg);
+
+	border: 1px solid rgba(255,255,255,.08);
+
+	color: white;
+
+	box-shadow: var(--shadow-lg);
+
+	animation:
+		fadeUp .3s ease;
+}
+
+.toast.success {
+	border-left: 5px solid var(--success);
+}
+
+.toast.error {
+	border-left: 5px solid var(--danger);
+}
+
+.toast.warning {
+	border-left: 5px solid var(--warning);
+}
+
+/* =========================================================
+   SKELETON LOADING
+========================================================= */
+
+.skeleton {
+
+	position: relative;
+	overflow: hidden;
+	background: #1f2937;
+	border-radius: 12px;
+}
+
+.skeleton::after {
+
+	content: "";
+
+	position: absolute;
+	inset: 0;
+
+	background-image:
+		linear-gradient(
+			90deg,
+			transparent,
+			rgba(255,255,255,.08),
+			transparent
+		);
+
+	background-size: 200px 100%;
+
+	animation:
+		skeleton 1.2s infinite linear;
+}
+
+/* =========================================================
+   PREVIEW DE IMAGEM
+========================================================= */
+
+.image-preview {
+
+	width: 100%;
+	height: 240px;
+
+	border-radius: 16px;
+
+	overflow: hidden;
+
+	background: #111;
+
+	border:
+		2px dashed rgba(212,175,55,.22);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.image-preview img {
+
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* =========================================================
+   DASHBOARD SELLER
+========================================================= */
+
+.seller-stats article {
+
+	position: relative;
+	overflow: hidden;
+}
+
+.seller-stats article::before {
+
+	content: "";
+
+	position: absolute;
+
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 4px;
+
+	background:
+		linear-gradient(
+			90deg,
+			#8B6914,
+			#D4AF37
+		);
+}
+
+/* =========================================================
+   TABELAS
+========================================================= */
+
+.table-modern {
+
+	width: 100%;
+	border-collapse: collapse;
+	border-radius: 16px;
+	overflow: hidden;
+}
+
+.table-modern th {
+
+	background: #111827;
+	color: white;
+	padding: 16px;
+	text-align: left;
+}
+
+.table-modern td {
+
+	padding: 16px;
+	border-bottom:
+		1px solid rgba(255,255,255,.06);
+}
+
+.table-modern tr:hover {
+
+	background:
+		rgba(212,175,55,.05);
+}
+
+/* =========================================================
+   GRÁFICOS
+========================================================= */
+
+.chart-card {
+
+	padding: 24px;
+	border-radius: 22px;
+
+	background:
+		linear-gradient(
+			145deg,
+			rgba(255,255,255,.04),
+			rgba(255,255,255,.01)
+		);
+
+	border:
+		1px solid rgba(255,255,255,.06);
+}
+
+/* =========================================================
+   MAPA
+========================================================= */
+
+.map-container {
+
+	width: 100%;
+	height: 360px;
+
+	border-radius: 22px;
+
+	overflow: hidden;
+
+	border:
+		1px solid rgba(212,175,55,.18);
+
+	box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   DARK / LIGHT MODE
+========================================================= */
+
+body.light-mode {
+
+	background: #f4f6f8;
+	color: #111827;
+}
+
+body.light-mode .seller-card,
+body.light-mode .card,
+body.light-mode .vehicle-card {
+
+	background: white;
+	color: #111827;
+}
+
+body.light-mode input,
+body.light-mode textarea,
+body.light-mode select {
+
+	background: #fff;
+	color: #111827;
+	border-color: #d1d5db;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+	.modal-card {
+		width: 95%;
+	}
+
+	.toast-container {
+		left: 12px;
+		right: 12px;
+		top: 12px;
+	}
+
+	.toast {
+		min-width: unset;
+		width: 100%;
+	}
+
+	.chart-card,
+	.map-container {
+		border-radius: 18px;
+	}
 }
