@@ -1,3 +1,4 @@
+```jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -5,8 +6,11 @@
 <html lang="pt-br">
 
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Login - AutoLoc</title>
 
 <link rel="icon" type="image/png"
@@ -22,24 +26,32 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/login.css">
+
 </head>
 
 <body>
 
 	<div class="main-container">
 
-		<!-- LOGIN -->
-		<div class="login-side">
+		<!-- =========================
+		     LOGIN SIDE
+		========================= -->
+
+		<section class="login-side">
 
 			<div class="login-box">
 
 				<!-- LOGO MOBILE -->
 				<div class="logo-mobile">
+
 					<img
-						src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png">
+						src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png"
+						alt="Logo AutoLoc">
+
 				</div>
 
 				<!-- TABS -->
+
 				<div class="tabs">
 
 					<button class="active" type="button">
@@ -53,14 +65,17 @@
 
 				</div>
 
+				<!-- TITULO -->
+
 				<h1>Bem-vindo!</h1>
 
 				<p class="subtitle">
-					Entre na sua conta para continuar.
+					Entre na sua conta para continuar na AutoLoc.
 				</p>
 
 				<!-- FORM -->
-				<form action="loginu" method="post">
+
+				<form action="loginu" method="post" class="login-form">
 
 					<div class="mb-4">
 
@@ -72,11 +87,12 @@
 							name="email"
 							class="form-control"
 							placeholder="Digite seu email"
+							autocomplete="email"
 							required>
 
 					</div>
 
-					<div class="mb-4">
+					<div class="mb-3">
 
 						<label class="form-label">
 							Senha
@@ -86,15 +102,23 @@
 							name="senha"
 							class="form-control"
 							placeholder="Digite sua senha"
+							autocomplete="current-password"
 							required>
 
 					</div>
 
+					<!-- OPTIONS -->
+
 					<div class="options">
 
-						<label>
+						<label class="remember-me">
+
 							<input type="checkbox">
-							Lembrar de mim
+
+							<span>
+								Lembrar de mim
+							</span>
+
 						</label>
 
 						<a href="#">
@@ -103,47 +127,68 @@
 
 					</div>
 
+					<!-- BOTAO -->
+
 					<button type="submit" class="login-btn">
 						Entrar
 					</button>
 
 				</form>
 
+				<!-- DIVIDER -->
+
 				<div class="divider">
-					ou continue com
+					<span>ou continue com</span>
 				</div>
 
-				<button class="google-btn">
+				<!-- GOOGLE -->
+
+				<button class="google-btn" type="button">
 
 					<img
-						src="${pageContext.request.contextPath}/img/google.png">
+						src="${pageContext.request.contextPath}/img/google.png"
+						alt="Google">
 
-					<span>Google</span>
+					<span>
+						Google
+					</span>
 
 				</button>
 
+				<!-- TERMOS -->
+
 				<p class="terms">
+
 					Ao continuar, você concorda com nossos
-					Termos de Uso e Política de Privacidade.
+					<strong>Termos de Uso</strong>
+					e
+					<strong>Política de Privacidade</strong>.
+
 				</p>
 
 			</div>
 
-		</div>
+		</section>
 
-		<!-- INFO -->
-		<div class="info-side">
+		<!-- =========================
+		     INFO SIDE
+		========================= -->
+
+		<section class="info-side">
 
 			<div class="logo">
 
 				<img class="logo-img"
-					src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png">
+					src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png"
+					alt="Logo AutoLoc">
 
 			</div>
 
 			<p class="top-text">
-				Encontre oficinas e serviços automotivos com facilidade
+				Encontre oficinas, veículos e serviços automotivos com facilidade.
 			</p>
+
+			<!-- FEATURE -->
 
 			<div class="feature">
 
@@ -163,6 +208,8 @@
 
 			</div>
 
+			<!-- FEATURE -->
+
 			<div class="feature">
 
 				<div class="icon">
@@ -180,6 +227,8 @@
 				</div>
 
 			</div>
+
+			<!-- FEATURE -->
 
 			<div class="feature">
 
@@ -199,13 +248,17 @@
 
 			</div>
 
+			<!-- STATS -->
+
 			<div class="stats">
 
 				<div class="stat-card">
 
 					<h2>1.2K+</h2>
 
-					<span>Oficinas</span>
+					<span>
+						Oficinas
+					</span>
 
 				</div>
 
@@ -213,7 +266,9 @@
 
 					<h2>5K+</h2>
 
-					<span>Usuários</span>
+					<span>
+						Usuários
+					</span>
 
 				</div>
 
@@ -221,13 +276,15 @@
 
 					<h2>4.9</h2>
 
-					<span>Avaliação</span>
+					<span>
+						Avaliação
+					</span>
 
 				</div>
 
 			</div>
 
-		</div>
+		</section>
 
 	</div>
 
@@ -237,3 +294,4 @@
 </body>
 
 </html>
+```
