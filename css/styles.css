@@ -1,70 +1,24 @@
-@media (max-width: 900px) {
-  .desktop-nav {
-    display: none !important;
-  }
-  .bottom-nav {
-    display: grid !important;
-    position: fixed;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: min(620px, 98vw);
-    height: 64px;
-    padding: 6px;
-    border-radius: 18px 18px 0 0;
-    box-shadow: 0 -2px 18px rgba(0,0,0,.18);
-    background: rgba(15,20,34,.98);
-    z-index: 1000;
-    border: 1px solid var(--border);
-    gap: 0;
-    grid-template-columns: repeat(5, 1fr);
-    align-items: center;
-  }
-  .bottom-nav .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    color: var(--muted);
-    gap: 2px;
-    padding: 0;
-    background: none;
-    border-radius: 12px;
-    transition: background .2s, color .2s;
-  }
-  .bottom-nav .nav-item.active {
-    color: var(--gold-light);
-    background: rgba(215,184,79,.10);
-  }
-}
-
-@media (min-width: 901px) {
-  .bottom-nav {
-    display: none !important;
-  }
-}
 
 
 :root {
   color-scheme:dark;
-  --bg:#070a12;
-  --surface:#0f1422;
-  --surface-2:#151b2c;
-  --surface-3:#1b2235;
-  --text:#f8fafc;
-  --text-soft:#cbd5e1;
-  --muted:#8b95a8;
+  --bg:#050814;
+  --surface:#0c1422;
+  --surface-2:#111c2d;
+  --surface-3:#19263b;
+  --text:#eef2ff;
+  --text-soft:#b8c2d6;
+  --muted:#7180a0;
   --gold:#d7b84f;
-  --gold-light:#f5d976;
-  --gold-dark:#a87912;
+  --gold-light:#ffde8d;
+  --gold-dark:#a67a16;
   --success:#22c55e;
   --danger:#ef4444;
   --border:rgba(255,255,255,.08);
   --border-strong:rgba(215,184,79,.36);
   --border-soft:rgba(255,255,255,.12);
   --surface-strong:rgba(255,255,255,.06);
-  --surface-light:rgba(255,255,255,.03);
+  --surface-light:rgba(255,255,255,.04);
   --surface-glass:rgba(10,14,24,.76);
   --gold-soft:rgba(215,184,79,.13);
   --danger-soft:rgba(239,68,68,.16);
@@ -105,179 +59,6 @@ html {
     height: auto;
     padding: 0 12px;
     gap: 10px;
-  }
-  .hero {
-    padding: 18px;
-    min-height: 320px;
-  }
-  .cars, .stats {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .section-title h2 {
-    font-size: 26px;
-  }
-}
-
-  @media (max-width: 400px) {
-    html {
-      font-size: 14px;
-    }
-    .container, .seller-shell {
-      padding-left: 2px;
-      padding-right: 2px;
-    }
-    .site-header, .bottom-nav, .modal, .hero, .page-hero, .profile-hero {
-      padding-left: 4px !important;
-      padding-right: 4px !important;
-    }
-    .primary-btn, .secondary-btn, .filter-btn, .details-btn, .select {
-      min-width: 0;
-      font-size: 13px;
-      padding: 0 4px;
-    }
-    .car-card, .service-card, .stat-card, .seller-card, .mini-card {
-      padding: 6px !important;
-      border-radius: 8px !important;
-    }
-    .brand-name, .hero-content h1, .section-title h2 {
-      font-size: 16px !important;
-    }
-    .modal-card, .modal-body {
-      padding: 8px !important;
-    }
-    .search-box, .filter-btn {
-      height: 36px !important;
-      padding: 0 4px !important;
-    }
-    .stats, .cars, .services {
-      grid-template-columns: 1fr !important;
-      gap: 6px !important;
-    }
-    .section-title {
-      gap: 2px !important;
-    }
-    .hero-actions {
-      gap: 4px !important;
-      margin-top: 8px !important;
-    }
-    .brand-mark {
-      width: 24px !important;
-      height: 24px !important;
-      font-size: 12px !important;
-    }
-    .modal-close, .icon-btn, .profile-link {
-      width: 32px !important;
-      height: 32px !important;
-    }
-    .modal-heading h2 {
-      font-size: 18px !important;
-    }
-    .modal-footer strong {
-      font-size: 16px !important;
-    }
-    .toast {
-      font-size: 12px !important;
-      padding: 6px 8px !important;
-    }
-    .login-logo, .brand {
-      font-size: 18px !important;
-    }
-    .login-feature, .login-feature-icon {
-      padding: 6px !important;
-      font-size: 12px !important;
-    }
-    .login-input-group input, .seller-form input, .seller-form select, .seller-form textarea {
-      height: 32px !important;
-      padding: 0 6px !important;
-      font-size: 13px !important;
-    }
-    .seller-item-heading strong {
-      font-size: 14px !important;
-    }
-    .seller-item-heading span {
-      font-size: 10px !important;
-      padding: 2px 4px !important;
-    }
-    .seller-item-side strong {
-      font-size: 13px !important;
-    }
-    .seller-return-bar {
-      font-size: 12px !important;
-      padding: 4px 2px !important;
-    }
-    .modal-card > img, .hero, .page-hero, .profile-hero {
-      min-height: 120px !important;
-    }
-    .modal-card, .modal-body, .modal-content {
-      min-width: 0 !important;
-      max-width: 100vw !important;
-    }
-    .modal-section h3 {
-      font-size: 16px !important;
-    }
-    .modal-section p {
-      font-size: 13px !important;
-    }
-    .service-tags, .services-grid {
-      grid-template-columns: 1fr !important;
-      gap: 4px !important;
-    }
-    .tag, .schedule {
-      padding: 6px !important;
-      font-size: 12px !important;
-    }
-    .powered {
-      display: none !important;
-    }
-    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-      font-size: 12px !important;
-    }
-    .stat-card h2 {
-      font-size: 18px !important;
-    }
-    .stat-card p {
-      font-size: 10px !important;
-    }
-    .modal-actions button {
-      font-size: 14px !important;
-      height: 38px !important;
-    }
-    .nav-item, .bottom-nav .nav-item {
-      font-size: 10px !important;
-      gap: 1px !important;
-    }
-    .user-menu a {
-      min-height: 32px !important;
-      font-size: 13px !important;
-      padding: 0 6px !important;
-    }
-    .user-menu svg {
-      width: 14px !important;
-      height: 14px !important;
-    }
-    .brand-name, .brand-mark {
-      overflow-wrap: break-word !important;
-    }
-  }
-@media (max-width: 600px) {
-  .container {
-    width: 100vw;
-    padding: 8px 0 32px;
-  }
-  .site-header {
-    flex-direction: column;
-    height: auto;
-    padding: 0 4px;
-    gap: 6px;
-  }
-  .brand-name {
-    font-size: 20px;
-  }
-  .desktop-nav {
-    flex-direction: column;
-    gap: 2px;
-    padding: 2px;
   }
   .hero {
     padding: 8px;
@@ -400,16 +181,6 @@ a {
 
 body.modal-open {
   overflow:hidden;
-}
-
-body.modal-open .seller-return-bar {
-  opacity:0;
-  pointer-events:none;
-}
-
-.site-header {
-  position:sticky;
-  top:0;
   z-index:20;
   height:82px;
   padding:0 32px;
@@ -1496,39 +1267,56 @@ body[data-page="home"] .hero p {
   transform:translate(-50%, 0);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme:light;
-    --bg:#f4f7fb;
-    --surface:#ffffff;
-    --surface-2:#f1f5f9;
-    --surface-3:#e8eef7;
-    --text:#0f172a;
-    --text-soft:#475569;
-    --muted:#64748b;
-    --border:rgba(15,23,42,.10);
-    --border-strong:rgba(168,121,18,.34);
-    --shadow:0 24px 70px rgba(15,23,42,.12);
-  }
+/* Modo escuro explícito */
+body.dark-mode {
+  color-scheme: dark;
+  --bg:#050814;
+  --surface:#0c1422;
+  --surface-2:#111c2d;
+  --surface-3:#19263b;
+  --text:#eef2ff;
+  --text-soft:#b8c2d6;
+  --muted:#7180a0;
+  --gold:#d7b84f;
+  --gold-light:#ffde8d;
+  --gold-dark:#a67a16;
+  --success:#22c55e;
+  --danger:#ef4444;
+  --border:rgba(255,255,255,.08);
+  --border-strong:rgba(215,184,79,.36);
+  --border-soft:rgba(255,255,255,.12);
+  --surface-strong:rgba(255,255,255,.06);
+  --surface-light:rgba(255,255,255,.04);
+  --surface-glass:rgba(10,14,24,.76);
+  --gold-soft:rgba(215,184,79,.13);
+  --danger-soft:rgba(239,68,68,.16);
+  --shadow:0 24px 70px rgba(0,0,0,.34);
+  --radius:24px;
+  --transition:.25s ease;
+}
 
-  body:not([data-page="login"]) {
-    background:
-      radial-gradient(circle at top left, rgba(215,184,79,.18), transparent 32rem),
-      linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
-    color:var(--text);
-  }
+body.dark-mode:not([data-page="login"]) {
+  background:
+    radial-gradient(circle at top left, rgba(215,184,79,.14), transparent 34rem),
+    linear-gradient(180deg, #080b14 0%, var(--bg) 100%);
+  color:var(--text);
+}
 
-  .site-header,
-  .bottom-nav,
-  .user-menu {
-    background:rgba(255,255,255,.88);
-    border-color:var(--border);
-    box-shadow:0 16px 42px rgba(15,23,42,.08);
-  }
+body.dark-mode .site-header,
+body.dark-mode .bottom-nav,
+body.dark-mode .user-menu {
+  background:rgba(15,20,34,.88);
+  border-color:var(--border);
+  box-shadow:0 16px 42px rgba(0,0,0,.25);
+}
 
-  .desktop-nav {
-    background:rgba(15,23,42,.035);
-  }
+body.dark-mode .desktop-nav {
+  background:rgba(255,255,255,.03);
+}
+
+.seller-hero {
+  box-shadow: var(--shadow);
+}
 
   .icon-btn,
   .profile-link,
@@ -2004,38 +1792,60 @@ body[data-page="login"] {
 .seller-header .desktop-nav {
   border-radius:18px;
 }
-
-.seller-hero {
-  min-height:300px;
-  padding:38px;
-  border:1px solid rgba(215,184,79,.18);
-  border-radius:28px;
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:24px;
-  background:
-    linear-gradient(90deg, rgba(7,10,18,.96), rgba(7,10,18,.72), rgba(7,10,18,.38)),
-    url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=1800') center/cover no-repeat;
-  box-shadow:var(--shadow);
+/* Modo claro */
+body.light-mode {
+  color-scheme: light;
+  --bg:#f4f7fb;
+  --surface:#ffffff;
+  --surface-2:#f1f5f9;
+  --surface-3:#e8eef7;
+  --text:#0f172a;
+  --text-soft:#475569;
+  --muted:#64748b;
+  --gold:#d7b84f;
+  --gold-light:#f8c24d;
+  --gold-dark:#a67a16;
+  --success:#16a34a;
+  --danger:#b91c1c;
+  --border:rgba(15,23,42,.10);
+  --border-strong:rgba(168,121,18,.34);
+  --border-soft:rgba(15,23,42,.05);
+  --surface-strong:rgba(255,255,255,.92);
+  --surface-light:rgba(255,255,255,.96);
+  --surface-glass:rgba(255,255,255,.84);
+  --gold-soft:rgba(215,184,79,.12);
+  --danger-soft:rgba(185,28,28,.16);
+  --shadow:0 24px 70px rgba(15,23,42,.12);
 }
 
-.seller-hero h1 {
-  max-width:760px;
-  margin-top:12px;
-  font-size:clamp(34px, 5vw, 56px);
-  line-height:1.03;
+body.light-mode:not([data-page="login"]) {
+  background:
+    radial-gradient(circle at top left, rgba(215,184,79,.16), transparent 32rem),
+    linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+  color:var(--text);
+}
+
+body.light-mode .site-header,
+body.light-mode .bottom-nav,
+body.light-mode .user-menu {
+  background:rgba(255,255,255,.88);
+  border-color:var(--border);
+  box-shadow:0 16px 42px rgba(15,23,42,.08);
+}
+
+body.light-mode .desktop-nav {
+  background:rgba(15,23,42,.035);
 }
 
 .seller-hero p {
   max-width:680px;
-  margin-top:16px;
-  color:var(--text-soft);
-  line-height:1.7;
+    background: rgba(15,20,34,.88);
+    border-color: var(--border);
+    box-shadow: 0 16px 42px rgba(0,0,0,.25);
 }
 
 .seller-status {
-  flex:0 0 auto;
+    background: rgba(255,255,255,.03);
   padding:12px 16px;
   border:1px solid var(--border-strong);
   border-radius:999px;
@@ -3032,7 +2842,7 @@ body[data-page="service-map"] .map-area {
   flex:1;
   min-width:0;
   height:100vh;
-  background:#e8edf3;
+  background:#0b1120;
 }
 
 body[data-page="service-map"] #map {
@@ -3058,8 +2868,8 @@ body[data-page="service-map"] .stat-card {
   padding:14px 15px 13px;
   border:1px solid rgba(15,23,42,.08);
   border-radius:18px;
-  background:rgba(255,255,255,.94);
-  color:#111827;
+  background:rgba(255,255,255,.08);
+  color:var(--text);
   backdrop-filter:blur(14px);
   box-shadow:0 18px 50px rgba(0,0,0,.22);
 }
@@ -3081,14 +2891,14 @@ body[data-page="service-map"] .green { background:#10b981; }
 
 body[data-page="service-map"] .stat-card h2 {
   margin:0 0 2px;
-  color:#111827;
+  color:var(--text);
   font-size:32px;
   line-height:1;
 }
 
 body[data-page="service-map"] .stat-card p {
   margin:0;
-  color:#64748b;
+  color:var(--text-soft);
   font-size:12px;
   line-height:1.25;
 }
@@ -3101,8 +2911,8 @@ body[data-page="service-map"] .powered {
   padding:16px 24px;
   border:1px solid rgba(255,255,255,.08);
   border-radius:30px;
-  background:rgba(255,255,255,.92);
-  color:#111827;
+  background:rgba(15,20,34,.92);
+  color:var(--text);
   backdrop-filter:blur(10px);
   transform:translateX(-50%);
 }
@@ -3436,62 +3246,131 @@ body[data-page="service-map"] .nav-item span {
   white-space:nowrap;
 }
 
-@media (prefers-color-scheme: light) {
-  body[data-page="service-map"] {
-    --sidebar:#fff;
-    --card:#fff;
-    --card-2:#f1f5f9;
-    --text:#111827;
-    --text-soft:#475569;
-    --muted:#64748b;
-    --border:rgba(15,23,42,.08);
-    background:#f3f6fb;
-  }
 
-  body[data-page="service-map"] .search-box {
-    background:#f1f5f9;
-  }
+/* Força o modo escuro no service-map quando o body estiver com dark-mode */
+body.dark-mode[data-page="service-map"] {
+  --sidebar:#050816;
+  --card:#141827;
+  --card-2:#111827;
+  --text:#eef2ff;
+  --text-soft:#b8c2d6;
+  --muted:#7180a0;
+  --border:rgba(255,255,255,.08);
+  background:var(--bg);
+  color:var(--text);
+}
 
-  body[data-page="service-map"] .icon {
-    background:#e2e8f0;
-  }
+body.dark-mode[data-page="service-map"] .search-box {
+  background:rgba(23,27,44,.92);
+}
 
-  body[data-page="service-map"] .icon i {
-    color:#111827;
-  }
+body.dark-mode[data-page="service-map"] .icon {
+  background:#232838;
+}
 
-  body[data-page="service-map"] .services-grid .service-card,
-  body[data-page="service-map"] .filter,
-  body[data-page="service-map"] .stat-card {
-    border-color:rgba(15,23,42,.06);
-    box-shadow:0 8px 24px rgba(15,23,42,.06);
-  }
+body.dark-mode[data-page="service-map"] .icon i {
+  color:var(--text);
+}
 
-  body[data-page="service-map"] .stat-card,
-  body[data-page="service-map"] .powered,
-  body[data-page="service-map"] .bottom-nav {
-    background:rgba(255,255,255,.94);
-    color:#111827;
-  }
+body.dark-mode[data-page="service-map"] .services-grid .service-card,
+body.dark-mode[data-page="service-map"] .filter,
+body.dark-mode[data-page="service-map"] .stat-card {
+  border-color:rgba(255,255,255,.08);
+  box-shadow:none;
+}
 
-  body[data-page="service-map"] .modal-card {
-    background:#fff;
-    color:#111827;
-  }
+body.dark-mode[data-page="service-map"] .map-area {
+  background:#0b1120;
+}
 
-  body[data-page="service-map"] .banner-overlay {
-    background:linear-gradient(to top, rgba(255,255,255,.96), transparent);
-  }
+body.dark-mode[data-page="service-map"] .stat-card,
+body.dark-mode[data-page="service-map"] .powered,
+body.dark-mode[data-page="service-map"] .bottom-nav {
+  background:rgba(15,20,34,.94);
+  color:var(--text);
+  border-color:rgba(255,255,255,.08);
+}
 
-  body[data-page="service-map"] .call-btn {
-    background:#e2e8f0;
-    color:#111827;
-  }
+body.dark-mode[data-page="service-map"] .modal-card {
+  background:var(--sidebar);
+  color:var(--text);
+}
 
-  body[data-page="service-map"] .whatsapp-btn {
-    background:#dcfce7;
-    color:#166534;
-  }
+body.dark-mode[data-page="service-map"] .banner-overlay {
+  background:linear-gradient(to top, #050816, transparent);
+}
+
+body.dark-mode[data-page="service-map"] .call-btn {
+  background:#1e293b;
+  color:#fff;
+}
+
+body.dark-mode[data-page="service-map"] .whatsapp-btn {
+  background:#052e16;
+  color:#4ade80;
+}
+
+/* Força o modo claro no service-map quando o body estiver com light-mode */
+body.light-mode[data-page="service-map"] {
+  --sidebar:#ffffff;
+  --card:#ffffff;
+  --card-2:#f1f5f9;
+  --text:#111827;
+  --text-soft:#475569;
+  --muted:#64748b;
+  --border:rgba(15,23,42,.08);
+  background:#f3f6fb;
+  color:var(--text);
+}
+
+body.light-mode[data-page="service-map"] .search-box {
+  background:#f1f5f9;
+}
+
+body.light-mode[data-page="service-map"] .icon {
+  background:#e2e8f0;
+}
+
+body.light-mode[data-page="service-map"] .icon i {
+  color:#111827;
+}
+
+body.light-mode[data-page="service-map"] .services-grid .service-card,
+body.light-mode[data-page="service-map"] .filter,
+body.light-mode[data-page="service-map"] .stat-card {
+  border-color:rgba(15,23,42,.06);
+  box-shadow:0 8px 24px rgba(15,23,42,.06);
+}
+
+body.light-mode[data-page="service-map"] .stat-card,
+body.light-mode[data-page="service-map"] .powered,
+body.light-mode[data-page="service-map"] .bottom-nav {
+  background:rgba(255,255,255,.94);
+  color:#111827;
+  border-color:rgba(15,23,42,.08);
+}
+
+body.light-mode[data-page="service-map"] .modal-card {
+  background:#ffffff;
+  color:#111827;
+}
+
+body.light-mode[data-page="service-map"] .banner-overlay {
+  background:linear-gradient(to top, rgba(255,255,255,.96), transparent);
+}
+
+body.light-mode[data-page="service-map"] .call-btn {
+  background:#e2e8f0;
+  color:#111827;
+}
+
+body.light-mode[data-page="service-map"] .whatsapp-btn {
+  background:#dcfce7;
+  color:#166534;
+}
+
+body.light-mode[data-page="service-map"] .map-area {
+  background:#eef1f7;
 }
 
 @media (max-width:900px) {
@@ -3726,9 +3605,6 @@ body[data-page="seller-services"] .seller-list{
 
 }
 
-}
-/* Browser theme sync: final overrides keep light mode consistent across all pages. */
-@media (prefers-color-scheme: light) {
   :root {
     color-scheme:light;
     --bg:#f4f7fb;
@@ -3905,7 +3781,7 @@ body[data-page="seller-services"] .seller-list{
   
 
 
-}
+
 
 .signup-extra-fields {
   display: flex;
@@ -3923,147 +3799,5 @@ body[data-page="seller-services"] .seller-list{
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@media (max-width: 400px) {
-  html {
-    font-size: 14px;
-  }
-  .container, .seller-shell {
-    padding-left: 2px;
-    padding-right: 2px;
-  }
-  .site-header, .bottom-nav, .modal, .hero, .page-hero, .profile-hero {
-    padding-left: 4px !important;
-    padding-right: 4px !important;
-  }
-  .primary-btn, .secondary-btn, .filter-btn, .details-btn, .select {
-    min-width: 0;
-    font-size: 13px;
-    padding: 0 4px;
-  }
-  .car-card, .service-card, .stat-card, .seller-card, .mini-card {
-    padding: 6px !important;
-    border-radius: 8px !important;
-  }
-  .brand-name, .hero-content h1, .section-title h2 {
-    font-size: 16px !important;
-  }
-  .modal-card, .modal-body {
-    padding: 8px !important;
-  }
-  .search-box, .filter-btn {
-    height: 36px !important;
-    padding: 0 4px !important;
-  }
-  .stats, .cars, .services {
-    grid-template-columns: 1fr !important;
-    gap: 6px !important;
-  }
-  .section-title {
-    gap: 2px !important;
-  }
-  .hero-actions {
-    gap: 4px !important;
-    margin-top: 8px !important;
-  }
-  .brand-mark {
-    width: 24px !important;
-    height: 24px !important;
-    font-size: 12px !important;
-  }
-  .modal-close, .icon-btn, .profile-link {
-    width: 32px !important;
-    height: 32px !important;
-  }
-  .modal-heading h2 {
-    font-size: 18px !important;
-  }
-  .modal-footer strong {
-    font-size: 16px !important;
-  }
-  .toast {
-    font-size: 12px !important;
-    padding: 6px 8px !important;
-  }
-  .login-logo, .brand {
-    font-size: 18px !important;
-  }
-  .login-feature, .login-feature-icon {
-    padding: 6px !important;
-    font-size: 12px !important;
-  }
-  .login-input-group input, .seller-form input, .seller-form select, .seller-form textarea {
-    height: 32px !important;
-    padding: 0 6px !important;
-    font-size: 13px !important;
-  }
-  .seller-item-heading strong {
-    font-size: 14px !important;
-  }
-  .seller-item-heading span {
-    font-size: 10px !important;
-    padding: 2px 4px !important;
-  }
-  .seller-item-side strong {
-    font-size: 13px !important;
-  }
-  .seller-return-bar {
-    font-size: 12px !important;
-    padding: 4px 2px !important;
-  }
-  .modal-card > img, .hero, .page-hero, .profile-hero {
-    min-height: 120px !important;
-  }
-  .modal-card, .modal-body, .modal-content {
-    min-width: 0 !important;
-    max-width: 100vw !important;
-  }
-  .modal-section h3 {
-    font-size: 16px !important;
-  }
-  .modal-section p {
-    font-size: 13px !important;
-  }
-  .service-tags, .services-grid {
-    grid-template-columns: 1fr !important;
-    gap: 4px !important;
-  }
-  .tag, .schedule {
-    padding: 6px !important;
-    font-size: 12px !important;
-  }
-  .powered {
-    display: none !important;
-  }
-  .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    font-size: 12px !important;
-  }
-  .stat-card h2 {
-    font-size: 18px !important;
-  }
-  .stat-card p {
-    font-size: 10px !important;
-  }
-  .modal-actions button {
-    font-size: 14px !important;
-    height: 38px !important;
-  }
-  .nav-item, .bottom-nav .nav-item {
-    font-size: 10px !important;
-    gap: 1px !important;
-  }
-  .user-menu a {
-    min-height: 32px !important;
-    font-size: 13px !important;
-    padding: 0 6px !important;
-  }
-  .user-menu svg {
-    width: 14px !important;
-    height: 14px !important;
-  }
-  .brand-name, .brand-mark {
-    overflow-wrap: break-word !important;
   }
 }
