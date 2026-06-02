@@ -1,9 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,242 +16,427 @@
 	href="${pageContext.request.contextPath}/img/logocerta.png">
 
 <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 	rel="stylesheet">
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/cadastro.css">
+
 </head>
 
 <body>
 
-	<div class="container">
+```
+<div class="main-container">
 
-		<div class="lado-cadastro">
+	<!-- ÁREA FORMULÁRIO -->
+	<div class="login-side">
 
-			<div class="caixa-cadastro">
+		<div class="login-box">
 
-				<div class="logo-mobile">
-					<img src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png" alt="">
+			<!-- LOGO MOBILE -->
+			<div class="logo-mobile">
+
+				<img
+					src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png">
+
+			</div>
+
+			<!-- TABS -->
+			<div class="tabs">
+
+				<button type="button"
+					onclick="window.location.href='login.jsp'">
+
+					Entrar
+
+				</button>
+
+				<button class="active" type="button">
+
+					Criar Conta
+
+				</button>
+
+			</div>
+
+			<h1>Crie sua conta</h1>
+
+			<p class="subtitle">
+
+				Cadastre-se para acessar a plataforma AutoLoc.
+
+			</p>
+
+			<!-- FORM -->
+			<form action="cadastro" method="post">
+
+				<div class="mb-4">
+
+					<label class="form-label">
+
+						Nome completo
+
+					</label>
+
+					<input type="text"
+						name="nome"
+						class="form-control"
+						placeholder="Digite seu nome"
+						required>
+
 				</div>
 
-				<div class="botoes-topo">
+				<div class="mb-4">
 
-					<button type="button"
-						onclick="window.location.href='login.jsp'">
-						Entrar
-					</button>
+					<label class="form-label">
 
-					<button class="ativo" type="button">
-						Criar Conta
-					</button>
+						Email
+
+					</label>
+
+					<input type="email"
+						name="email"
+						class="form-control"
+						placeholder="Digite seu email"
+						required>
 
 				</div>
 
-				<h1>Criar Conta</h1>
+				<div class="row-fields">
 
-				<p class="subtitulo">
-					Preencha os dados para começar.
-				</p>
-
-				<form id="formCadastro" method="post" action="cadastrol">
-
-					<div class="tipo-conta">
-
-						<button type="button" class="tipo-btn ativo" id="btnVendedor">
-							Vendedor
-						</button>
-
-						<button type="button" class="tipo-btn" id="btnUsuario">
-							Usuário
-						</button>
-
-					</div>
-
-					<div id="formVendedor">
-
-						<div class="grupo-input full">
-							<label>Nome da Empresa</label>
-							<input type="text" name="nomeFantasia"
-								placeholder="Digite o nome da empresa">
-						</div>
-
-						<div class="grupo-input full">
-							<label>Razão Social</label>
-							<input type="text" name="razaoSocial"
-								placeholder="Digite a razão social">
-						</div>
-
-						<div class="grupo-input">
-							<label>Nome</label>
-							<input type="text" name="nome"
-								placeholder="Digite seu nome">
-						</div>
-
-						<div class="grupo-input">
-							<label>CPF</label>
-							<input type="text" name="cpf"
-								placeholder="Digite seu CPF">
-						</div>
-
-						<div class="grupo-input">
-							<label>CNPJ</label>
-							<input type="text" name="cnpj"
-								placeholder="Digite o CNPJ">
-						</div>
-
-						<div class="grupo-input">
-							<label>Telefone</label>
-							<input type="text" name="telefone"
-								placeholder="Digite o telefone">
-						</div>
-
-						<div class="grupo-input full">
-							<label>Email</label>
-							<input type="email" name="email"
-								placeholder="Digite seu email">
-						</div>
-
-						<div class="grupo-input full">
-							<label>Categoria</label>
-							<select name="categoria">
-								<option value="">Selecione</option>
-								<option value="OFICINA">Oficina</option>
-								<option value="LOCADORA">Locadora</option>
-								<option value="POSTO">Posto</option>
-								<option value="AUTOPECAS">Auto Peças</option>
-								<option value="PNEUS">Pneus</option>
-								<option value="ELETRICA">Elétrica</option>
-								<option value="LAVAGEM">Lavagem</option>
-							</select>
-						</div>
-
-						<div class="grupo-input full">
-							<label>Descrição</label>
-							<input type="text" name="descricao"
-								placeholder="Descrição da empresa">
-						</div>
-
-						<div class="grupo-input full">
-							<label>Senha</label>
-							<input type="password" name="senha"
-								placeholder="Digite sua senha">
-						</div>
-
-					</div>
-
-					<div id="formUsuario" style="display: none;">
-
-						<div class="grupo-input full">
-							<label>Nome</label>
-							<input type="text" name="nome"
-								placeholder="Digite seu nome">
-						</div>
-
-						<div class="grupo-input">
-							<label>CPF</label>
-							<input type="text" name="cpf"
-								placeholder="Digite seu CPF">
-						</div>
-
-						<div class="grupo-input">
-							<label>Telefone</label>
-							<input type="text" name="telefone"
-								placeholder="Digite seu telefone">
-						</div>
-
-						<div class="grupo-input full">
-							<label>Email</label>
-							<input type="email" name="email"
-								placeholder="Digite seu email">
-						</div>
-
-						<div class="grupo-input full">
-							<label>Senha</label>
-							<input type="password" name="senha"
-								placeholder="Digite sua senha">
-						</div>
-
-					</div>
-
-					<div class="opcoes">
+					<div class="field-group">
 
 						<label>
-							<input type="checkbox" required>
-							Aceito os termos
+
+							Telefone
+
 						</label>
+
+						<input type="text"
+							name="telefone"
+							class="form-control"
+							placeholder="(11) 99999-9999"
+							required>
 
 					</div>
 
-					<button class="botao-cadastro" type="submit">
-						Criar Conta
-					</button>
+					<div class="field-group">
 
-				</form>
+						<label>
+
+							CPF
+
+						</label>
+
+						<input type="text"
+							name="cpf"
+							class="form-control"
+							placeholder="000.000.000-00"
+							required>
+
+					</div>
+
+				</div>
+
+				<div class="row-fields">
+
+					<div class="field-group">
+
+						<label>
+
+							CEP
+
+						</label>
+
+						<input type="text"
+							name="cep"
+							id="cep"
+							class="form-control"
+							placeholder="00000-000">
+
+					</div>
+
+					<div class="field-group">
+
+						<label>
+
+							Número
+
+						</label>
+
+						<input type="text"
+							name="numero"
+							class="form-control"
+							placeholder="123">
+
+					</div>
+
+				</div>
+
+				<div class="row-fields">
+
+					<div class="field-group">
+
+						<label>
+
+							Cidade
+
+						</label>
+
+						<input type="text"
+							name="cidade"
+							class="form-control"
+							placeholder="São Paulo">
+
+					</div>
+
+					<div class="field-group">
+
+						<label>
+
+							Estado
+
+						</label>
+
+						<input type="text"
+							name="estado"
+							maxlength="2"
+							class="form-control"
+							placeholder="SP">
+
+					</div>
+
+				</div>
+
+				<div class="mb-4">
+
+					<label class="form-label">
+
+						Senha
+
+					</label>
+
+					<input type="password"
+						name="senha"
+						class="form-control"
+						placeholder="Digite sua senha"
+						required>
+
+				</div>
+
+				<div class="mb-4">
+
+					<label class="form-label">
+
+						Tipo de conta
+
+					</label>
+
+					<select name="tipoUsuario"
+						class="form-control"
+						required>
+
+						<option value="CLIENTE">
+
+							Cliente
+
+						</option>
+
+						<option value="VENDEDOR">
+
+							Vendedor
+
+						</option>
+
+					</select>
+
+				</div>
+
+				<button type="submit"
+					class="login-btn">
+
+					Criar conta
+
+				</button>
+
+			</form>
+
+			<div class="divider">
+
+				ou continue com
+
+			</div>
+
+			<button class="google-btn">
+
+				<img
+					src="${pageContext.request.contextPath}/img/google.png">
+
+				<span>
+
+					Google
+
+				</span>
+
+			</button>
+
+			<p class="terms">
+
+				Ao continuar, você concorda com nossos
+				Termos de Uso e Política de Privacidade.
+
+			</p>
+
+		</div>
+
+	</div>
+
+	<!-- ÁREA INFORMATIVA -->
+	<div class="info-side">
+
+		<div class="logo">
+
+			<img class="logo-img"
+				src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png">
+
+		</div>
+
+		<p class="top-text">
+
+			Cadastre sua conta e tenha acesso ao ecossistema AutoLoc
+
+		</p>
+
+		<div class="feature">
+
+			<div class="icon">
+
+				🚗
+
+			</div>
+
+			<div>
+
+				<h3>
+
+					Veículos Premium
+
+				</h3>
+
+				<p>
+
+					Encontre carros selecionados com segurança.
+
+				</p>
 
 			</div>
 
 		</div>
 
-		<div class="lado-info">
+		<div class="feature">
 
-			<div class="logo">
-				<img src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png" alt="">
-			</div>
+			<div class="icon">
 
-			<h2 class="texto-principal">
-				Crie sua conta e encontre oficinas com facilidade
-			</h2>
-
-			<div class="item-info">
-
-				<div class="icone">🚗</div>
-
-				<div>
-					<h3>Cadastro Rápido</h3>
-					<p>Crie sua conta em poucos segundos.</p>
-				</div>
+				🛠️
 
 			</div>
 
-			<div class="item-info">
+			<div>
 
-				<div class="icone">⭐</div>
+				<h3>
 
-				<div>
-					<h3>Oficinas Avaliadas</h3>
-					<p>Veja avaliações reais de outros usuários.</p>
-				</div>
+					Serviços Automotivos
 
-			</div>
+				</h3>
 
-			<div class="item-info">
+				<p>
 
-				<div class="icone">🔧</div>
+					Oficinas, estética, revisão e muito mais.
 
-				<div>
-					<h3>Serviços Automotivos</h3>
-					<p>Encontre serviços próximos.</p>
-				</div>
+				</p>
 
 			</div>
 
-			<div class="cards">
+		</div>
 
-				<div class="card">
-					<h2>1.2K+</h2>
-					<span>Oficinas</span>
-				</div>
+		<div class="feature">
 
-				<div class="card">
-					<h2>5K+</h2>
-					<span>Usuários</span>
-				</div>
+			<div class="icon">
 
-				<div class="card">
-					<h2>4.9</h2>
-					<span>Avaliação</span>
-				</div>
+				📍
+
+			</div>
+
+			<div>
+
+				<h3>
+
+					Mapa Inteligente
+
+				</h3>
+
+				<p>
+
+					Veja empresas próximas da sua região.
+
+				</p>
+
+			</div>
+
+		</div>
+
+		<div class="stats">
+
+			<div class="stat-card">
+
+				<h2>
+
+					15K+
+
+				</h2>
+
+				<span>
+
+					Veículos
+
+				</span>
+
+			</div>
+
+			<div class="stat-card">
+
+				<h2>
+
+					8K+
+
+				</h2>
+
+				<span>
+
+					Usuários
+
+				</span>
+
+			</div>
+
+			<div class="stat-card">
+
+				<h2>
+
+					4.9
+
+				</h2>
+
+				<span>
+
+					Avaliação
+
+				</span>
 
 			</div>
 
@@ -256,54 +444,12 @@
 
 	</div>
 
-	<script>
-		const btnVendedor = document.getElementById("btnVendedor");
-		const btnUsuario = document.getElementById("btnUsuario");
+</div>
 
-		const formCadastro = document.getElementById("formCadastro");
-
-		const formVendedor = document.getElementById("formVendedor");
-		const formUsuario = document.getElementById("formUsuario");
-
-		function setCamposAtivos(container, ativo) {
-			const campos = container.querySelectorAll("input, select, textarea");
-
-			campos.forEach(function(campo) {
-				campo.disabled = !ativo;
-			});
-		}
-
-		function mostrarVendedor() {
-			formCadastro.action = "cadastrol";
-
-			formVendedor.style.display = "grid";
-			formUsuario.style.display = "none";
-
-			setCamposAtivos(formVendedor, true);
-			setCamposAtivos(formUsuario, false);
-
-			btnVendedor.classList.add("ativo");
-			btnUsuario.classList.remove("ativo");
-		}
-
-		function mostrarUsuario() {
-			formCadastro.action = "cadastrou";
-
-			formVendedor.style.display = "none";
-			formUsuario.style.display = "grid";
-
-			setCamposAtivos(formVendedor, false);
-			setCamposAtivos(formUsuario, true);
-
-			btnUsuario.classList.add("ativo");
-			btnVendedor.classList.remove("ativo");
-		}
-
-		btnUsuario.addEventListener("click", mostrarUsuario);
-		btnVendedor.addEventListener("click", mostrarVendedor);
-
-		mostrarVendedor();
-	</script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+```
 
 </body>
+
 </html>
