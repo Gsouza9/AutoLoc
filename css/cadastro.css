@@ -1,3 +1,4 @@
+```css
 * {
 	margin: 0;
 	padding: 0;
@@ -12,6 +13,7 @@ body {
 	align-items: center;
 	background: linear-gradient(120deg, #D4AF37, #000, #D4AF37);
 	padding: 30px;
+	overflow-x: hidden;
 }
 
 .container {
@@ -22,7 +24,12 @@ body {
 	border-radius: 25px;
 	overflow: hidden;
 	border: 1px solid rgba(212, 175, 55, 0.2);
+	box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
 }
+
+/* =========================
+   LADO CADASTRO
+========================= */
 
 .lado-cadastro {
 	width: 550px;
@@ -56,6 +63,12 @@ body {
 	border-radius: 12px;
 	cursor: pointer;
 	font-size: 16px;
+	font-weight: 500;
+	transition: 0.2s ease;
+}
+
+.botoes-topo button:hover {
+	background: rgba(212, 175, 55, 0.08);
 }
 
 .botoes-topo .ativo {
@@ -67,46 +80,83 @@ body {
 h1 {
 	color: white;
 	font-size: 40px;
+	line-height: 1.1;
+	margin-bottom: 10px;
 }
 
 .subtitulo {
 	color: #aaa;
 	margin-bottom: 25px;
+	line-height: 1.5;
 }
+
+/* =========================
+   FORMULÁRIO
+========================= */
 
 form {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 15px;
+	width: 100%;
+}
+
+#formVendedor,
+#formUsuario {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+	width: 100%;
 }
 
 .grupo-input {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 .grupo-input label {
 	color: white;
-	margin-bottom: 5px;
+	margin-bottom: 6px;
 	font-size: 14px;
+	font-weight: 500;
 }
 
 .grupo-input input,
-.grupo-input select {
+.grupo-input select,
+.grupo-input textarea {
+	width: 100%;
 	padding: 14px;
 	border-radius: 12px;
 	border: 1px solid rgba(212, 175, 55, 0.20);
 	background: #1b1b1b;
 	color: white;
 	outline: none;
+	font-size: 15px;
+	transition: 0.2s ease;
+	font-family: inherit;
 }
 
-.grupo-input input::placeholder {
+.grupo-input input:focus,
+.grupo-input select:focus,
+.grupo-input textarea:focus {
+	border-color: #D4AF37;
+	box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+}
+
+.grupo-input input::placeholder,
+.grupo-input textarea::placeholder {
 	color: #777;
 }
 
 .grupo-input select {
 	cursor: pointer;
+}
+
+.grupo-input textarea {
+	resize: vertical;
+	min-height: 120px;
 }
 
 .full {
@@ -117,6 +167,10 @@ form {
 	grid-column: 1 / -1;
 	color: white;
 	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 5px;
 }
 
 .botao-cadastro {
@@ -128,7 +182,17 @@ form {
 	font-size: 18px;
 	font-weight: bold;
 	cursor: pointer;
+	transition: 0.25s ease;
 }
+
+.botao-cadastro:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 20px rgba(212, 175, 55, 0.18);
+}
+
+/* =========================
+   TIPO DE CONTA
+========================= */
 
 .tipo-conta {
 	grid-column: 1 / -1;
@@ -152,12 +216,17 @@ form {
 
 .tipo-btn:hover {
 	transform: translateY(-1px);
+	border-color: #D4AF37;
 }
 
 .tipo-btn.ativo {
 	background: linear-gradient(135deg, #8B6914, #D4AF37, #FFD966);
 	color: black;
 }
+
+/* =========================
+   LADO INFO
+========================= */
 
 .lado-info {
 	flex: 1;
@@ -177,12 +246,16 @@ form {
 
 .logo img {
 	width: 320px;
+	max-width: 100%;
+	object-fit: contain;
 }
 
 .texto-principal {
 	color: white;
 	font-size: 42px;
+	line-height: 1.2;
 	margin-bottom: 40px;
+	max-width: 650px;
 }
 
 .item-info {
@@ -206,6 +279,7 @@ form {
 	align-items: center;
 	font-size: 24px;
 	margin: 0 auto;
+	background: rgba(212, 175, 55, 0.05);
 }
 
 .item-info h3 {
@@ -218,13 +292,19 @@ form {
 .item-info p {
 	color: #ccc;
 	font-size: 15px;
-	line-height: 1.4;
+	line-height: 1.5;
 }
+
+/* =========================
+   CARDS
+========================= */
 
 .cards {
 	display: flex;
 	gap: 15px;
 	margin-top: 30px;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .card {
@@ -233,29 +313,48 @@ form {
 	border-radius: 15px;
 	text-align: center;
 	width: 130px;
+	box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
 .card h2 {
 	color: #D4AF37;
+	font-size: 24px;
+	margin-bottom: 5px;
 }
 
 .card span {
 	color: #777;
+	font-size: 14px;
 }
 
 .logo-mobile {
 	display: none;
 }
 
-#formVendedor,
-#formUsuario {
-	grid-column: 1 / -1;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 15px;
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1100px) {
+
+	.container {
+		flex-direction: column;
+		max-width: 700px;
+	}
+
+	.lado-cadastro {
+		width: 100%;
+		border-right: none;
+		border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+	}
+
+	.lado-info {
+		padding: 45px 30px;
+	}
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
+
 	body {
 		padding: 0;
 		background: #000;
@@ -264,6 +363,7 @@ form {
 	.container {
 		flex-direction: column;
 		border-radius: 0;
+		min-height: 100vh;
 	}
 
 	.lado-cadastro {
@@ -273,17 +373,27 @@ form {
 		border-right: none;
 	}
 
-	form {
+	form,
+	#formVendedor,
+	#formUsuario {
 		grid-template-columns: 1fr;
 		gap: 12px;
 	}
 
 	h1 {
-		font-size: 28px;
+		font-size: 30px;
 	}
 
 	.subtitulo {
 		font-size: 14px;
+	}
+
+	.tipo-conta {
+		flex-direction: column;
+	}
+
+	.botoes-topo {
+		flex-direction: row;
 	}
 
 	.lado-info {
@@ -295,7 +405,7 @@ form {
 	}
 
 	.texto-principal {
-		font-size: 24px;
+		font-size: 26px;
 		text-align: center;
 		margin-bottom: 35px;
 	}
@@ -313,6 +423,7 @@ form {
 
 	.logo-mobile img {
 		width: 220px;
+		max-width: 100%;
 	}
 
 	.item-info {
@@ -330,7 +441,7 @@ form {
 	}
 
 	.item-info h3 {
-		font-size: 22px;
+		font-size: 20px;
 		margin-bottom: 4px;
 	}
 
@@ -352,9 +463,42 @@ form {
 	.card {
 		width: 130px;
 	}
+}
 
-	#formVendedor,
-	#formUsuario {
-		grid-template-columns: 1fr;
+@media (max-width: 480px) {
+
+	.lado-cadastro {
+		padding: 22px 16px;
+	}
+
+	h1 {
+		font-size: 26px;
+	}
+
+	.grupo-input input,
+	.grupo-input select,
+	.grupo-input textarea {
+		padding: 13px;
+		font-size: 14px;
+	}
+
+	.botao-cadastro {
+		font-size: 16px;
+		padding: 15px;
+	}
+
+	.texto-principal {
+		font-size: 22px;
+	}
+
+	.item-info {
+		gap: 14px;
+	}
+
+	.icone {
+		width: 50px;
+		height: 50px;
+		font-size: 20px;
 	}
 }
+```
