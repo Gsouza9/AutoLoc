@@ -27,13 +27,21 @@ if (cpfUsuario == null) cpfUsuario = "";
 String iniciais = "US";
 
 if (!nomeUsuario.trim().isEmpty()) {
+
 	String[] partesNome = nomeUsuario.trim().split("\\s+");
 
 	if (partesNome.length >= 2) {
-		iniciais = partesNome[0].substring(0, 1).toUpperCase()
-				+ partesNome[1].substring(0, 1).toUpperCase();
+
+		iniciais =
+			partesNome[0].substring(0, 1).toUpperCase()
+			+
+			partesNome[1].substring(0, 1).toUpperCase();
+
 	} else {
-		iniciais = partesNome[0].substring(0, 1).toUpperCase();
+
+		iniciais =
+			partesNome[0].substring(0, 1).toUpperCase();
+
 	}
 }
 %>
@@ -42,51 +50,107 @@ if (!nomeUsuario.trim().isEmpty()) {
 <html lang="pt-BR">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>AutoLoc | Perfil</title>
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-	
-	<link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
 
-	<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0">
 
-	
+<meta name="description"
+	content="Perfil do cliente AutoLoc.">
+
+<title>AutoLoc | Perfil</title>
+
+<link rel="preconnect"
+	href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+	href="https://fonts.gstatic.com"
+	crossorigin>
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/styles.css">
+
+<script
+	src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"
+	defer></script>
+
 </head>
 
 <body data-page="profile">
 
 <header class="site-header">
 
-	<a class="brand" href="consumidor.jsp">
-		<span class="brand-mark">AL</span>
-		<span class="brand-name">Auto<span>Loc</span></span>
+	<a class="brand"
+		href="${pageContext.request.contextPath}/consumidor.jsp">
+
+		<span class="brand-mark">
+			AL
+		</span>
+
+		<span class="brand-name">
+			Auto<span>Loc</span>
+		</span>
+
 	</a>
 
-	<nav class="desktop-nav" aria-label="Navegacao principal">
-		<a href="consumidor.jsp">Inicio</a>
-		<a href="veiculos.jsp">Veiculos</a>
-		<a href="servicos.html">Servicos</a>
-		<a href="favoritos.jsp">
-			Favoritos <span data-favorite-count>0</span>
+	<nav class="desktop-nav"
+		aria-label="Navegacao principal">
+
+		<a href="${pageContext.request.contextPath}/consumidor.jsp">
+			Inicio
 		</a>
+
+		<a href="${pageContext.request.contextPath}/veiculos.jsp">
+			Veiculos
+		</a>
+
+		<a href="${pageContext.request.contextPath}/servicos.jsp">
+			Servicos
+		</a>
+
+		<a href="${pageContext.request.contextPath}/favoritos.jsp">
+
+			Favoritos
+
+			<span data-favorite-count>
+				0
+			</span>
+
+		</a>
+
 	</nav>
 
 	<div class="header-actions">
-		<a class="icon-btn" href="favoritos.jsp" aria-label="Favoritos">
+
+		<a class="icon-btn"
+			href="${pageContext.request.contextPath}/favoritos.jsp"
+			aria-label="Favoritos">
+
 			<i data-lucide="heart"></i>
+
 		</a>
 
-		<a class="profile-link active" href="perfil.jsp" aria-label="Perfil">
+		<a class="profile-link active"
+			href="${pageContext.request.contextPath}/perfil.jsp"
+			aria-label="Perfil">
+
 			<i data-lucide="user"></i>
+
 		</a>
 
-		<a class="icon-btn" href="logout" aria-label="Sair">
+		<a class="icon-btn"
+			href="${pageContext.request.contextPath}/logout"
+			aria-label="Sair">
+
 			<i data-lucide="log-out"></i>
+
 		</a>
+
 	</div>
 
 </header>
@@ -94,19 +158,37 @@ if (!nomeUsuario.trim().isEmpty()) {
 <main class="container">
 
 	<section class="profile-hero">
-		<div class="profile-avatar"><%= iniciais %></div>
+
+		<div class="profile-avatar">
+			<%= iniciais %>
+		</div>
 
 		<div>
-			<span class="eyebrow">Área do cliente</span>
 
-			<h1><%= nomeUsuario %></h1>
+			<span class="eyebrow">
+				Area do cliente
+			</span>
+
+			<h1>
+				<%= nomeUsuario %>
+			</h1>
 
 			<p>
-				<span><%= emailUsuario %></span>
+
+				<span>
+					<%= emailUsuario %>
+				</span>
+
 				&middot;
-				<span><%= telefoneUsuario %></span>
+
+				<span>
+					<%= telefoneUsuario %>
+				</span>
+
 			</p>
+
 		</div>
+
 	</section>
 
 	<section class="profile-grid">
@@ -114,46 +196,101 @@ if (!nomeUsuario.trim().isEmpty()) {
 		<form class="profile-card-large">
 
 			<div class="section-title">
+
 				<div>
-					<span class="section-kicker">Dados pessoais</span>
-					<h2>Meu perfil</h2>
+
+					<span class="section-kicker">
+						Dados pessoais
+					</span>
+
+					<h2>
+						Meu perfil
+					</h2>
+
 				</div>
+
 			</div>
 
 			<label>
+
 				Nome completo
-				<input name="nome" type="text" value="<%= nomeUsuario %>" readonly>
+
+				<input name="nome"
+					type="text"
+					value="<%= nomeUsuario %>"
+					readonly>
+
 			</label>
 
 			<label>
+
 				Email
-				<input name="email" type="email" value="<%= emailUsuario %>" readonly>
+
+				<input name="email"
+					type="email"
+					value="<%= emailUsuario %>"
+					readonly>
+
 			</label>
 
 			<label>
+
 				Telefone
-				<input name="telefone" type="tel" value="<%= telefoneUsuario %>" readonly>
+
+				<input name="telefone"
+					type="tel"
+					value="<%= telefoneUsuario %>"
+					readonly>
+
 			</label>
 
 			<label>
+
 				CPF
-				<input name="cpf" type="text" value="<%= cpfUsuario %>" readonly>
+
+				<input name="cpf"
+					type="text"
+					value="<%= cpfUsuario %>"
+					readonly>
+
 			</label>
 
 			<label class="switch-row">
+
 				<span>
-					<strong>Notificações</strong>
-					<small>Receber novidades e alertas dos favoritos.</small>
+
+					<strong>
+						Notificacoes
+					</strong>
+
+					<small>
+						Receber novidades e alertas dos favoritos.
+					</small>
+
 				</span>
-				<input name="notifications" type="checkbox">
+
+				<input name="notifications"
+					type="checkbox">
+
 			</label>
 
 			<label class="switch-row">
+
 				<span>
-					<strong>Financiamento</strong>
-					<small>Permitir contato sobre simulações e condições.</small>
+
+					<strong>
+						Financiamento
+					</strong>
+
+					<small>
+						Permitir contato sobre simulacoes e condicoes.
+					</small>
+
 				</span>
-				<input name="financing" type="checkbox">
+
+				<input name="financing"
+					type="checkbox">
+
 			</label>
 
 		</form>
@@ -161,20 +298,57 @@ if (!nomeUsuario.trim().isEmpty()) {
 		<aside class="profile-side">
 
 			<article class="stat-card">
-				<strong data-favorite-count>0</strong>
-				<span>Favoritos salvos</span>
+
+				<strong data-favorite-count>
+					0
+				</strong>
+
+				<span>
+					Favoritos salvos
+				</span>
+
 			</article>
 
 			<article class="mini-card">
+
 				<i data-lucide="shield-check"></i>
-				<h3>Conta protegida</h3>
-				<p>Seus dados de cadastro estão vinculados à sua conta AutoLoc.</p>
+
+				<h3>
+					Conta protegida
+				</h3>
+
+				<p>
+					Seus dados de cadastro estao vinculados a sua conta AutoLoc.
+				</p>
+
 			</article>
 
 			<article class="mini-card">
+
 				<i data-lucide="headphones"></i>
-				<h3>Consultoria ativa</h3>
-				<p>Registre interesse em um veículo para iniciar o atendimento.</p>
+
+				<h3>
+					Consultoria ativa
+				</h3>
+
+				<p>
+					Registre interesse em um veiculo para iniciar o atendimento.
+				</p>
+
+			</article>
+
+			<article class="mini-card">
+
+				<i data-lucide="car"></i>
+
+				<h3>
+					Experiencia premium
+				</h3>
+
+				<p>
+					Acompanhe seus favoritos e encontre os melhores servicos automotivos.
+				</p>
+
 			</article>
 
 		</aside>
@@ -183,42 +357,71 @@ if (!nomeUsuario.trim().isEmpty()) {
 
 </main>
 
-<nav class="bottom-nav" aria-label="Navegacao inferior">
+<nav class="bottom-nav"
+	aria-label="Navegacao inferior">
 
-	<a class="nav-item" href="consumidor.jsp">
+	<a class="nav-item"
+		href="${pageContext.request.contextPath}/consumidor.jsp">
+
 		<i data-lucide="home"></i>
+
 		Inicio
+
 	</a>
 
-	<a class="nav-item" href="veiculos.jsp">
+	<a class="nav-item"
+		href="${pageContext.request.contextPath}/veiculos.jsp">
+
 		<i data-lucide="car"></i>
+
 		Veiculos
+
 	</a>
 
-	<a class="active" href="vendedorservicos">
+	<a class="nav-item"
+		href="${pageContext.request.contextPath}/servicos.jsp">
+
 		<i data-lucide="wrench"></i>
+
 		Servicos
+
 	</a>
 
-	<a class="nav-item" href="favoritos.jsp">
+	<a class="nav-item"
+		href="${pageContext.request.contextPath}/favoritos.jsp">
+
 		<i data-lucide="heart"></i>
+
 		Favoritos
+
 	</a>
 
-	<a class="nav-item active" href="perfil.jsp">
+	<a class="nav-item active"
+		href="${pageContext.request.contextPath}/perfil.jsp">
+
 		<i data-lucide="user"></i>
+
 		Perfil
+
 	</a>
 
 </nav>
 
+<script
+	src="${pageContext.request.contextPath}/js/scripts.js"></script>
+
 <script>
-	document.addEventListener("DOMContentLoaded", function() {
+
+	document.addEventListener("DOMContentLoaded", function () {
+
 		if (window.lucide) {
 			lucide.createIcons();
 		}
+
 	});
+
 </script>
 
 </body>
+
 </html>
