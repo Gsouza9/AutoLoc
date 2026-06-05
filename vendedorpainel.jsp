@@ -32,11 +32,11 @@ if (loja == null) {
 		<span class="brand-name">Auto<span>Loc</span></span>
 	</a>
 
-	<nav class="desktop-nav" aria-label="Navegacao do vendedor">
-		<a href="${pageContext.request.contextPath}/vendedorinicio">Inicio</a>
+	<nav class="desktop-nav" aria-label="Navegação do vendedor">
+		<a href="${pageContext.request.contextPath}/vendedorinicio">Início</a>
 		<a class="active" href="${pageContext.request.contextPath}/vendedorpainel">Loja</a>
-		<a href="${pageContext.request.contextPath}/vendedorveiculos">Veiculos</a>
-		<a href="${pageContext.request.contextPath}/vendedorservicos">Servicos</a>
+		<a href="${pageContext.request.contextPath}/vendedorveiculos">Veículos</a>
+		<a href="${pageContext.request.contextPath}/vendedorservicos">Serviços</a>
 		<a href="${pageContext.request.contextPath}/consumidor">Ver consumidor</a>
 	</nav>
 
@@ -52,8 +52,8 @@ if (loja == null) {
 	<section class="seller-page-heading">
 		<div>
 			<span class="section-kicker">Loja</span>
-			<h1>Cadastro e previa publica.</h1>
-			<p>Mantenha telefone, endereco e horario atualizados para seus clientes.</p>
+			<h1>Cadastro e prévia pública.</h1>
+			<p>Mantenha telefone, endereço e horário atualizados para seus clientes.</p>
 		</div>
 
 		<a class="secondary-btn" href="${pageContext.request.contextPath}/consumidor">Ver como consumidor</a>
@@ -69,7 +69,7 @@ if (loja == null) {
 				<span><i data-lucide="store"></i></span>
 				<div>
 					<h2>Dados da loja</h2>
-					<p>Apenas telefone, endereco e horario podem ser editados.</p>
+					<p>Apenas telefone, endereço e horário podem ser editados.</p>
 				</div>
 			</div>
 
@@ -85,7 +85,7 @@ if (loja == null) {
 				<input type="text" value="<%=loja.getCategoria() != null ? loja.getCategoria() : ""%>" readonly />
 			</label>
 
-			<label>Email
+			<label>E-mail
 				<input type="email" value="<%=loja.getEmail() != null ? loja.getEmail() : ""%>" readonly />
 			</label>
 
@@ -95,30 +95,30 @@ if (loja == null) {
 					placeholder="(11) 99999-0000" />
 			</label>
 
-			<label>Endereco
+			<label>Endereço
 				<input name="endereco" type="text"
 					value="<%=loja.getEndereco() != null ? loja.getEndereco() : ""%>"
-					placeholder="Rua, numero, bairro" />
+					placeholder="Rua, número, bairro" />
 			</label>
 
-			<label>Horario
+			<label>Horário
 				<input name="horario" type="text"
 					value="<%=loja.getHorario() != null ? loja.getHorario() : ""%>"
 					placeholder="Segunda a Sexta, 08:00 - 18:00" />
 			</label>
 
-			<label class="full-field">Descricao
+			<label class="full-field">Descrição
 				<textarea rows="4" readonly><%=loja.getDescricao() != null ? loja.getDescricao() : ""%></textarea>
 			</label>
 
-			<button class="primary-btn" type="submit">Salvar alteracoes</button>
+			<button class="primary-btn" type="submit">Salvar alterações</button>
 		</form>
 
 		<aside class="seller-card seller-preview">
 			<div class="seller-card-title">
 				<span><i data-lucide="badge-check"></i></span>
 				<div>
-					<h2>Previa publica</h2>
+					<h2>Prévia pública</h2>
 					<p>Resumo atual do cadastro.</p>
 				</div>
 			</div>
@@ -129,8 +129,8 @@ if (loja == null) {
 					<span>CNPJ: <%=loja.getCnpj() != null ? loja.getCnpj() : ""%></span>
 					<span>Categoria: <%=loja.getCategoria() != null ? loja.getCategoria() : ""%></span>
 					<span>Telefone: <%=loja.getNumeroTelefone() != null ? loja.getNumeroTelefone() : ""%></span>
-					<span>Endereco: <%=loja.getEndereco() != null ? loja.getEndereco() : ""%></span>
-					<span>Horario: <%=loja.getHorario() != null ? loja.getHorario() : ""%></span>
+					<span>Endereço: <%=loja.getEndereco() != null ? loja.getEndereco() : ""%></span>
+					<span>Horário: <%=loja.getHorario() != null ? loja.getHorario() : ""%></span>
 					<span><%=loja.getDescricao() != null ? loja.getDescricao() : ""%></span>
 				</div>
 			</div>
