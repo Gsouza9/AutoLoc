@@ -1,297 +1,173 @@
-```jsp
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Login - AutoLoc</title>
+<title>AutoLoc</title>
 
 <link rel="icon" type="image/png"
-	href="${pageContext.request.contextPath}/img/logocerta.png">
+	href="${pageContext.request.contextPath}/img/logoautolocksemfundo.png">
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/login.css">
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/login.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
+<style>
+body {
+	background-color: rgb(0, 0, 0);
+	background: linear-gradient(28deg, #D4AF37, black, #D4AF37);
+}
+</style>
 </head>
 
 <body>
 
+	<div class="blur blur1"></div>
+	<div class="blur blur2"></div>
+
 	<div class="main-container">
 
-		<!-- =========================
-		     LOGIN SIDE
-		========================= -->
-
-		<section class="login-side">
+		<!-- LOGIN -->
+		<div class="right-side">
 
 			<div class="login-box">
 
-				<!-- LOGO MOBILE -->
 				<div class="logo-mobile">
-
 					<img
-						src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png"
-						alt="Logo AutoLoc">
-
+						src="${pageContext.request.contextPath}/imagem/logoautolocksemfundo.png"
+						alt="Logo">
 				</div>
-
-				<!-- TABS -->
 
 				<div class="tabs">
-
-					<button class="active" type="button">
-						Entrar
-					</button>
+					<button class="active">Entrar</button>
 
 					<button type="button"
-						onclick="window.location.href='cadastro.jsp'">
-						Criar Conta
-					</button>
-
+						onclick="window.location.href='${pageContext.request.contextPath}/cadastro.jsp'">
+						Criar Conta</button>
 				</div>
-
-				<!-- TITULO -->
 
 				<h1>Bem-vindo!</h1>
 
-				<p class="subtitle">
-					Entre na sua conta para continuar na AutoLoc.
-				</p>
+				<p class="subtitle">Entre na sua conta para continuar.</p>
 
-				<!-- FORM -->
+				<form action="${pageContext.request.contextPath}/loginu"
+					method="post">
 
-				<form action="loginu" method="post" class="login-form">
-
-					<div class="mb-4">
-
-						<label class="form-label">
-							Email
-						</label>
-
-						<input type="email"
-							name="email"
-							class="form-control"
-							placeholder="Digite seu email"
-							autocomplete="email"
-							required>
-
+					<div class="input-group">
+						<label>Email</label> <input type="email" name="email"
+							placeholder="Digite seu email" required>
 					</div>
 
-					<div class="mb-3">
-
-						<label class="form-label">
-							Senha
-						</label>
-
-						<input type="password"
-							name="senha"
-							class="form-control"
-							placeholder="Digite sua senha"
-							autocomplete="current-password"
-							required>
-
+					<div class="input-group">
+						<label>Senha</label> <input type="password" id="senha"
+							name="senha" placeholder="Digite sua senha" required>
 					</div>
 
-					<!-- OPTIONS -->
+					<label class="mostrar-senha"> <input type="checkbox"
+						onclick="mostrarSenha()"> Mostrar senha
+					</label>
 
 					<div class="options">
-
-						<label class="remember-me">
-
-							<input type="checkbox">
-
-							<span>
-								Lembrar de mim
-							</span>
-
-						</label>
-
-						<a href="#">
-							Esqueceu a senha?
-						</a>
-
+						<label> <input type="checkbox" name="lembrar">
+							Lembrar de mim
+						</label> <a href="#">Esqueceu a senha?</a>
 					</div>
 
-					<!-- BOTAO -->
-
-					<button type="submit" class="login-btn">
-						Entrar
-					</button>
+					<button type="submit" class="login-btn">Entrar</button>
 
 				</form>
 
-				<!-- DIVIDER -->
+				<div class="divider">ou continue com</div>
 
-				<div class="divider">
-					<span>ou continue com</span>
+				<div class="socials">
+
+					<button class="social-btn google-btn" type="button">
+						<img src="${pageContext.request.contextPath}/imagem/google.png"
+							alt="Google"> <span>Google</span>
+					</button>
+
 				</div>
 
-				<!-- GOOGLE -->
-
-				<button class="google-btn" type="button">
-
-					<img
-						src="${pageContext.request.contextPath}/img/google.png"
-						alt="Google">
-
-					<span>
-						Google
-					</span>
-
-				</button>
-
-				<!-- TERMOS -->
-
 				<p class="terms">
-
-					Ao continuar, você concorda com nossos
-					<strong>Termos de Uso</strong>
-					e
-					<strong>Política de Privacidade</strong>.
-
+					Ao continuar, você concorda com nossos <span>Termos de Uso</span> e
+					<span>Política de Privacidade</span>.
 				</p>
 
 			</div>
 
-		</section>
+		</div>
 
-		<!-- =========================
-		     INFO SIDE
-		========================= -->
-
-		<section class="info-side">
+		<!-- LADO ESQUERDO -->
+		<div class="left-side">
 
 			<div class="logo">
-
-				<img class="logo-img"
-					src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png"
-					alt="Logo AutoLoc">
-
+				<img
+					src="${pageContext.request.contextPath}/imagem/logoautolocksemfundo.png"
+					class="logo-img" alt="Logo">
 			</div>
 
-			<p class="top-text">
-				Encontre oficinas, veículos e serviços automotivos com facilidade.
-			</p>
-
-			<!-- FEATURE -->
+			<p class="top-text">Encontre oficinas e serviços automotivos com
+				facilidade</p>
 
 			<div class="feature">
-
-				<div class="icon">
-					🔍
-				</div>
-
+				<div class="icon">🔍</div>
 				<div>
-
 					<h3>Busca Inteligente</h3>
-
-					<p>
-						Encontre oficinas e serviços próximos rapidamente.
-					</p>
-
+					<p>Encontre oficinas e serviços próximos rapidamente.</p>
 				</div>
-
 			</div>
 
-			<!-- FEATURE -->
-
 			<div class="feature">
-
-				<div class="icon">
-					⭐
-				</div>
-
+				<div class="icon">⭐</div>
 				<div>
-
 					<h3>Avaliações Reais</h3>
-
-					<p>
-						Veja comentários de outros clientes.
-					</p>
-
+					<p>Veja comentários de outros clientes.</p>
 				</div>
-
 			</div>
-
-			<!-- FEATURE -->
 
 			<div class="feature">
-
-				<div class="icon">
-					⚡
-				</div>
-
+				<div class="icon">⚡</div>
 				<div>
-
 					<h3>Atendimento Rápido</h3>
-
-					<p>
-						Entre em contato facilmente.
-					</p>
-
+					<p>Entre em contato facilmente.</p>
 				</div>
-
 			</div>
-
-			<!-- STATS -->
 
 			<div class="stats">
 
-				<div class="stat-card">
-
+				<div class="card">
 					<h2>1.2K+</h2>
-
-					<span>
-						Oficinas
-					</span>
-
+					<span>Oficinas</span>
 				</div>
 
-				<div class="stat-card">
-
+				<div class="card">
 					<h2>5K+</h2>
-
-					<span>
-						Usuários
-					</span>
-
+					<span>Usuários</span>
 				</div>
 
-				<div class="stat-card">
-
+				<div class="card">
 					<h2>4.9</h2>
-
-					<span>
-						Avaliação
-					</span>
-
+					<span>Avaliação</span>
 				</div>
 
 			</div>
 
-		</section>
+		</div>
 
 	</div>
 
+	<script src="${pageContext.request.contextPath}/js/login.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
-
 </html>
-```
