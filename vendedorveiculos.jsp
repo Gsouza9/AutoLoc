@@ -16,7 +16,7 @@ if (veiculos == null) {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AutoLoc | Veiculos do Vendedor</title>
+<title>AutoLoc | Veículos do Vendedor</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,11 +41,11 @@ if (veiculos == null) {
 		<span class="brand-name">Auto<span>Loc</span></span>
 	</a>
 
-		<nav class="desktop-nav" aria-label="Navegacao do vendedor">
-			<a href="${pageContext.request.contextPath}/vendedorinicio">Inicio</a>
+		<nav class="desktop-nav" aria-label="Navegação do vendedor">
+			<a href="${pageContext.request.contextPath}/vendedorinicio">Início</a>
 			<a href="${pageContext.request.contextPath}/vendedorpainel">Loja</a>
-			<a class="active" href="${pageContext.request.contextPath}/vendedorveiculos">Veiculos</a>
-			<a href="${pageContext.request.contextPath}/vendedorservicos">Servicos</a>
+			<a class="active" href="${pageContext.request.contextPath}/vendedorveiculos">Veículos</a>
+			<a href="${pageContext.request.contextPath}/vendedorservicos">Serviços</a>
 			<a href="${pageContext.request.contextPath}/consumidor">Ver consumidor</a>
 	
 		</nav>
@@ -63,9 +63,8 @@ if (veiculos == null) {
 		<section class="seller-page-heading">
 			<div>
 				<span class="section-kicker">Estoque</span>
-				<h1>Veiculos que voce esta vendendo.</h1>
-				<p>Cadastre os anuncios e atualize status, quilometragem e
-					cidade quando precisar.</p>
+				<h1>Veículos que você está vendendo.</h1>
+				<p>Cadastre os anúncios e atualize status, quilometragem e cidade quando precisar.</p>
 			</div>
 		</section>
 
@@ -78,12 +77,12 @@ if (veiculos == null) {
 				<div class="seller-card-title">
 					<span><i data-lucide="car"></i></span>
 					<div>
-						<h2>Cadastrar veiculo</h2>
-						<p>Adicione os dados do carro e do anuncio.</p>
+						<h2>Cadastrar veículo</h2>
+						<p>Adicione os dados do carro e do anúncio.</p>
 					</div>
 				</div>
 
-				<label>Titulo do anuncio <input name="tituloAnuncio"
+				<label>Título do anúncio <input name="tituloAnuncio"
 					type="text" maxlength="150" required />
 				</label> <label>Marca <input name="marca" type="text"
 					maxlength="100" required />
@@ -96,29 +95,29 @@ if (veiculos == null) {
 					required />
 				</label> <label>Chassi <input name="chassi" type="text"
 					maxlength="50" />
-				</label> <label>Combustivel <select name="combustivel" required>
+				</label> <label>Combustível <select name="combustivel" required>
 						<option value="">Selecione</option>
 						<option value="GASOLINA">Gasolina</option>
 						<option value="ETANOL">Etanol</option>
 						<option value="FLEX">Flex</option>
 						<option value="DIESEL">Diesel</option>
-						<option value="ELETRICO">Eletrico</option>
-						<option value="HIBRIDO">Hibrido</option>
+						<option value="ELETRICO">Elétrico</option>
+						<option value="HIBRIDO">Híbrido</option>
 				</select>
-				</label> <label>Preco <input name="preco" type="number" min="0"
+				</label> <label>Preço <input name="preco" type="number" min="0"
 					step="0.01" required />
-				</label> <label>Descricao <textarea name="descricao" rows="3"></textarea>
+				</label> <label>Descrição <textarea name="descricao" rows="3"></textarea>
 				</label> <label>Status <select name="statusVenda">
-						<option value="DISPONIVEL">Disponivel</option>
+						<option value="DISPONIVEL">Disponível</option>
 						<option value="RESERVADO">Reservado</option>
 						<option value="VENDIDO">Vendido</option>
 				</select>
 				</label> <label>KM rodados <input name="kmRodados" type="number"
 					min="0" />
-				</label> <label>Cambio <select name="cambio">
+				</label> <label>Câmbio <select name="cambio">
 						<option value="">Selecione</option>
 						<option value="MANUAL">Manual</option>
-						<option value="AUTOMATICO">Automatico</option>
+						<option value="AUTOMATICO">Automático</option>
 						<option value="CVT">CVT</option>
 				</select>
 				</label> <label>Portas <input name="portas" type="number" min="2"
@@ -130,17 +129,17 @@ if (veiculos == null) {
 				</label> <label>Estado <input name="estado" type="text"
 					maxlength="2" />
 				</label> <label>Aceita troca <select name="aceitaTroca">
-						<option value="NAO">Nao</option>
+						<option value="NAO">Não</option>
 						<option value="SIM">Sim</option>
 				</select>
-				</label> <label for="foto" class="btn-foto">📷 Escolher Foto</label> <input
+				</label> <label for="foto" class="btn-foto">📷 Escolher foto</label> <input
 					type="file" id="foto" name="foto" accept="image/*" hidden>
 				<div id="previewContainer" style="margin-top: 8px; display: none;">
-					<img id="previewFoto" src="" alt="Preview"
+					<img id="previewFoto" src="" alt="Pré-visualização"
 						style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 10px;" />
 				</div>
 
-				<button class="primary-btn" type="submit">Adicionar veiculo</button>
+				<button class="primary-btn" type="submit">Adicionar veículo</button>
 			</form>
 
 			<div class="seller-card">
@@ -148,10 +147,8 @@ if (veiculos == null) {
 					<span><i data-lucide="clipboard-list"></i></span>
 
 					<div>
-						<h2>Veiculos cadastrados</h2>
-						<p><%=veiculos.size()%>
-							itens
-						</p>
+						<h2>Veículos cadastrados</h2>
+						<p><%=veiculos.size()%> itens</p>
 					</div>
 				</div>
 
@@ -160,7 +157,7 @@ if (veiculos == null) {
 					if (veiculos.isEmpty()) {
 					%>
 
-					<p>Nenhum veiculo cadastrado ainda.</p>
+					<p>Nenhum veículo cadastrado ainda.</p>
 
 					<%
 					} else {
@@ -177,7 +174,7 @@ if (veiculos == null) {
 							%>
 							<img class="vehicle-thumb"
 								src="${pageContext.request.contextPath}/uploads/<%=v.getImagem()%>"
-								alt="Foto do veiculo" />
+								alt="Foto do veículo" />
 							<%
 							} else {
 							%>
@@ -189,21 +186,22 @@ if (veiculos == null) {
 							%>
 
 							<div class="vehicle-main">
-								<strong><%=v.getTituloAnuncio()%></strong> <span><%=v.getMarca()%>
-									<%=v.getModelo()%> - <%=v.getAno()%></span> <span><%=v.getDescricao() != null ? v.getDescricao() : ""%></span>
+								<strong><%=v.getTituloAnuncio()%></strong>
+								<span><%=v.getMarca()%> <%=v.getModelo()%> - <%=v.getAno()%></span>
+								<span><%=v.getDescricao() != null ? v.getDescricao() : ""%></span>
 							</div>
 						</div>
 
 						<div class="vehicle-badges">
-							<span class="vehicle-badge">Status: <%=v.getStatus()%></span> <span
-								class="vehicle-badge">R$ <%=v.getPreco()%></span> <span
-								class="vehicle-badge">KM: <%=v.getQuilometragem()%></span> <span
-								class="vehicle-badge">Cambio: <%=v.getCambio()%></span> <span
-								class="vehicle-badge">Portas: <%=v.getPortas()%></span> <span
-								class="vehicle-badge">Placa: <%=v.getPlaca()%></span> <span
-								class="vehicle-badge">Final: <%=v.getFinalPlaca()%></span> <span
-								class="vehicle-badge">Local: <%=v.getCidade()%> / <%=v.getEstado()%></span>
-							<span class="vehicle-badge">Troca: <%=v.isAceitaTroca() ? "Sim" : "Nao"%></span>
+							<span class="vehicle-badge">Status: <%=v.getStatus()%></span>
+							<span class="vehicle-badge">R$ <%=v.getPreco()%></span>
+							<span class="vehicle-badge">KM: <%=v.getQuilometragem()%></span>
+							<span class="vehicle-badge">Câmbio: <%=v.getCambio()%></span>
+							<span class="vehicle-badge">Portas: <%=v.getPortas()%></span>
+							<span class="vehicle-badge">Placa: <%=v.getPlaca()%></span>
+							<span class="vehicle-badge">Final: <%=v.getFinalPlaca()%></span>
+							<span class="vehicle-badge">Local: <%=v.getCidade()%> / <%=v.getEstado()%></span>
+							<span class="vehicle-badge">Troca: <%=v.isAceitaTroca() ? "Sim" : "Não"%></span>
 						</div>
 
 						<form class="vehicle-edit"
@@ -214,26 +212,32 @@ if (veiculos == null) {
 
 							<label>Status <select name="statusVenda">
 									<option value="DISPONIVEL"
-										<%="DISPONIVEL".equals(v.getStatus()) ? "selected" : ""%>>Disponivel</option>
+										<%="DISPONIVEL".equals(v.getStatus()) ? "selected" : ""%>>Disponível</option>
 									<option value="RESERVADO"
 										<%="RESERVADO".equals(v.getStatus()) ? "selected" : ""%>>Reservado</option>
 									<option value="VENDIDO"
 										<%="VENDIDO".equals(v.getStatus()) ? "selected" : ""%>>Vendido</option>
 							</select>
-							</label> <label>KM rodados <input name="kmRodados" type="number"
+							</label>
+
+							<label>KM rodados <input name="kmRodados" type="number"
 								min="0" value="<%=v.getQuilometragem()%>" />
-							</label> <label>Cidade <input name="cidade" type="text"
+							</label>
+
+							<label>Cidade <input name="cidade" type="text"
 								maxlength="100"
 								value="<%=v.getCidade() != null ? v.getCidade() : ""%>" />
 							</label>
 
 							<button class="primary-btn" type="submit">Salvar</button>
 						</form>
+
 						<a
 							href="${pageContext.request.contextPath}/deletar?idVenda=<%=v.getIdVenda()%>"
 							onclick="return confirm('Tem certeza que deseja excluir este anúncio?')"
 							style="display: block; margin-top: 8px; padding: 10px; background: #dc2626; color: white; text-align: center; border-radius: 8px; text-decoration: none; font-weight: 600;">
-							Excluir anúncio </a>
+							Excluir anúncio
+						</a>
 
 					</div>
 					<%
