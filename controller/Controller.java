@@ -18,8 +18,9 @@ import model.JavaBeans;
 
 @MultipartConfig
 @WebServlet({ "/cadastro", "/deletar", "/edit", "/navegacao", "/cadastrou", "/cadastrol", "/loginu", "/logine",
-	"/update", "/cadveiculo", "/cadservico", "/cadproduto", "/vendedorservicos", "/vendedorveiculos",
-	"/buscarEditar", "/updateAnuncio", "/vendedorpainel", "/atualizarLoja", "/editarDadosVeiculo","/consumidor","/vendedorinicio" })
+    "/update", "/cadveiculo", "/cadservico", "/cadproduto", "/vendedorservicos", "/vendedorveiculos",
+    "/buscarEditar", "/updateAnuncio", "/vendedorpainel", "/atualizarLoja", "/editarDadosVeiculo",
+    "/consumidor", "/vendedorinicio", "/api/lojas" })
 
 public class Controller extends HttpServlet {
 
@@ -56,7 +57,9 @@ public class Controller extends HttpServlet {
 		    carregarHome(request, response);
 		} else if(action.equals("/vendedorinicio")) {
 			 carregarInicioVendedor(request, response);
-		}else {
+		} else if (action.equals("/api/lojas")) {
+    listarLojasMapa(request, response);
+		} else {
 			response.sendRedirect("login.jsp");
 		}
 	}
@@ -688,5 +691,76 @@ public class Controller extends HttpServlet {
 
 	    request.getRequestDispatcher("vendedorinicio.jsp").forward(request, response);
 	}
+	protected void listarLojasMapa(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
+
+    ArrayList<JavaBeans> lojas = dao.listarEmpresasMapa();
+
+    StringBuilder json = new StringBuilder();
+    json.append("[");
+
+    for (int i = 0; i < lojas.size(); i++) {
+        JavaBeans loja = lojas.get(i);
+
+        String enderecoCompleto = "";
+
+        if (loja.getLogradouro() != null && !loja.getLogradouro().trim().isEmpty()) {
+            enderecoCompleto += loja.getLogradouro();
+        }
+
+        if (loja.getBairro() != null && !loja.getBairro().trim().isEmpty()) {
+            enderecoCompleto += enderecoCompleto.isEmpty()
+                    ? loja.getBairro()
+                    : " - " + loja.getBairro();
+        }
+
+        if (loja.getCidade() != null && !loja.getCidade().trim().isEmpty()) {
+            enderecoCompleto += enderecoCompleto.isEmpty()
+                    ? loja.getCidade()
+                    : ", " + loja.getCidade();
+        }
+
+        if (loja.getEstado() != null && !loja.getEstado().trim().isEmpty()) {
+            enderecoCompleto += "/" + loja.getEstado();
+        }
+
+        json.append("{");
+        json.append("\"id\":").append(loja.getIdEmpresa()).append(",");
+        json.append("\"nome\":\"").append(escapeJson(loja.getNomeEmpresa())).append("\",");
+        json.append("\"tipo\":\"").append(escapeJson(loja.getCategoria())).append("\",");
+        json.append("\"descricao\":\"").append(escapeJson(loja.getDescricao())).append("\",");
+        json.append("\"telefone\":\"").append(escapeJson(loja.getNumeroTelefone())).append("\",");
+        json.append("\"cep\":\"").append(escapeJson(loja.getCep())).append("\",");
+        json.append("\"endereco\":\"").append(escapeJson(enderecoCompleto)).append("\",");
+        json.append("\"horario\":\"").append(escapeJson(loja.getHorario())).append("\",");
+        json.append("\"latitude\":").append(loja.getLatitude()).append(",");
+        json.append("\"longitude\":").append(loja.getLongitude());
+        json.append("}");
+
+        if (i < lojas.size() - 1) {
+            json.append(",");
+        }
+    }
+
+    json.append("]");
+  
+			
+    response.getWriter().write(json.toString());
+
+  }
 	
+private String escapeJson(String valor) {
+    if (valor == null) {
+        return "";
+    }
+
+    return valor
+            .replace("\\", "\\\\")
+            .replace("\"", "\\\"")
+            .replace("\n", " ")
+            .replace("\r", " ");
+}
 }
