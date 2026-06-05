@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-
 <html lang="pt-br">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,440 +13,233 @@ pageEncoding="UTF-8"%>
 	href="${pageContext.request.contextPath}/img/logocerta.png">
 
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 	rel="stylesheet">
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/cadastro.css">
-
 </head>
 
 <body>
 
-```
-<div class="main-container">
+	<div class="container">
 
-	<!-- ÁREA FORMULÁRIO -->
-	<div class="login-side">
+		<div class="lado-cadastro">
 
-		<div class="login-box">
+			<div class="caixa-cadastro">
 
-			<!-- LOGO MOBILE -->
-			<div class="logo-mobile">
+				<div class="logo-mobile">
+					<img
+						src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png"
+						alt="">
+				</div>
 
+				<div class="botoes-topo">
+
+					<button type="button" onclick="window.location.href='login.jsp'">
+						Entrar</button>
+
+					<button class="ativo" type="button">Criar Conta</button>
+
+				</div>
+
+				<h1>Criar Conta</h1>
+
+				<p class="subtitulo">Preencha os dados para começar.</p>
+
+				<form id="formCadastro" method="post" action="cadastrol">
+
+					<div class="tipo-conta">
+
+						<button type="button" class="tipo-btn ativo" id="btnVendedor">
+							Vendedor</button>
+
+						<button type="button" class="tipo-btn" id="btnUsuario">
+							Usuário</button>
+
+					</div>
+
+					<div id="formVendedor">
+
+						<div class="grupo-input full">
+							<label>Nome da Empresa</label> <input type="text"
+								name="nomeFantasia" placeholder="Digite o nome da empresa">
+						</div>
+
+						<div class="grupo-input full">
+							<label>Razão Social</label> <input type="text" name="razaoSocial"
+								placeholder="Digite a razão social">
+						</div>
+
+						<div class="grupo-input">
+							<label>Nome</label> <input type="text" name="nome"
+								placeholder="Digite seu nome">
+						</div>
+
+						<div class="grupo-input">
+							<label>CEP</label> <input type="text" name="cep"
+								placeholder="Digite o CEP">
+						</div>
+
+						<div class="grupo-input">
+							<label>CNPJ</label> <input type="text" name="cnpj"
+								placeholder="Digite o CNPJ">
+						</div>
+
+						<div class="grupo-input">
+							<label>Telefone</label> <input type="text" name="telefone"
+								placeholder="Digite o telefone">
+						</div>
+
+						<div class="grupo-input full">
+							<label>Email</label> <input type="email" name="email"
+								placeholder="Digite seu email">
+						</div>
+
+						<div class="grupo-input full">
+							<label>Categoria</label> <select name="categoria">
+								<option value="">Selecione</option>
+								<option value="OFICINA">Oficina</option>
+								<option value="LOCADORA">Locadora</option>
+								<option value="AUTOPECAS">Auto Peças</option>
+								<option value="PNEUS">Borracharia</option>
+								<option value="ELETRICA">Elétrica</option>
+								<option value="LAVAGEM">Lavagem</option>
+							</select>
+						</div>
+
+						<div class="grupo-input full">
+							<label>Descrição</label> <input type="text" name="descricao"
+								placeholder="Descrição da empresa">
+						</div>
+
+						<div class="grupo-input full">
+							<label>Senha</label> <input type="password" name="senha"
+								placeholder="Digite sua senha">
+						</div>
+						<div class="grupo-input full">
+							<label>Confirmar Senha</label> <input type="password"
+								id="confirmarSenhaVendedor" placeholder="Confirme sua senha">
+						</div>
+
+					</div>
+
+					<div id="formUsuario" style="display: none;">
+
+						<div class="grupo-input full">
+							<label>Nome</label> <input type="text" name="nome"
+								placeholder="Digite seu nome">
+						</div>
+
+						<div class="grupo-input">
+							<label>CPF</label> <input type="text" name="cpf"
+								placeholder="Digite seu CPF">
+						</div>
+
+						<div class="grupo-input">
+							<label>Telefone</label> <input type="text" name="telefone"
+								placeholder="Digite seu telefone">
+						</div>
+
+						<div class="grupo-input full">
+							<label>Email</label> <input type="email" name="email"
+								placeholder="Digite seu email">
+						</div>
+
+						<div class="grupo-input full">
+							<label>Senha</label> <input type="password" name="senha"
+								placeholder="Digite sua senha">
+						</div>
+						<div class="grupo-input full">
+							<label>Confirmar Senha</label> <input type="password"
+								id="confirmarSenhaVendedor" placeholder="Confirme sua senha">
+						</div>
+
+					</div>
+
+					<div class="opcoes">
+
+						<label> <input type="checkbox" required> Aceito os
+							termos
+						</label>
+
+					</div>
+
+					<button class="botao-cadastro" type="submit">Criar Conta</button>
+
+				</form>
+
+			</div>
+
+		</div>
+
+		<div class="lado-info">
+
+			<div class="logo">
 				<img
-					src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png">
-
+					src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png"
+					alt="">
 			</div>
 
-			<!-- TABS -->
-			<div class="tabs">
+			<h2 class="texto-principal">Crie sua conta e encontre oficinas
+				com facilidade</h2>
 
-				<button type="button"
-					onclick="window.location.href='login.jsp'">
+			<div class="item-info">
 
-					Entrar
+				<div class="icone">🚗</div>
 
-				</button>
-
-				<button class="active" type="button">
-
-					Criar Conta
-
-				</button>
-
-			</div>
-
-			<h1>Crie sua conta</h1>
-
-			<p class="subtitle">
-
-				Cadastre-se para acessar a plataforma AutoLoc.
-
-			</p>
-
-			<!-- FORM -->
-			<form action="cadastro" method="post">
-
-				<div class="mb-4">
-
-					<label class="form-label">
-
-						Nome completo
-
-					</label>
-
-					<input type="text"
-						name="nome"
-						class="form-control"
-						placeholder="Digite seu nome"
-						required>
-
+				<div>
+					<h3>Cadastro Rápido</h3>
+					<p>Crie sua conta em poucos segundos.</p>
 				</div>
 
-				<div class="mb-4">
+			</div>
 
-					<label class="form-label">
+			<div class="item-info">
 
-						Email
+				<div class="icone">⭐</div>
 
-					</label>
-
-					<input type="email"
-						name="email"
-						class="form-control"
-						placeholder="Digite seu email"
-						required>
-
+				<div>
+					<h3>Oficinas Avaliadas</h3>
+					<p>Veja avaliações reais de outros usuários.</p>
 				</div>
 
-				<div class="row-fields">
+			</div>
 
-					<div class="field-group">
+			<div class="item-info">
 
-						<label>
+				<div class="icone">🔧</div>
 
-							Telefone
-
-						</label>
-
-						<input type="text"
-							name="telefone"
-							class="form-control"
-							placeholder="(11) 99999-9999"
-							required>
-
-					</div>
-
-					<div class="field-group">
-
-						<label>
-
-							CPF
-
-						</label>
-
-						<input type="text"
-							name="cpf"
-							class="form-control"
-							placeholder="000.000.000-00"
-							required>
-
-					</div>
-
+				<div>
+					<h3>Serviços Automotivos</h3>
+					<p>Encontre serviços próximos.</p>
 				</div>
 
-				<div class="row-fields">
+			</div>
 
-					<div class="field-group">
+			<div class="cards">
 
-						<label>
-
-							CEP
-
-						</label>
-
-						<input type="text"
-							name="cep"
-							id="cep"
-							class="form-control"
-							placeholder="00000-000">
-
-					</div>
-
-					<div class="field-group">
-
-						<label>
-
-							Número
-
-						</label>
-
-						<input type="text"
-							name="numero"
-							class="form-control"
-							placeholder="123">
-
-					</div>
-
+				<div class="card">
+					<h2>1.2K+</h2>
+					<span>Oficinas</span>
 				</div>
 
-				<div class="row-fields">
-
-					<div class="field-group">
-
-						<label>
-
-							Cidade
-
-						</label>
-
-						<input type="text"
-							name="cidade"
-							class="form-control"
-							placeholder="São Paulo">
-
-					</div>
-
-					<div class="field-group">
-
-						<label>
-
-							Estado
-
-						</label>
-
-						<input type="text"
-							name="estado"
-							maxlength="2"
-							class="form-control"
-							placeholder="SP">
-
-					</div>
-
+				<div class="card">
+					<h2>5K+</h2>
+					<span>Usuários</span>
 				</div>
 
-				<div class="mb-4">
-
-					<label class="form-label">
-
-						Senha
-
-					</label>
-
-					<input type="password"
-						name="senha"
-						class="form-control"
-						placeholder="Digite sua senha"
-						required>
-
+				<div class="card">
+					<h2>4.9</h2>
+					<span>Avaliação</span>
 				</div>
-
-				<div class="mb-4">
-
-					<label class="form-label">
-
-						Tipo de conta
-
-					</label>
-
-					<select name="tipoUsuario"
-						class="form-control"
-						required>
-
-						<option value="CLIENTE">
-
-							Cliente
-
-						</option>
-
-						<option value="VENDEDOR">
-
-							Vendedor
-
-						</option>
-
-					</select>
-
-				</div>
-
-				<button type="submit"
-					class="login-btn">
-
-					Criar conta
-
-				</button>
-
-			</form>
-
-			<div class="divider">
-
-				ou continue com
-
-			</div>
-
-			<button class="google-btn">
-
-				<img
-					src="${pageContext.request.contextPath}/img/google.png">
-
-				<span>
-
-					Google
-
-				</span>
-
-			</button>
-
-			<p class="terms">
-
-				Ao continuar, você concorda com nossos
-				Termos de Uso e Política de Privacidade.
-
-			</p>
-
-		</div>
-
-	</div>
-
-	<!-- ÁREA INFORMATIVA -->
-	<div class="info-side">
-
-		<div class="logo">
-
-			<img class="logo-img"
-				src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png">
-
-		</div>
-
-		<p class="top-text">
-
-			Cadastre sua conta e tenha acesso ao ecossistema AutoLoc
-
-		</p>
-
-		<div class="feature">
-
-			<div class="icon">
-
-				🚗
-
-			</div>
-
-			<div>
-
-				<h3>
-
-					Veículos Premium
-
-				</h3>
-
-				<p>
-
-					Encontre carros selecionados com segurança.
-
-				</p>
-
-			</div>
-
-		</div>
-
-		<div class="feature">
-
-			<div class="icon">
-
-				🛠️
-
-			</div>
-
-			<div>
-
-				<h3>
-
-					Serviços Automotivos
-
-				</h3>
-
-				<p>
-
-					Oficinas, estética, revisão e muito mais.
-
-				</p>
-
-			</div>
-
-		</div>
-
-		<div class="feature">
-
-			<div class="icon">
-
-				📍
-
-			</div>
-
-			<div>
-
-				<h3>
-
-					Mapa Inteligente
-
-				</h3>
-
-				<p>
-
-					Veja empresas próximas da sua região.
-
-				</p>
-
-			</div>
-
-		</div>
-
-		<div class="stats">
-
-			<div class="stat-card">
-
-				<h2>
-
-					15K+
-
-				</h2>
-
-				<span>
-
-					Veículos
-
-				</span>
-
-			</div>
-
-			<div class="stat-card">
-
-				<h2>
-
-					8K+
-
-				</h2>
-
-				<span>
-
-					Usuários
-
-				</span>
-
-			</div>
-
-			<div class="stat-card">
-
-				<h2>
-
-					4.9
-
-				</h2>
-
-				<span>
-
-					Avaliação
-
-				</span>
 
 			</div>
 
 		</div>
 
 	</div>
-
-</div>
-
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-```
+	<script src="js/cadastro.js"></script>
 
 </body>
-
 </html>
