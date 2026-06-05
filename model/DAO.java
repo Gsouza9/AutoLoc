@@ -757,7 +757,10 @@ public int cadastrarEmpresa(JavaBeans empresa) {
 
 		JavaBeans loja = null;
 
-		String sql = "SELECT * FROM empresas WHERE id_empresa = ?";
+		String sql = "SELECT e.*, l.cep, l.rua, l.bairro, l.cidade, l.estado, l.latitude, l.longitude "
+        + "FROM empresas e "
+        + "LEFT JOIN locais l ON e.id_empresa = l.id_empresa "
+        + "WHERE e.id_empresa = ?";
 
 		try {
 			Connection con = conectar();
@@ -775,18 +778,13 @@ public int cadastrarEmpresa(JavaBeans empresa) {
 			if (rs.next()) {
 				loja = new JavaBeans();
 
-				loja.setIdEmpresa(rs.getInt("id_empresa"));
-				loja.setIdUsuario(rs.getInt("id_usuario"));
-				loja.setNomeEmpresa(rs.getString("nome_fantasia"));
-				loja.setRazaoSocial(rs.getString("razao_social"));
-				loja.setCnpj(rs.getString("cnpj"));
-				loja.setDescricao(rs.getString("descricao"));
-				loja.setNumeroTelefone(rs.getString("telefone"));
-				loja.setEmail(rs.getString("email"));
-				loja.setCategoria(rs.getString("categoria"));
-				loja.setEndereco(rs.getString("endereco"));
-				loja.setHorario(rs.getString("horario"));
 				loja.setCep(rs.getString("cep"));
+loja.setLogradouro(rs.getString("rua"));
+loja.setBairro(rs.getString("bairro"));
+loja.setCidade(rs.getString("cidade"));
+loja.setEstado(rs.getString("estado"));
+loja.setLatitude(rs.getDouble("latitude"));
+loja.setLongitude(rs.getDouble("longitude"));
 			}
 
 			rs.close();
@@ -804,7 +802,7 @@ public int cadastrarEmpresa(JavaBeans empresa) {
 
 	public boolean atualizarDadosLoja(JavaBeans loja) {
 
-		String sql = "UPDATE empresas SET telefone = ?, endereco = ?, horario = ? WHERE id_empresa = ?, cep = ?";
+		String sql = "UPDATE empresas SET telefone = ?, endereco = ?, horario = ? WHERE id_empresa = ?";
 
 		try {
 			Connection con = conectar();
@@ -820,7 +818,7 @@ public int cadastrarEmpresa(JavaBeans empresa) {
 			pst.setString(2, loja.getEndereco());
 			pst.setString(3, loja.getHorario());
 			pst.setInt(4, loja.getIdEmpresa());
-			pst.setString(5, loja.getCep());
+		
 
 			int resultado = pst.executeUpdate();
 
@@ -912,4 +910,63 @@ public int cadastrarEmpresa(JavaBeans empresa) {
 	    } catch (Exception e) { e.printStackTrace(); }
 	    return total;
 	}
+
+	public ArrayList<JavaBeans> listarEmpresasMapa() {
+    ArrayList<JavaBeans> lista = new ArrayList<>();
+
+    String sql = "SELECT e.id_empresa, e.nome_fantasia, e.descricao, e.telefone, "
+            + "e.email, e.categoria, e.horario, e.avaliacao_media, "
+            + "l.cep, l.rua, l.bairro, l.cidade, l.estado, l.latitude, l.longitude "
+            + "FROM empresas e "
+            + "INNER JOIN locais l ON e.id_empresa = l.id_empresa "
+            + "WHERE l.latitude IS NOT NULL "
+            + "AND l.longitude IS NOT NULL "
+            + "AND l.latitude <> 0 "
+            + "AND l.longitude <> 0 "
+            + "AND e.status_empresa IN ('ATIVA', 'PENDENTE')";
+
+    try {
+        Connection con = conectar();
+
+        if (con == null) {
+            System.out.println("CONEXAO NULL AO LISTAR EMPRESAS MAPA");
+            return lista;
+        }
+
+        PreparedStatement pst = con.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            JavaBeans loja = new JavaBeans();
+
+            loja.setIdEmpresa(rs.getInt("id_empresa"));
+            loja.setNomeEmpresa(rs.getString("nome_fantasia"));
+            loja.setDescricao(rs.getString("descricao"));
+            loja.setNumeroTelefone(rs.getString("telefone"));
+            loja.setEmail(rs.getString("email"));
+            loja.setCategoria(rs.getString("categoria"));
+            loja.setHorario(rs.getString("horario"));
+            loja.setCep(rs.getString("cep"));
+            loja.setLogradouro(rs.getString("rua"));
+            loja.setBairro(rs.getString("bairro"));
+            loja.setCidade(rs.getString("cidade"));
+            loja.setEstado(rs.getString("estado"));
+            loja.setLatitude(rs.getDouble("latitude"));
+            loja.setLongitude(rs.getDouble("longitude"));
+
+            lista.add(loja);
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+    } catch (Exception e) {
+        System.out.println("ERRO AO LISTAR EMPRESAS NO MAPA");
+        System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+        e.printStackTrace();
+    }
+
+    return lista;
+}
 }
