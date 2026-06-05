@@ -776,16 +776,28 @@ public int cadastrarEmpresa(JavaBeans empresa) {
 			ResultSet rs = pst.executeQuery();
 
 			if (rs.next()) {
-				loja = new JavaBeans();
+    loja = new JavaBeans();
 
-				loja.setCep(rs.getString("cep"));
-loja.setLogradouro(rs.getString("rua"));
-loja.setBairro(rs.getString("bairro"));
-loja.setCidade(rs.getString("cidade"));
-loja.setEstado(rs.getString("estado"));
-loja.setLatitude(rs.getDouble("latitude"));
-loja.setLongitude(rs.getDouble("longitude"));
-			}
+    loja.setIdEmpresa(rs.getInt("id_empresa"));
+    loja.setIdUsuario(rs.getInt("id_usuario"));
+    loja.setNomeEmpresa(rs.getString("nome_fantasia"));
+    loja.setRazaoSocial(rs.getString("razao_social"));
+    loja.setCnpj(rs.getString("cnpj"));
+    loja.setDescricao(rs.getString("descricao"));
+    loja.setNumeroTelefone(rs.getString("telefone"));
+    loja.setEmail(rs.getString("email"));
+    loja.setCategoria(rs.getString("categoria"));
+    loja.setEndereco(rs.getString("endereco"));
+    loja.setHorario(rs.getString("horario"));
+
+    loja.setCep(rs.getString("cep"));
+    loja.setLogradouro(rs.getString("rua"));
+    loja.setBairro(rs.getString("bairro"));
+    loja.setCidade(rs.getString("cidade"));
+    loja.setEstado(rs.getString("estado"));
+    loja.setLatitude(rs.getDouble("latitude"));
+    loja.setLongitude(rs.getDouble("longitude"));
+}
 
 			rs.close();
 			pst.close();
