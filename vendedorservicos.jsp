@@ -9,7 +9,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AutoLoc | Servicos do Vendedor</title>
+  <title>AutoLoc | Serviços do Vendedor</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,11 +30,11 @@
       <span class="brand-name">Auto<span>Loc</span></span>
     </a>
 
-    <nav class="desktop-nav" aria-label="Navegacao do vendedor">
-    	<a href="${pageContext.request.contextPath}/vendedorinicio">Inicio</a>
+    <nav class="desktop-nav" aria-label="Navegação do vendedor">
+    	<a href="${pageContext.request.contextPath}/vendedorinicio">Início</a>
 		<a href="${pageContext.request.contextPath}/vendedorpainel">Loja</a>
-     	<a href="${pageContext.request.contextPath}/vendedorveiculos">Veiculos</a>
-      	<a class="active" href="${pageContext.request.contextPath}/vendedorservicos">Servicos</a>
+     	<a href="${pageContext.request.contextPath}/vendedorveiculos">Veículos</a>
+      	<a class="active" href="${pageContext.request.contextPath}/vendedorservicos">Serviços</a>
       	<a href="${pageContext.request.contextPath}/consumidor">Ver consumidor</a>
     </nav>
 
@@ -50,9 +50,9 @@
 
     <section class="seller-page-heading">
       <div>
-        <span class="section-kicker">Servicos e produtos</span>
+        <span class="section-kicker">Serviços e produtos</span>
         <h1>Gerencie o que sua loja oferece.</h1>
-        <p>Publique servicos automotivos e produtos para organizar sua operacao e melhorar a experiencia do consumidor.</p>
+        <p>Publique serviços automotivos e produtos para organizar sua operação e melhorar a experiência do consumidor.</p>
       </div>
 
       <a class="secondary-btn" href="servicos.html">
@@ -67,36 +67,36 @@
         <div class="seller-card-title">
           <span><i data-lucide="wrench"></i></span>
           <div>
-            <h2>Cadastrar servico</h2>
-            <p>Manutencao, vistoria, borracharia, estetica e outros.</p>
+            <h2>Cadastrar serviço</h2>
+            <p>Manutenção, vistoria, borracharia, estética e outros.</p>
           </div>
         </div>
 
         <label>
-          Servico
-          <input name="nomeServico" type="text" placeholder="Ex: Revisao completa" required />
+          Serviço
+          <input name="nomeServico" type="text" placeholder="Ex: Revisão completa" required />
         </label>
 
         <label>
           Categoria
           <select name="categoria">
-            <option value="Mecanica">Mecanica</option>
-            <option value="Eletrica">Eletrica</option>
+            <option value="Mecanica">Mecânica</option>
+            <option value="Eletrica">Elétrica</option>
             <option value="Borracharia">Borracharia</option>
             <option value="Funilaria">Funilaria</option>
-            <option value="Estetica">Estetica</option>
+            <option value="Estetica">Estética</option>
             <option value="Locadora">Locadora</option>
             <option value="Vistoria">Vistoria</option>
           </select>
         </label>
 
         <label>
-          Preco a partir de
+          Preço a partir de
           <input name="preco" type="text" inputmode="decimal" placeholder="250,00" />
         </label>
 
         <label>
-          Prazo medio
+          Prazo médio
           <input name="tempoEstimado" type="text" placeholder="2 horas" />
         </label>
 
@@ -109,12 +109,12 @@
         </label>
 
         <label class="full-field">
-          Descricao
-          <textarea name="descricao" rows="3" placeholder="Detalhe o que esta incluso"></textarea>
+          Descrição
+          <textarea name="descricao" rows="3" placeholder="Detalhe o que está incluso"></textarea>
         </label>
 
         <button class="primary-btn" type="submit">
-          Adicionar servico
+          Adicionar serviço
         </button>
 
       </form>
@@ -125,7 +125,7 @@
           <span><i data-lucide="package"></i></span>
           <div>
             <h2>Cadastrar produto</h2>
-            <p>Autopecas, acessorios e itens automotivos.</p>
+            <p>Autopeças, acessórios e itens automotivos.</p>
           </div>
         </div>
 
@@ -137,15 +137,15 @@
         <label>
           Categoria
           <select name="categoriaProduto">
-            <option value="Autopecas">Autopecas</option>
+            <option value="Autopecas">Autopeças</option>
             <option value="Borracharia">Borracharia</option>
-            <option value="Oleo e fluidos">Oleo e fluidos</option>
-            <option value="Acessorios">Acessorios</option>
+            <option value="Oleo e fluidos">Óleo e fluidos</option>
+            <option value="Acessorios">Acessórios</option>
           </select>
         </label>
 
         <label>
-          Preco
+          Preço
           <input name="precoProduto" type="text" inputmode="decimal" placeholder="390,00" />
         </label>
 
@@ -164,8 +164,8 @@
         </label>
 
         <label class="full-field">
-          Descricao
-          <textarea name="descricaoProduto" rows="3" placeholder="Marca, compatibilidade e condicoes"></textarea>
+          Descrição
+          <textarea name="descricaoProduto" rows="3" placeholder="Marca, compatibilidade e condições"></textarea>
         </label>
 
         <button class="primary-btn" type="submit">
@@ -182,7 +182,7 @@
         <div class="seller-card-title">
           <span><i data-lucide="clipboard-list"></i></span>
           <div>
-            <h2>Servicos cadastrados</h2>
+            <h2>Serviços cadastrados</h2>
             <%
               ArrayList<JavaBeans> servicos = (ArrayList<JavaBeans>) request.getAttribute("servicos");
               int totalServicos = servicos == null ? 0 : servicos.size();
@@ -195,7 +195,7 @@
           <%
             if (servicos == null || servicos.isEmpty()) {
           %>
-              <p>Nenhum servico cadastrado.</p>
+              <p>Nenhum serviço cadastrado.</p>
           <%
             } else {
               for (JavaBeans s : servicos) {
