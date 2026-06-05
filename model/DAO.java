@@ -148,51 +148,61 @@ public class DAO {
 		return lista;
 	}
 
-	public boolean cadastrarEmpresa(JavaBeans empresa) {
+public int cadastrarEmpresa(JavaBeans empresa) {
 
-		String sql = "INSERT INTO empresas "
-				+ "(id_usuario, nome_fantasia, razao_social, cnpj, descricao, telefone, email, categoria, cep) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    int idEmpresaGerado = 0;
 
-		try {
-			Connection con = conectar();
+    String sql = "INSERT INTO empresas "
+            + "(id_usuario, nome_fantasia, razao_social, cnpj, descricao, telefone, email, categoria) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-			if (con == null) {
-				System.out.println("CONEXAO NULL AO CADASTRAR EMPRESA");
-				return false;
-			}
+    try {
+        Connection con = conectar();
 
-			if (empresa.getIdUsuario() <= 0) {
-				System.out.println("ID USUARIO INVALIDO PARA CADASTRAR EMPRESA");
-				return false;
-			}
+        if (con == null) {
+            System.out.println("CONEXAO NULL AO CADASTRAR EMPRESA");
+            return 0;
+        }
 
-			PreparedStatement pst = con.prepareStatement(sql);
+        if (empresa.getIdUsuario() <= 0) {
+            System.out.println("ID USUARIO INVALIDO PARA CADASTRAR EMPRESA");
+            return 0;
+        }
 
-			pst.setInt(1, empresa.getIdUsuario());
-			pst.setString(2, empresa.getNomeEmpresa());
-			pst.setString(3, empresa.getRazaoSocial());
-			pst.setString(4, empresa.getCnpj());
-			pst.setString(5, empresa.getDescricao());
-			pst.setString(6, empresa.getNumeroTelefone());
-			pst.setString(7, empresa.getEmail());
-			pst.setString(8, empresa.getCategoria());
-			pst.setString(9, empresa.getCep());
+        PreparedStatement pst = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-			int resultado = pst.executeUpdate();
+        pst.setInt(1, empresa.getIdUsuario());
+        pst.setString(2, empresa.getNomeEmpresa());
+        pst.setString(3, empresa.getRazaoSocial());
+        pst.setString(4, empresa.getCnpj());
+        pst.setString(5, empresa.getDescricao());
+        pst.setString(6, empresa.getNumeroTelefone());
+        pst.setString(7, empresa.getEmail());
+        pst.setString(8, empresa.getCategoria());
 
-			pst.close();
-			con.close();
+        int resultado = pst.executeUpdate();
 
-			return resultado > 0;
+        if (resultado > 0) {
+            ResultSet rs = pst.getGeneratedKeys();
 
-		} catch (Exception e) {
-			System.out.println("ERRO AO CADASTRAR EMPRESA");
-			System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
-			e.printStackTrace();
-			return false;
-		}
-	}
+            if (rs.next()) {
+                idEmpresaGerado = rs.getInt(1);
+            }
+
+            rs.close();
+        }
+
+        pst.close();
+        con.close();
+
+    } catch (Exception e) {
+        System.out.println("ERRO AO CADASTRAR EMPRESA");
+        System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+        e.printStackTrace();
+    }
+
+    return idEmpresaGerado;
+}
 
 	public boolean loginEmpresa(JavaBeans empresa) {
 
