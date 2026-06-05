@@ -204,6 +204,46 @@ public int cadastrarEmpresa(JavaBeans empresa) {
     return idEmpresaGerado;
 }
 
+	public boolean cadastrarLocal(JavaBeans local) {
+
+    String sql = "INSERT INTO locais "
+            + "(id_empresa, cep, rua, bairro, cidade, estado, latitude, longitude) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    try {
+        Connection con = conectar();
+
+        if (con == null) {
+            System.out.println("CONEXAO NULL AO CADASTRAR LOCAL");
+            return false;
+        }
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, local.getIdEmpresa());
+        pst.setString(2, local.getCep());
+        pst.setString(3, local.getLogradouro());
+        pst.setString(4, local.getBairro());
+        pst.setString(5, local.getCidade());
+        pst.setString(6, local.getEstado());
+        pst.setDouble(7, local.getLatitude());
+        pst.setDouble(8, local.getLongitude());
+
+        int resultado = pst.executeUpdate();
+
+        pst.close();
+        con.close();
+
+        return resultado > 0;
+
+    } catch (Exception e) {
+        System.out.println("ERRO AO CADASTRAR LOCAL");
+        System.out.println("MENSAGEM DO ERRO: " + e.getMessage());
+        e.printStackTrace();
+        return false;
+    }
+}
+
 	public boolean loginEmpresa(JavaBeans empresa) {
 
 		String sql = "SELECT * FROM empresas WHERE email=? AND cnpj=?";
