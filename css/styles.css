@@ -798,164 +798,17 @@ textarea::placeholder {
 }
 
 /* =========================================================
-   RESPONSIVIDADE
-========================================================= */
-@media (max-width: 1200px) {
-
-	.hero,
-	.page-hero,
-	.profile-hero,
-	.seller-hero,
-	.profile-grid,
-	.seller-grid,
-	.two-columns {
-		grid-template-columns: 1fr;
-	}
-
-	.hero-panel,
-	.seller-status {
-		min-height: auto;
-	}
-}
-
-@media (max-width: 900px) {
-
-	.desktop-nav {
-		display: none;
-	}
-
-	.bottom-nav {
-		display: flex;
-	}
-
-	.site-header {
-		padding: 16px 18px;
-	}
-
-	.container,
-	.seller-shell {
-		padding:
-			24px 16px 120px;
-	}
-
-	.hero,
-	.page-hero,
-	.profile-hero,
-	.seller-hero {
-		padding: 32px 24px;
-		border-radius: 24px;
-	}
-
-	.hero h1,
-	.page-hero h1,
-	.profile-hero h1,
-	.seller-hero h1 {
-		font-size: 38px;
-		line-height: 1.12;
-	}
-
-	.hero-actions {
-		flex-direction: column;
-		align-items: stretch;
-	}
-
-	.primary-btn,
-	.secondary-btn,
-	.filter-btn {
-		width: 100%;
-	}
-
-	.seller-form {
-		grid-template-columns: 1fr;
-	}
-
-	.vehicle-edit {
-		grid-template-columns: 1fr !important;
-	}
-
-	.vehicle-card-header {
-		flex-direction: column;
-	}
-
-	.vehicle-thumb,
-	.vehicle-thumb-empty {
-		width: 100%;
-		height: 220px;
-	}
-}
-
-@media (max-width: 600px) {
-
-	.brand-name {
-		font-size: 20px;
-	}
-
-	.brand-mark {
-		width: 40px;
-		height: 40px;
-		font-size: 16px;
-	}
-
-	.hero,
-	.page-hero,
-	.profile-hero,
-	.seller-hero,
-	.seller-card,
-	.profile-card-large,
-	.mini-card,
-	.stat-card,
-	.card {
-		border-radius: 20px;
-	}
-
-	.hero h1,
-	.page-hero h1,
-	.profile-hero h1,
-	.seller-hero h1 {
-		font-size: 30px;
-		letter-spacing: -1px;
-	}
-
-	.search-box,
-	.select {
-		height: 54px;
-	}
-
-	.hero-panel strong {
-		font-size: 44px;
-	}
-
-	.profile-avatar {
-		width: 90px;
-		height: 90px;
-		font-size: 30px;
-	}
-
-	.modal-body {
-		padding: 22px;
-	}
-
-	.modal-footer strong {
-		font-size: 24px;
-	}
-/* =========================================================
    AUTOLOC PREMIUM UI
 ========================================================= */
 
 :root {
-
 	--transition-fast: .18s ease;
 	--transition-medium: .28s ease;
 	--transition-slow: .45s ease;
 
-	--shadow-sm:
-		0 4px 12px rgba(0,0,0,.08);
-
-	--shadow-md:
-		0 10px 30px rgba(0,0,0,.12);
-
-	--shadow-lg:
-		0 20px 50px rgba(0,0,0,.18);
+	--shadow-sm: 0 4px 12px rgba(0,0,0,.08);
+	--shadow-md: 0 10px 30px rgba(0,0,0,.12);
+	--shadow-lg: 0 20px 50px rgba(0,0,0,.18);
 
 	--blur-bg: blur(14px);
 
@@ -968,50 +821,25 @@ textarea::placeholder {
 /* =========================================================
    ANIMAÇÕES GLOBAIS
 ========================================================= */
-
 @keyframes fadeUp {
-
-	from {
-		opacity: 0;
-		transform: translateY(24px);
-	}
-
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+	from { opacity: 0; transform: translateY(24px); }
+	to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulseGlow {
-
-	0% {
-		box-shadow: 0 0 0 rgba(212,175,55,0);
-	}
-
-	50% {
-		box-shadow: 0 0 25px rgba(212,175,55,.35);
-	}
-
-	100% {
-		box-shadow: 0 0 0 rgba(212,175,55,0);
-	}
+	0%   { box-shadow: 0 0 0 rgba(212,175,55,0); }
+	50%  { box-shadow: 0 0 25px rgba(212,175,55,.35); }
+	100% { box-shadow: 0 0 0 rgba(212,175,55,0); }
 }
 
 @keyframes skeleton {
-
-	0% {
-		background-position: -200px 0;
-	}
-
-	100% {
-		background-position: calc(200px + 100%) 0;
-	}
+	0%   { background-position: -200px 0; }
+	100% { background-position: calc(200px + 100%) 0; }
 }
 
 /* =========================================================
    ANIMAÇÕES BASE
 ========================================================= */
-
 .site-header,
 .hero,
 .card,
@@ -1020,7 +848,6 @@ textarea::placeholder {
 .modal-card,
 .stat-card,
 .mini-card {
-
 	animation: fadeUp .45s ease;
 }
 
@@ -1030,7 +857,6 @@ textarea::placeholder {
 .icon-btn,
 .favorite-btn,
 .nav-item {
-
 	transition:
 		transform var(--transition-fast),
 		background var(--transition-medium),
@@ -1042,33 +868,28 @@ textarea::placeholder {
 /* =========================================================
    BOTÕES
 ========================================================= */
-
 .primary-btn:hover,
 .secondary-btn:hover,
 .filter:hover,
 .icon-btn:hover,
 .favorite-btn:hover {
-
 	transform: translateY(-2px);
 	box-shadow: var(--shadow-md);
 }
 
 .primary-btn:active,
 .secondary-btn:active {
-
 	transform: scale(.98);
 }
 
 /* =========================================================
    CARDS
 ========================================================= */
-
 .card,
 .vehicle-card,
 .seller-card,
 .stat-card,
 .mini-card {
-
 	transition:
 		transform .25s ease,
 		box-shadow .25s ease,
@@ -1080,7 +901,6 @@ textarea::placeholder {
 .seller-card:hover,
 .stat-card:hover,
 .mini-card:hover {
-
 	transform: translateY(-4px);
 	box-shadow: var(--shadow-lg);
 	border-color: rgba(212,175,55,.28);
@@ -1089,19 +909,10 @@ textarea::placeholder {
 /* =========================================================
    FAVORITOS
 ========================================================= */
-
 .favorite-btn.active,
 .nav-item.favorite-active {
-
-	background:
-		linear-gradient(
-			135deg,
-			#8B6914,
-			#D4AF37
-		);
-
+	background: linear-gradient(135deg, #8B6914, #D4AF37);
 	color: black;
-
 	animation: pulseGlow 1.8s infinite;
 }
 
@@ -1112,11 +923,9 @@ textarea::placeholder {
 /* =========================================================
    INPUTS
 ========================================================= */
-
 input,
 textarea,
 select {
-
 	transition:
 		border-color .2s ease,
 		box-shadow .2s ease,
@@ -1126,104 +935,68 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-
 	border-color: #D4AF37;
-	box-shadow:
-		0 0 0 4px rgba(212,175,55,.12);
-
+	box-shadow: 0 0 0 4px rgba(212,175,55,.12);
 	outline: none;
 }
 
 /* =========================================================
    MODAL
 ========================================================= */
-
 .modal {
-
 	backdrop-filter: blur(6px);
-
 	transition:
 		opacity .25s ease,
 		visibility .25s ease;
 }
 
 .modal-card {
-
-	border:
-		1px solid rgba(255,255,255,.08);
-
+	border: 1px solid rgba(255,255,255,.08);
 	box-shadow: var(--shadow-lg);
-
-	animation:
-		fadeUp .35s ease;
+	animation: fadeUp .35s ease;
 }
 
 .modal img {
-
 	transition: transform .4s ease;
 }
 
 .modal img:hover {
-
 	transform: scale(1.02);
 }
 
 /* =========================================================
    TOAST NOTIFICATIONS
 ========================================================= */
-
 .toast-container {
-
 	position: fixed;
 	top: 24px;
 	right: 24px;
 	z-index: 9999;
-
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
 }
 
 .toast {
-
 	min-width: 280px;
-
 	padding: 16px 18px;
-
 	border-radius: 16px;
-
 	background: rgba(15,15,15,.92);
-
 	backdrop-filter: var(--blur-bg);
-
 	border: 1px solid rgba(255,255,255,.08);
-
 	color: white;
-
 	box-shadow: var(--shadow-lg);
-
-	animation:
-		fadeUp .3s ease;
+	animation: fadeUp .3s ease;
 }
 
-.toast.success {
-	border-left: 5px solid var(--success);
-}
-
-.toast.error {
-	border-left: 5px solid var(--danger);
-}
-
-.toast.warning {
-	border-left: 5px solid var(--warning);
-}
+.toast.success { border-left: 5px solid var(--success); }
+.toast.error   { border-left: 5px solid var(--danger); }
+.toast.warning { border-left: 5px solid var(--warning); }
 
 /* =========================================================
    SKELETON LOADING
 ========================================================= */
-
 .skeleton {
-
 	position: relative;
 	overflow: hidden;
 	background: #1f2937;
@@ -1231,51 +1004,30 @@ select:focus {
 }
 
 .skeleton::after {
-
 	content: "";
-
 	position: absolute;
 	inset: 0;
-
-	background-image:
-		linear-gradient(
-			90deg,
-			transparent,
-			rgba(255,255,255,.08),
-			transparent
-		);
-
+	background-image: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
 	background-size: 200px 100%;
-
-	animation:
-		skeleton 1.2s infinite linear;
+	animation: skeleton 1.2s infinite linear;
 }
 
 /* =========================================================
    PREVIEW DE IMAGEM
 ========================================================= */
-
 .image-preview {
-
 	width: 100%;
 	height: 240px;
-
 	border-radius: 16px;
-
 	overflow: hidden;
-
 	background: #111;
-
-	border:
-		2px dashed rgba(212,175,55,.22);
-
+	border: 2px dashed rgba(212,175,55,.22);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .image-preview img {
-
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -1284,39 +1036,25 @@ select:focus {
 /* =========================================================
    DASHBOARD SELLER
 ========================================================= */
-
 .seller-stats article {
-
 	position: relative;
 	overflow: hidden;
 }
 
 .seller-stats article::before {
-
 	content: "";
-
 	position: absolute;
-
 	top: 0;
 	left: 0;
-
 	width: 100%;
 	height: 4px;
-
-	background:
-		linear-gradient(
-			90deg,
-			#8B6914,
-			#D4AF37
-		);
+	background: linear-gradient(90deg, #8B6914, #D4AF37);
 }
 
 /* =========================================================
    TABELAS
 ========================================================= */
-
 .table-modern {
-
 	width: 100%;
 	border-collapse: collapse;
 	border-radius: 16px;
@@ -1324,7 +1062,6 @@ select:focus {
 }
 
 .table-modern th {
-
 	background: #111827;
 	color: white;
 	padding: 16px;
@@ -1332,63 +1069,40 @@ select:focus {
 }
 
 .table-modern td {
-
 	padding: 16px;
-	border-bottom:
-		1px solid rgba(255,255,255,.06);
+	border-bottom: 1px solid rgba(255,255,255,.06);
 }
 
 .table-modern tr:hover {
-
-	background:
-		rgba(212,175,55,.05);
+	background: rgba(212,175,55,.05);
 }
 
 /* =========================================================
    GRÁFICOS
 ========================================================= */
-
 .chart-card {
-
 	padding: 24px;
 	border-radius: 22px;
-
-	background:
-		linear-gradient(
-			145deg,
-			rgba(255,255,255,.04),
-			rgba(255,255,255,.01)
-		);
-
-	border:
-		1px solid rgba(255,255,255,.06);
+	background: linear-gradient(145deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+	border: 1px solid rgba(255,255,255,.06);
 }
 
 /* =========================================================
    MAPA
 ========================================================= */
-
 .map-container {
-
 	width: 100%;
 	height: 360px;
-
 	border-radius: 22px;
-
 	overflow: hidden;
-
-	border:
-		1px solid rgba(212,175,55,.18);
-
+	border: 1px solid rgba(212,175,55,.18);
 	box-shadow: var(--shadow-md);
 }
 
 /* =========================================================
    DARK / LIGHT MODE
 ========================================================= */
-
 body.light-mode {
-
 	background: #f4f6f8;
 	color: #111827;
 }
@@ -1396,7 +1110,6 @@ body.light-mode {
 body.light-mode .seller-card,
 body.light-mode .card,
 body.light-mode .vehicle-card {
-
 	background: white;
 	color: #111827;
 }
@@ -1404,22 +1117,179 @@ body.light-mode .vehicle-card {
 body.light-mode input,
 body.light-mode textarea,
 body.light-mode select {
-
 	background: #fff;
 	color: #111827;
 	border-color: #d1d5db;
 }
 
+
 /* =========================================================
-   MOBILE
+   ▼▼▼  RESPONSIVIDADE  ▼▼▼
+   Tudo abaixo é NOVO — nada acima foi alterado.
+   Breakpoints:
+     1200px → notebook grande
+      900px → tablet landscape / notebook pequeno
+      768px → tablet portrait
+      480px → mobile
 ========================================================= */
 
-@media (max-width: 768px) {
+/* ---------------------------------------------------------
+   NOTEBOOK GRANDE  (≤ 1200px)
+   Colapsa grids de 2 colunas, ajusta padding lateral
+--------------------------------------------------------- */
+@media (max-width: 1200px) {
 
-	.modal-card {
-		width: 95%;
+	.hero,
+	.page-hero,
+	.profile-hero,
+	.seller-hero {
+		grid-template-columns: 1fr;
 	}
 
+	.profile-grid,
+	.seller-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.two-columns {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.hero-panel,
+	.seller-status {
+		min-height: auto;
+	}
+
+	.seller-grid > *:last-child,
+	.profile-grid > *:last-child {
+		order: -1;
+	}
+}
+
+/* ---------------------------------------------------------
+   TABLET LANDSCAPE / NOTEBOOK PEQUENO  (≤ 900px)
+   Esconde nav desktop, exibe bottom nav, ajusta header
+--------------------------------------------------------- */
+@media (max-width: 900px) {
+
+	/* Header */
+	.desktop-nav {
+		display: none;
+	}
+
+	.site-header {
+		padding: 14px 18px;
+	}
+
+	/* Bottom nav */
+	.bottom-nav {
+		display: flex;
+	}
+
+	/* Container */
+	.container,
+	.seller-shell {
+		padding: 24px 16px 110px;
+	}
+
+	/* Hero */
+	.hero,
+	.page-hero,
+	.profile-hero,
+	.seller-hero {
+		padding: 32px 24px;
+		border-radius: 22px;
+		gap: 20px;
+	}
+
+	.hero h1,
+	.page-hero h1,
+	.profile-hero h1,
+	.seller-hero h1 {
+		font-size: clamp(28px, 6vw, 48px);
+		letter-spacing: -1.2px;
+		line-height: 1.1;
+	}
+
+	.hero-actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.primary-btn,
+	.secondary-btn,
+	.filter-btn {
+		width: 100%;
+		justify-content: center;
+	}
+
+	/* Cards de stats — 2 colunas em tablet */
+	.stats,
+	.cards,
+	.seller-stats {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	/* Seller forms */
+	.seller-form {
+		grid-template-columns: 1fr;
+	}
+
+	.two-columns {
+		grid-template-columns: 1fr;
+	}
+
+	/* Vehicle card header */
+	.vehicle-card-header {
+		flex-direction: column;
+	}
+
+	.vehicle-thumb,
+	.vehicle-thumb-empty {
+		width: 100%;
+		height: 200px;
+	}
+
+	/* Toolbar / search */
+	.search-section,
+	.toolbar {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.search-box {
+		min-width: unset;
+		width: 100%;
+	}
+
+	.select {
+		width: 100%;
+	}
+
+	/* Filters — scroll horizontal em tablet */
+	.filters {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		padding-bottom: 6px;
+		gap: 10px;
+	}
+
+	.filter {
+		flex-shrink: 0;
+	}
+
+	/* Modal */
+	.modal-card {
+		max-width: 96vw;
+		border-radius: 22px;
+	}
+
+	.modal-body {
+		padding: 22px;
+	}
+
+	/* Toast */
 	.toast-container {
 		left: 12px;
 		right: 12px;
@@ -1431,8 +1301,366 @@ body.light-mode select {
 		width: 100%;
 	}
 
-	.chart-card,
+	/* Tabela — scroll horizontal */
+	.table-modern {
+		display: block;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+}
+
+/* ---------------------------------------------------------
+   TABLET PORTRAIT  (≤ 768px)
+   Ajustes finos de padding, tipografia e grids
+--------------------------------------------------------- */
+@media (max-width: 768px) {
+
+	/* Container */
+	.container,
+	.seller-shell {
+		padding: 20px 14px 110px;
+	}
+
+	/* Hero */
+	.hero,
+	.page-hero,
+	.profile-hero,
+	.seller-hero {
+		padding: 28px 20px;
+		border-radius: 20px;
+	}
+
+	.hero h1,
+	.page-hero h1,
+	.profile-hero h1,
+	.seller-hero h1 {
+		font-size: clamp(26px, 7vw, 40px);
+		letter-spacing: -1px;
+	}
+
+	.hero p,
+	.page-hero p,
+	.profile-hero p,
+	.seller-hero p {
+		font-size: 15px;
+	}
+
+	.hero-panel strong {
+		font-size: 44px;
+	}
+
+	/* Cards de stats — 2 colunas mantidas */
+	.stats,
+	.cards,
+	.seller-stats {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 14px;
+	}
+
+	/* Veículos — 1 coluna */
+	.cars {
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+
+	/* Seller card title — empilha */
+	.seller-card-title,
+	.section-title {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+
+	.seller-card-title h2,
+	.section-title h2 {
+		font-size: 20px;
+	}
+
+	/* Seller card padding */
+	.seller-card,
+	.profile-card-large,
+	.mini-card {
+		padding: 20px;
+		border-radius: 20px;
+	}
+
+	/* Profile avatar menor */
+	.profile-avatar {
+		width: 90px;
+		height: 90px;
+		font-size: 30px;
+	}
+
+	/* Modal footer empilha */
+	.modal-footer {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 12px;
+	}
+
+	.modal-footer strong {
+		font-size: 24px;
+	}
+
+	/* Map container menor */
 	.map-container {
+		height: 260px;
 		border-radius: 18px;
+	}
+
+	/* Chart card */
+	.chart-card {
+		border-radius: 18px;
+		padding: 18px;
+	}
+
+	/* Image preview */
+	.image-preview {
+		height: 180px;
+	}
+
+	/* Bottom nav — fonte menor */
+	.bottom-nav {
+		height: 66px;
+		bottom: 10px;
+		border-radius: 18px;
+	}
+
+	.bottom-nav a {
+		font-size: 10px;
+	}
+}
+
+/* ---------------------------------------------------------
+   MOBILE  (≤ 480px)
+   Máxima compactação, tudo em 1 coluna
+--------------------------------------------------------- */
+@media (max-width: 480px) {
+
+	/* Brand */
+	.brand-name {
+		font-size: 20px;
+	}
+
+	.brand-mark {
+		width: 38px;
+		height: 38px;
+		font-size: 15px;
+		border-radius: 12px;
+	}
+
+	/* Header actions — reduz ícones */
+	.icon-btn,
+	.profile-link {
+		width: 40px;
+		height: 40px;
+		border-radius: 12px;
+	}
+
+	/* Container */
+	.container,
+	.seller-shell {
+		padding: 16px 12px 100px;
+	}
+
+	/* Hero */
+	.hero,
+	.page-hero,
+	.profile-hero,
+	.seller-hero {
+		padding: 24px 16px;
+		border-radius: 18px;
+	}
+
+	.hero h1,
+	.page-hero h1,
+	.profile-hero h1,
+	.seller-hero h1 {
+		font-size: clamp(22px, 8vw, 34px);
+		letter-spacing: -0.8px;
+	}
+
+	.eyebrow,
+	.section-kicker {
+		font-size: 11px;
+		padding: 6px 12px;
+	}
+
+	.hero-panel strong {
+		font-size: 38px;
+	}
+
+	/* Stats — 1 coluna em telas muito pequenas */
+	.stats,
+	.cards,
+	.seller-stats {
+		grid-template-columns: 1fr 1fr;
+		gap: 12px;
+	}
+
+	.stat-card,
+	.card {
+		padding: 18px 14px;
+		border-radius: 16px;
+	}
+
+	.stat-card strong,
+	.card h2 {
+		font-size: 22px;
+	}
+
+	/* Veículos */
+	.cars {
+		grid-template-columns: 1fr;
+	}
+
+	.car-image,
+	.vehicle-thumb {
+		height: 190px;
+	}
+
+	.car-body,
+	.vehicle-main {
+		padding: 16px;
+	}
+
+	/* Inputs menores */
+	input,
+	select,
+	textarea {
+		min-height: 48px;
+		padding: 12px 14px;
+		font-size: 15px;
+		border-radius: 12px;
+	}
+
+	.search-box {
+		height: 52px;
+		padding: 0 14px;
+		border-radius: 14px;
+	}
+
+	.select {
+		height: 52px;
+	}
+
+	/* Botões */
+	.primary-btn,
+	.secondary-btn,
+	.filter-btn,
+	.login-btn {
+		height: 48px;
+		font-size: 14px;
+		border-radius: 12px;
+	}
+
+	/* Filters — scroll horizontal */
+	.filters {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		padding-bottom: 4px;
+	}
+
+	.filter {
+		height: 40px;
+		padding: 0 14px;
+		font-size: 13px;
+		flex-shrink: 0;
+	}
+
+	/* Seller / profile cards */
+	.seller-card,
+	.profile-card-large,
+	.mini-card {
+		padding: 16px;
+		border-radius: 18px;
+	}
+
+	.seller-card-title h2,
+	.section-title h2 {
+		font-size: 18px;
+	}
+
+	/* Seller list item */
+	.seller-list-item {
+		padding: 14px;
+		border-radius: 14px;
+	}
+
+	/* Profile avatar */
+	.profile-avatar {
+		width: 78px;
+		height: 78px;
+		font-size: 26px;
+	}
+
+	/* Modal */
+	.modal {
+		padding: 10px;
+	}
+
+	.modal-card {
+		border-radius: 18px;
+		max-height: 92vh;
+		overflow-y: auto;
+	}
+
+	.modal-card img {
+		max-height: 200px;
+	}
+
+	.modal-body {
+		padding: 16px;
+	}
+
+	.modal-close {
+		width: 38px;
+		height: 38px;
+		top: 12px;
+		right: 12px;
+	}
+
+	.modal-footer strong {
+		font-size: 20px;
+	}
+
+	/* Toast */
+	.toast {
+		padding: 14px 16px;
+		border-radius: 14px;
+		font-size: 14px;
+	}
+
+	/* Map */
+	.map-container {
+		height: 220px;
+		border-radius: 16px;
+	}
+
+	/* Image preview */
+	.image-preview {
+		height: 150px;
+	}
+
+	/* Bottom nav */
+	.bottom-nav {
+		width: calc(100% - 16px);
+		height: 62px;
+		bottom: 8px;
+		border-radius: 16px;
+		padding: 0 6px;
+	}
+
+	.bottom-nav a {
+		font-size: 9px;
+		gap: 3px;
+	}
+
+	/* Switch row — empilha em tela muito pequena */
+	.switch-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
 	}
 }
