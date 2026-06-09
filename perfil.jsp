@@ -5,7 +5,7 @@ String usuarioLogado = (String) session.getAttribute("usuarioLogado");
 String tipoUsuario = (String) session.getAttribute("tipoUsuario");
 
 if (usuarioLogado == null) {
-	response.sendRedirect("login.jsp");
+	response.sendRedirect("index.jsp");
 	return;
 }
 
@@ -69,7 +69,7 @@ if (!nomeUsuario.trim().isEmpty()) {
 	<nav class="desktop-nav" aria-label="Navegacao principal">
 		<a href="consumidor.jsp">Inicio</a>
 		<a href="veiculos.jsp">Veiculos</a>
-		<a href="servicos.html">Servicos</a>
+		<a href="servicos.jsp">Serviços</a>
 		<a href="favoritos.jsp">
 			Favoritos <span data-favorite-count>0</span>
 		</a>
@@ -197,7 +197,7 @@ if (!nomeUsuario.trim().isEmpty()) {
 
 	<a class="active" href="vendedorservicos">
 		<i data-lucide="wrench"></i>
-		Servicos
+		Serviços
 	</a>
 
 	<a class="nav-item" href="favoritos.jsp">
