@@ -60,7 +60,7 @@ public class Controller extends HttpServlet {
 		} else if (action.equals("/api/lojas")) {
     listarLojasMapa(request, response);
 		} else {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("index.jsp");
 		}
 	}
 
@@ -95,7 +95,7 @@ public class Controller extends HttpServlet {
 		}  else if (action.equals("/editarDadosVeiculo")) {
 			atualizarDadosVeiculo(request, response);
 		}	else {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("index.jsp");
 		}
 	}
 
@@ -132,115 +132,128 @@ public class Controller extends HttpServlet {
 			return;
 		}
 
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("index.jsp");
 	}
 
 	protected void cadastrarEmpresa(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+	        throws ServletException, IOException {
 
-    System.out.println("CHEGOU NO CADASTRO EMPRESA");
+	    System.out.println("CHEGOU NO CADASTRO EMPRESA");
 
-    JavaBeans usuario = new JavaBeans();
+	    JavaBeans usuario = new JavaBeans();
 
-    usuario.setNome(request.getParameter("nome"));
-    usuario.setEmail(request.getParameter("email"));
-    usuario.setSenha(request.getParameter("senha"));
-    usuario.setNumeroTelefone(request.getParameter("telefone"));
+	    usuario.setNome(request.getParameter("nome"));
+	    usuario.setEmail(request.getParameter("email"));
+	    usuario.setSenha(request.getParameter("senha"));
+	    usuario.setNumeroTelefone(request.getParameter("telefone"));
 
-    String cpf = request.getParameter("cpf");
+	    String cpf = request.getParameter("cpf");
 
-    if (cpf != null) {
-        cpf = cpf.replace(".", "").replace("-", "");
-    }
+	    if (cpf != null) {
+	        cpf = cpf.replace(".", "").replace("-", "");
+	    }
 
-    usuario.setCpf(cpf);
-    usuario.setTipoUsuario("EMPRESA");
+	    usuario.setCpf(cpf);
+	    usuario.setTipoUsuario("EMPRESA");
 
-    if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()) {
-        response.sendRedirect("cadastro.jsp?erro=nome");
-        return;
-    }
+	    if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()) {
+	        response.sendRedirect("cadastro.jsp?erro=nome");
+	        return;
+	    }
 
-    if (usuario.getEmail() == null || usuario.getEmail().trim().isEmpty()) {
-        response.sendRedirect("cadastro.jsp?erro=email");
-        return;
-    }
+	    if (usuario.getEmail() == null || usuario.getEmail().trim().isEmpty()) {
+	        response.sendRedirect("cadastro.jsp?erro=email");
+	        return;
+	    }
 
-    if (usuario.getSenha() == null || usuario.getSenha().trim().isEmpty()) {
-        response.sendRedirect("cadastro.jsp?erro=senha");
-        return;
-    }
+	    if (usuario.getSenha() == null || usuario.getSenha().trim().isEmpty()) {
+	        response.sendRedirect("cadastro.jsp?erro=senha");
+	        return;
+	    }
 
-    int idUsuarioGerado = dao.cadastrarUsuario(usuario);
+	    int idUsuarioGerado = dao.cadastrarUsuario(usuario);
 
-    if (idUsuarioGerado <= 0) {
-        response.sendRedirect("cadastro.jsp?erro=usuario");
-        return;
-    }
+	    if (idUsuarioGerado <= 0) {
+	        response.sendRedirect("cadastro.jsp?erro=usuario");
+	        return;
+	    }
 
-    JavaBeans empresa = new JavaBeans();
+	    JavaBeans empresa = new JavaBeans();
 
-    empresa.setIdUsuario(idUsuarioGerado);
-    empresa.setNomeEmpresa(request.getParameter("nomeFantasia"));
-    empresa.setRazaoSocial(request.getParameter("razaoSocial"));
+	    empresa.setIdUsuario(idUsuarioGerado);
+	    empresa.setNomeEmpresa(request.getParameter("nomeFantasia"));
+	    empresa.setRazaoSocial(request.getParameter("razaoSocial"));
 
-    String cnpj = request.getParameter("cnpj");
+	    String cnpj = request.getParameter("cnpj");
 
-    if (cnpj != null) {
-        cnpj = cnpj.replace(".", "").replace("/", "").replace("-", "");
-    }
+	    if (cnpj != null) {
+	        cnpj = cnpj.replace(".", "").replace("/", "").replace("-", "");
+	    }
 
-    empresa.setCnpj(cnpj);
-    empresa.setDescricao(request.getParameter("descricao"));
-    empresa.setNumeroTelefone(request.getParameter("telefone"));
-    empresa.setEmail(request.getParameter("email"));
-    empresa.setCategoria(request.getParameter("categoria"));
+	    empresa.setCnpj(cnpj);
+	    empresa.setDescricao(request.getParameter("descricao"));
+	    empresa.setNumeroTelefone(request.getParameter("telefone"));
+	    empresa.setEmail(request.getParameter("email"));
+	    empresa.setCategoria(request.getParameter("categoria"));
 
-    if (empresa.getNomeEmpresa() == null || empresa.getNomeEmpresa().trim().isEmpty()) {
-        response.sendRedirect("cadastro.jsp?erro=empresa");
-        return;
-    }
+	    if (empresa.getNomeEmpresa() == null || empresa.getNomeEmpresa().trim().isEmpty()) {
+	        response.sendRedirect("cadastro.jsp?erro=empresa");
+	        return;
+	    }
 
-    if (empresa.getCnpj() == null || empresa.getCnpj().trim().isEmpty()) {
-        response.sendRedirect("cadastro.jsp?erro=cnpj");
-        return;
-    }
+	    if (empresa.getCnpj() == null || empresa.getCnpj().trim().isEmpty()) {
+	        response.sendRedirect("cadastro.jsp?erro=cnpj");
+	        return;
+	    }
 
-    if (empresa.getCategoria() == null || empresa.getCategoria().trim().isEmpty()) {
-        response.sendRedirect("cadastro.jsp?erro=categoria");
-        return;
-    }
+	    if (empresa.getCategoria() == null || empresa.getCategoria().trim().isEmpty()) {
+	        response.sendRedirect("cadastro.jsp?erro=categoria");
+	        return;
+	    }
 
-    int idEmpresaGerado = dao.cadastrarEmpresa(empresa);
+	    int idEmpresaGerado = dao.cadastrarEmpresa(empresa);
 
-    if (idEmpresaGerado <= 0) {
-        response.sendRedirect("cadastro.jsp?erro=empresa");
-        return;
-    }
+	    if (idEmpresaGerado <= 0) {
+	        response.sendRedirect("cadastro.jsp?erro=empresa");
+	        return;
+	    }
 
-    JavaBeans local = new JavaBeans();
+	    JavaBeans local = new JavaBeans();
 
-    String cep = request.getParameter("cep");
+	    String cep = request.getParameter("cep");
+	    if (cep != null) {
+	        cep = cep.replace("-", "").replace(".", "").trim();
+	    }
 
-    if (cep != null) {
-        cep = cep.replace("-", "").replace(".", "").trim();
-    }
+	    local.setIdEmpresa(idEmpresaGerado);
+	    local.setCep(cep);
+	    local.setLogradouro(request.getParameter("logradouro") != null ? request.getParameter("logradouro") : "");
+	    local.setBairro(request.getParameter("bairro") != null ? request.getParameter("bairro") : "");
+	    local.setCidade(request.getParameter("cidade") != null ? request.getParameter("cidade") : "");
+	    local.setEstado(request.getParameter("estado") != null ? request.getParameter("estado") : "");
+	    local.setNumero(request.getParameter("numero"));
 
-    local.setIdEmpresa(idEmpresaGerado);
-    local.setCep(cep);
+	    String latTexto = request.getParameter("latitude");
+	    String lonTexto = request.getParameter("longitude");
 
-    // Temporário: depois vamos preencher automaticamente via ViaCEP e OpenStreetMap.
-    local.setLogradouro("");
-    local.setBairro("");
-    local.setCidade("");
-    local.setEstado("");
-    local.setLatitude(0);
-    local.setLongitude(0);
+	    double latitude = 0;
+	    double longitude = 0;
 
-    dao.cadastrarLocal(local);
+	    if (latTexto != null && !latTexto.trim().isEmpty()) {
+	        latitude = Double.parseDouble(latTexto.trim());
+	    }
 
-    response.sendRedirect("login.jsp");
-}
+	    if (lonTexto != null && !lonTexto.trim().isEmpty()) {
+	        longitude = Double.parseDouble(lonTexto.trim());
+	    }
+
+	    local.setLatitude(latitude);
+	    local.setLongitude(longitude);
+
+	    dao.cadastrarLocal(local);
+
+	    response.sendRedirect("index.jsp");
+	}
 
 	protected void loginUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -325,7 +338,7 @@ public class Controller extends HttpServlet {
 		Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
 
 		if (idUsuarioSessao == null) {
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 			return;
 		}
 
@@ -398,7 +411,7 @@ public class Controller extends HttpServlet {
 		Object idEmpresaSessao = request.getSession().getAttribute("idEmpresa");
 
 		if (idEmpresaSessao == null) {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("index.jsp");
 			return;
 		}
 
@@ -431,7 +444,7 @@ public class Controller extends HttpServlet {
 		Object idEmpresaSessao = request.getSession().getAttribute("idEmpresa");
 
 		if (idEmpresaSessao == null) {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("index.jsp");
 			return;
 		}
 
@@ -572,7 +585,7 @@ public class Controller extends HttpServlet {
 		Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
 
 		if (idUsuarioSessao == null) {
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 			return;
 		}
 
@@ -592,7 +605,7 @@ public class Controller extends HttpServlet {
 		Object idEmpresaSessao = request.getSession().getAttribute("idEmpresa");
 
 		if (idEmpresaSessao == null) {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("index.jsp");
 			return;
 		}
 
@@ -614,7 +627,7 @@ public class Controller extends HttpServlet {
 		Object idEmpresaSessao = request.getSession().getAttribute("idEmpresa");
 
 		if (idEmpresaSessao == null) {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("index.jsp");
 			return;
 		}
 
@@ -636,7 +649,7 @@ public class Controller extends HttpServlet {
 		Object idUsuarioSessao = request.getSession().getAttribute("idUsuario");
 
 		if (idUsuarioSessao == null) {
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 			return;
 		}
 
@@ -671,7 +684,7 @@ public class Controller extends HttpServlet {
 	    System.out.println("ID EMPRESA NA SESSAO: " + idEmpresaSessao);
 
 	    if (idUsuarioSessao == null || idEmpresaSessao == null) {
-	        response.sendRedirect("login.jsp");
+	        response.sendRedirect("index.jsp");
 	        return;
 	    }
 
