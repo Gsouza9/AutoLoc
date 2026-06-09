@@ -43,7 +43,7 @@ if (destaques == null)
 			<a class="active"
 				href="${pageContext.request.contextPath}/consumidor">Início</a> <a
 				href="${pageContext.request.contextPath}/navegacao">Veículos</a> <a
-				href="servicos.html">Serviços</a> <a href="favoritos.jsp">
+				href="servicos.jsp">Serviços</a> <a href="favoritos.jsp">
 				Favoritos <span data-favorite-count>0</span>
 			</a>
 		</nav>
@@ -169,7 +169,7 @@ if (destaques == null)
 					<span class="section-kicker">Pós-venda completo</span>
 					<h2>Serviços AutoLoc</h2>
 				</div>
-				<a href="servicos.html">Ver todos</a>
+				<a href="servicos.jsp">Ver todos</a>
 			</div>
 
 			<div class="services" data-home-services></div>
@@ -183,7 +183,7 @@ if (destaques == null)
 			data-lucide="home"></i>Início</a> <a class="nav-item"
 			href="${pageContext.request.contextPath}/navegacao"><i
 			data-lucide="car"></i>Veículos</a> <a class="nav-item"
-			href="servicos.html"><i data-lucide="wrench"></i>Serviços</a> <a
+			href="servicos.jsp"><i data-lucide="wrench"></i>Serviços</a> <a
 			class="nav-item" href="favoritos.jsp"><i data-lucide="heart"></i>Favoritos</a>
 		<a class="nav-item" href="perfil.jsp"><i data-lucide="user"></i>Perfil</a>
 	</nav>
