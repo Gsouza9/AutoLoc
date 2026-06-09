@@ -53,6 +53,7 @@ public class JavaBeans {
 	private String bairro;
 	private double latitude;
 	private double longitude;
+	private String numero;
 
 	public JavaBeans() {
 		super();
@@ -409,5 +410,13 @@ public class JavaBeans {
 	}
 	public void setLongitude(double longitude) {
 	    this.longitude = longitude;
+	}
+
+	public String getNumero() {
+	    return numero;
+	}
+
+	public void setNumero(String numero) {
+	    this.numero = numero;
 	}
 }
