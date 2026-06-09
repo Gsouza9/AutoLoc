@@ -9,8 +9,8 @@
 
 <title>Cadastro - AutoLoc</title>
 
-<link rel="icon" type="image/png"
-	href="${pageContext.request.contextPath}/img/logocerta.png">
+<link rel="icon" type="imagem/png"
+	href="${pageContext.request.contextPath}/imagem/logocerta.png">
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -30,33 +30,23 @@
 
 				<div class="logo-mobile">
 					<img
-						src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png"
+						src="${pageContext.request.contextPath}/imagem/logoautolocksemfundo.png"
 						alt="">
 				</div>
 
 				<div class="botoes-topo">
-
-					<button type="button" onclick="window.location.href='login.jsp'">
-						Entrar</button>
-
+					<button type="button" onclick="window.location.href='index.jsp'">Entrar</button>
 					<button class="ativo" type="button">Criar Conta</button>
-
 				</div>
 
 				<h1>Criar Conta</h1>
-
 				<p class="subtitulo">Preencha os dados para começar.</p>
 
 				<form id="formCadastro" method="post" action="cadastrol">
 
 					<div class="tipo-conta">
-
-						<button type="button" class="tipo-btn ativo" id="btnVendedor">
-							Vendedor</button>
-
-						<button type="button" class="tipo-btn" id="btnUsuario">
-							Usuário</button>
-
+						<button type="button" class="tipo-btn ativo" id="btnVendedor">Vendedor</button>
+						<button type="button" class="tipo-btn" id="btnUsuario">Usuário</button>
 					</div>
 
 					<div id="formVendedor">
@@ -77,8 +67,8 @@
 						</div>
 
 						<div class="grupo-input">
-							<label>CEP</label> <input type="text" name="cep"
-								placeholder="Digite o CEP">
+							<label>CPF</label> <input type="text" name="cpf"
+								placeholder="Digite seu CPF">
 						</div>
 
 						<div class="grupo-input">
@@ -113,10 +103,46 @@
 								placeholder="Descrição da empresa">
 						</div>
 
+						<!-- CEP e endereço -->
+						<div class="grupo-input">
+							<label>CEP</label> <input type="text" id="cep" name="cep"
+								placeholder="Digite o CEP" maxlength="9">
+						</div>
+
+						<div class="grupo-input">
+							<label>Estado</label> <input type="text" id="estado"
+								name="estado" placeholder="UF" maxlength="2" readonly>
+						</div>
+
+						<!-- Troque o campo endereço por esses: -->
+						<div class="grupo-input full">
+							<label>Endereço</label> <input type="text" id="logradouro"
+								name="logradouro" placeholder="Rua" readonly>
+						</div>
+
+						<div class="grupo-input">
+							<label>Número</label> <input type="text" id="numero"
+								name="numero" placeholder="Número do estabelecimento">
+						</div>
+
+						<div class="grupo-input full">
+							<label>Bairro</label> <input type="text" id="bairro"
+								name="bairro" placeholder="Bairro" readonly>
+						</div>
+
+						<div class="grupo-input full">
+							<label>Cidade</label> <input type="text" id="cidade"
+								name="cidade" placeholder="Cidade" readonly>
+						</div>
+
+						<!-- Campos hidden para latitude e longitude -->
+						<input type="hidden" id="latitude" name="latitude"> <input
+							type="hidden" id="longitude" name="longitude">
 						<div class="grupo-input full">
 							<label>Senha</label> <input type="password" name="senha"
 								placeholder="Digite sua senha">
 						</div>
+
 						<div class="grupo-input full">
 							<label>Confirmar Senha</label> <input type="password"
 								id="confirmarSenhaVendedor" placeholder="Confirme sua senha">
@@ -150,19 +176,17 @@
 							<label>Senha</label> <input type="password" name="senha"
 								placeholder="Digite sua senha">
 						</div>
+
 						<div class="grupo-input full">
 							<label>Confirmar Senha</label> <input type="password"
-								id="confirmarSenhaVendedor" placeholder="Confirme sua senha">
+								id="confirmarSenhaUsuario" placeholder="Confirme sua senha">
 						</div>
 
 					</div>
 
 					<div class="opcoes">
-
-						<label> <input type="checkbox" required> Aceito os
-							termos
-						</label>
-
+						<label><input type="checkbox" required> Aceito os
+							termos</label>
 					</div>
 
 					<button class="botao-cadastro" type="submit">Criar Conta</button>
@@ -177,7 +201,7 @@
 
 			<div class="logo">
 				<img
-					src="${pageContext.request.contextPath}/img/logoautolocksemfundo.png"
+					src="${pageContext.request.contextPath}/imagem/logoautolocksemfundo.png"
 					alt="">
 			</div>
 
@@ -185,61 +209,48 @@
 				com facilidade</h2>
 
 			<div class="item-info">
-
 				<div class="icone">🚗</div>
-
 				<div>
 					<h3>Cadastro Rápido</h3>
 					<p>Crie sua conta em poucos segundos.</p>
 				</div>
-
 			</div>
 
 			<div class="item-info">
-
 				<div class="icone">⭐</div>
-
 				<div>
 					<h3>Oficinas Avaliadas</h3>
 					<p>Veja avaliações reais de outros usuários.</p>
 				</div>
-
 			</div>
 
 			<div class="item-info">
-
 				<div class="icone">🔧</div>
-
 				<div>
 					<h3>Serviços Automotivos</h3>
 					<p>Encontre serviços próximos.</p>
 				</div>
-
 			</div>
 
 			<div class="cards">
-
 				<div class="card">
 					<h2>1.2K+</h2>
 					<span>Oficinas</span>
 				</div>
-
 				<div class="card">
 					<h2>5K+</h2>
 					<span>Usuários</span>
 				</div>
-
 				<div class="card">
 					<h2>4.9</h2>
 					<span>Avaliação</span>
 				</div>
-
 			</div>
 
 		</div>
 
 	</div>
-	<script src="js/cadastro.js"></script>
 
+	<script src="js/cadastro.js"></script>
 </body>
 </html>
