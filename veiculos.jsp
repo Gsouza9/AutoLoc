@@ -49,7 +49,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		<nav class="desktop-nav" aria-label="Navegacao principal">
 			<a href="${pageContext.request.contextPath}/consumidor">Inicio</a>
 			<a class="active" href="${pageContext.request.contextPath}/navegacao">Veiculos</a>
-			<a href="servicos.html">Servicos</a>
+			<a href="servicos.jsp">Serviços</a>
 			<a href="favoritos.jsp">Favoritos <span data-favorite-count>0</span></a>
 		</nav>
 
@@ -177,7 +177,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 	<nav class="bottom-nav" aria-label="Navegacao inferior">
 		<a class="nav-item" href="${pageContext.request.contextPath}/consumidor"><i data-lucide="home"></i>Inicio</a>
 		<a class="nav-item active" href="${pageContext.request.contextPath}/navegacao"><i data-lucide="car"></i>Veiculos</a>
-		<a class="nav-item" href="servicos.html"><i data-lucide="wrench"></i>Servicos</a>
+		<a class="nav-item" href="servicos.jsp"><i data-lucide="wrench"></i>Serviços</a>
 		<a class="nav-item" href="favoritos.jsp"><i data-lucide="heart"></i>Favoritos</a>
 		<a class="nav-item" href="perfil.jsp"><i data-lucide="user"></i>Perfil</a>
 	</nav>
