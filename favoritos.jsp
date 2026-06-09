@@ -1,173 +1,150 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AutoLoc</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoLoc | Favoritos</title>
 
-<link rel="icon" type="image/png"
-	href="${pageContext.request.contextPath}/img/logoautolocksemfundo.png">
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/login.css">
-
-<link
-	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-	rel="stylesheet">
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<style>
-body {
-	background-color: rgb(0, 0, 0);
-	background: linear-gradient(28deg, #D4AF37, black, #D4AF37);
-}
-</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="styles.css?v=20260519-theme" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  
 </head>
 
-<body>
+<body data-page="favorites">
 
-	<div class="blur blur1"></div>
-	<div class="blur blur2"></div>
+  <header class="site-header">
+    <a class="brand" href="${pageContext.request.contextPath}/consumidor">
+      <span class="brand-mark">AL</span>
+      <span class="brand-name">Auto<span>Loc</span></span>
+    </a>
 
-	<div class="main-container">
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="${pageContext.request.contextPath}/consumidor">Início</a>
+      <a href="${pageContext.request.contextPath}/navegacao">Veículos</a>
+     <a class="active" href="servicos.jsp">Serviços</a>
+      <a class="active" href="favoritos.jsp">
+        Favoritos <span data-favorite-count>0</span>
+      </a>
+    </nav>
 
-		<!-- LOGIN -->
-		<div class="right-side">
+    <div class="header-actions">
+      <a class="icon-btn" href="${pageContext.request.contextPath}/navegacao">
+        <i data-lucide="car"></i>
+      </a>
+      <a class="profile-link" href="perfil.jsp">
+        <i data-lucide="user"></i>
+      </a>
+    </div>
+  </header>
 
-			<div class="login-box">
+  <main class="container">
 
-				<div class="logo-mobile">
-					<img
-						src="${pageContext.request.contextPath}/imagem/logoautolocksemfundo.png"
-						alt="Logo">
-				</div>
+    <section class="page-hero favorites-banner">
+      <span class="eyebrow">Sua seleção</span>
+      <h1>Compare os veículos que você salvou para decidir com calma.</h1>
+      <p>Os favoritos ficam guardados neste navegador e podem ser removidos a qualquer momento.</p>
+    </section>
 
-				<div class="tabs">
-					<button class="active">Entrar</button>
+    <section class="stats">
+      <article class="stat-card">
+        <strong data-favorites-total>0</strong>
+        <span>Favoritos salvos</span>
+      </article>
 
-					<button type="button"
-						onclick="window.location.href='${pageContext.request.contextPath}/cadastro.jsp'">
-						Criar Conta</button>
-				</div>
+      <article class="stat-card">
+        <strong data-favorites-value>R$ 0</strong>
+        <span>Valor total da seleção</span>
+      </article>
 
-				<h1>Bem-vindo!</h1>
+      <article class="stat-card">
+        <strong>24h</strong>
+        <span>Retorno médio do consultor</span>
+      </article>
+    </section>
 
-				<p class="subtitle">Entre na sua conta para continuar.</p>
+    <section class="content-section">
 
-				<form action="${pageContext.request.contextPath}/loginu"
-					method="post">
+      <div class="section-title">
+        <div>
+          <span class="section-kicker">Lista ativa</span>
+          <h2>Meus favoritos</h2>
+        </div>
+        <a href="veiculos.jsp">Adicionar mais</a>
+      </div>
 
-					<div class="input-group">
-						<label>Email</label> <input type="email" name="email"
-							placeholder="Digite seu email" required>
-					</div>
+      <div class="empty-state" data-favorites-empty>
+        <i data-lucide="heart-off"></i>
+        <h3>Nenhum favorito ainda</h3>
+        <p>Explore o catálogo e toque no coração para salvar os modelos que chamarem sua atenção.</p>
+        <a class="primary-btn" href="${pageContext.request.contextPath}/navegacao">Ver veículos</a>
+      </div>
 
-					<div class="input-group">
-						<label>Senha</label> <input type="password" id="senha"
-							name="senha" placeholder="Digite sua senha" required>
-					</div>
+      <div class="cars" data-favorites-grid></div>
 
-					<label class="mostrar-senha"> <input type="checkbox"
-						onclick="mostrarSenha()"> Mostrar senha
-					</label>
+    </section>
 
-					<div class="options">
-						<label> <input type="checkbox" name="lembrar">
-							Lembrar de mim
-						</label> <a href="#">Esqueceu a senha?</a>
-					</div>
+  </main>
 
-					<button type="submit" class="login-btn">Entrar</button>
+  <!-- NAV MOBILE -->
+  <nav class="bottom-nav" aria-label="Navegacao inferior">
+    <a class="nav-item" href="${pageContext.request.contextPath}/consumidor"><i data-lucide="home"></i>Início</a>
+    <a class="nav-item" href="${pageContext.request.contextPath}/navegacao"><i data-lucide="car"></i>Veículos</a>
+    <a class="nav-item" href="servicos.jsp"><i data-lucide="wrench"></i>Serviços</a>
+    <a class="nav-item active" href="favoritos.jsp"><i data-lucide="heart"></i>Favoritos</a>
+    <a class="nav-item" href="perfil.jsp"><i data-lucide="user"></i>Perfil</a>
+  </nav>
 
-				</form>
+  <!-- MODAL -->
+  <div class="modal" id="vehicle-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
 
-				<div class="divider">ou continue com</div>
+    <section class="modal-card" aria-label="Detalhes do veiculo">
+      <button class="modal-close" type="button" data-close-modal aria-label="Fechar">
+        <i data-lucide="x"></i>
+      </button>
 
-				<div class="socials">
+      <img data-modal-image src="" alt="" />
 
-					<button class="social-btn google-btn" type="button">
-						<img src="${pageContext.request.contextPath}/imagem/google.png"
-							alt="Google"> <span>Google</span>
-					</button>
+      <div class="modal-body">
+        <div class="modal-heading">
+          <div>
+            <span class="section-kicker">Detalhes do veiculo</span>
+            <h2 data-modal-title></h2>
+          </div>
 
-				</div>
+          <button class="favorite-btn modal-fav" type="button" data-modal-favorite>
+            <i data-lucide="heart"></i>
+          </button>
+        </div>
 
-				<p class="terms">
-					Ao continuar, você concorda com nossos <span>Termos de Uso</span> e
-					<span>Política de Privacidade</span>.
-				</p>
+        <p data-modal-description></p>
 
-			</div>
+        <div class="car-info modal-meta" data-modal-meta></div>
 
-		</div>
+        <ul class="spec-list" data-modal-specs></ul>
 
-		<!-- LADO ESQUERDO -->
-		<div class="left-side">
+        <div class="modal-footer">
+          <strong data-modal-price></strong>
 
-			<div class="logo">
-				<img
-					src="${pageContext.request.contextPath}/imagem/logoautolocksemfundo.png"
-					class="logo-img" alt="Logo">
-			</div>
+          <button class="primary-btn" type="button" data-modal-interest>
+            Tenho interesse
+          </button>
+        </div>
+      </div>
 
-			<p class="top-text">Encontre oficinas e serviços automotivos com
-				facilidade</p>
+    </section>
+  </div>
 
-			<div class="feature">
-				<div class="icon">🔍</div>
-				<div>
-					<h3>Busca Inteligente</h3>
-					<p>Encontre oficinas e serviços próximos rapidamente.</p>
-				</div>
-			</div>
+  <script src="script.js?v=20260518-fix"></script>
+  <script src="js/scripts.js"></script>
 
-			<div class="feature">
-				<div class="icon">⭐</div>
-				<div>
-					<h3>Avaliações Reais</h3>
-					<p>Veja comentários de outros clientes.</p>
-				</div>
-			</div>
-
-			<div class="feature">
-				<div class="icon">⚡</div>
-				<div>
-					<h3>Atendimento Rápido</h3>
-					<p>Entre em contato facilmente.</p>
-				</div>
-			</div>
-
-			<div class="stats">
-
-				<div class="card">
-					<h2>1.2K+</h2>
-					<span>Oficinas</span>
-				</div>
-
-				<div class="card">
-					<h2>5K+</h2>
-					<span>Usuários</span>
-				</div>
-
-				<div class="card">
-					<h2>4.9</h2>
-					<span>Avaliação</span>
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-
-	<script src="${pageContext.request.contextPath}/js/login.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
