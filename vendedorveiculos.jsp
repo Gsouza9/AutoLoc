@@ -28,6 +28,7 @@ if (veiculos == null) {
 	href="${pageContext.request.contextPath}/css/styles.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/vendedorveiculos.css" />
+	
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"
 	defer></script>
 
@@ -52,7 +53,7 @@ if (veiculos == null) {
 
 		<div class="header-actions">
 			<a class="icon-btn"
-				href="${pageContext.request.contextPath}/login.jsp"
+				href="${pageContext.request.contextPath}/index.jsp"
 				aria-label="Sair" data-clear-role> <i data-lucide="log-out"></i>
 			</a>
 		</div>
@@ -254,6 +255,14 @@ if (veiculos == null) {
 
 		</section>
 	</main>
+	<nav class="bottom-nav" aria-label="Navegacao inferior">
+			<a class="nav-item active" href="${pageContext.request.contextPath}/vendedorveiculos.jsp"><i data-lucide="car"></i>Veículos</a> 
+			<a class="nav-item" href="${pageContext.request.contextPath}/vendedorpainel.jsp"><i data-lucide="home"></i>Loja</a>
+			<a class="nav-item" href="${pageContext.request.contextPath}/vendedorservicos.jsp"><i data-lucide="wrench"></i>Serviços</a>
+			<a class="nav-item" href="${pageContext.request.contextPath}/vendedorinicio.jsp"><i data-lucide="heart"></i>Início</a>
+			
+		<a class="nav-item" href="perfil.jsp"><i data-lucide="user"></i>Perfil</a>
+</nav>
 
 	<script src="${pageContext.request.contextPath}/js/scripts.js"></script>
 	<script src="${pageContext.request.contextPath}/js/vendedorveiculos.js"></script>
