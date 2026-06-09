@@ -11,7 +11,7 @@ public class DAO {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://127.0.0.1:3306/autoloc?useTimezone=true&serverTimezone=UTC";
 	private String user = "root";
-	private String password = "";
+	private String password = "21092007g";
 
 	private Connection conectar() {
 		Connection con = null;
@@ -206,9 +206,9 @@ public int cadastrarEmpresa(JavaBeans empresa) {
 
 	public boolean cadastrarLocal(JavaBeans local) {
 
-    String sql = "INSERT INTO locais "
-            + "(id_empresa, cep, rua, bairro, cidade, estado, latitude, longitude) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO locais "
+		        + "(id_empresa, cep, rua, numero, bairro, cidade, estado, latitude, longitude) "
+		        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try {
         Connection con = conectar();
@@ -223,11 +223,12 @@ public int cadastrarEmpresa(JavaBeans empresa) {
         pst.setInt(1, local.getIdEmpresa());
         pst.setString(2, local.getCep());
         pst.setString(3, local.getLogradouro());
-        pst.setString(4, local.getBairro());
-        pst.setString(5, local.getCidade());
-        pst.setString(6, local.getEstado());
-        pst.setDouble(7, local.getLatitude());
-        pst.setDouble(8, local.getLongitude());
+        pst.setString(4, local.getNumero());
+        pst.setString(5, local.getBairro());
+        pst.setString(6, local.getCidade());
+        pst.setString(7, local.getEstado());
+        pst.setDouble(8, local.getLatitude());
+        pst.setDouble(9, local.getLongitude());
 
         int resultado = pst.executeUpdate();
 
