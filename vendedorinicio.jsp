@@ -46,7 +46,7 @@
   </nav>
 
   <div class="header-actions">
-    <a class="icon-btn" href="${pageContext.request.contextPath}/login.jsp" aria-label="Sair" data-clear-role>
+    <a class="icon-btn" href="${pageContext.request.contextPath}/index.jsp" aria-label="Sair" data-clear-role>
       <i data-lucide="log-out"></i>
     </a>
   </div>
@@ -123,6 +123,15 @@
 
   </section>
 </main>
+
+<nav class="bottom-nav" aria-label="Navegacao inferior">
+			<a class="nav-item active" href="${pageContext.request.contextPath}/vendedorinicio.jsp""><i data-lucide="heart"></i>Serviços</a> 
+			<a class="nav-item" href="${pageContext.request.contextPath}/vendedorveiculos.jsp"><i data-lucide="car"></i>Veículos</a>
+			<a class="nav-item" href="${pageContext.request.contextPath}/vendedorpainel.jsp"><i data-lucide="home"></i>Loja</a>
+			<a class="nav-item" href="${pageContext.request.contextPath}/vendedorservicos.jsp"><i data-lucide="wrench"></i>Início</a>
+			
+		<a class="nav-item" href="perfil.jsp"><i data-lucide="user"></i>Perfil</a>
+</nav>
 
 <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
 </body>
