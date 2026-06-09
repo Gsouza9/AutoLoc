@@ -29,7 +29,7 @@
     <nav class="desktop-nav" aria-label="Navegação principal">
       <a href="${pageContext.request.contextPath}/consumidor">Início</a>
       <a href="${pageContext.request.contextPath}/navegacao">Veículos</a>
-     <a class="active" href="servicos.html">Servicos</a>
+     <a class="active" href="servicos.jsp">Serviços</a>
       <a class="active" href="favoritos.jsp">
         Favoritos <span data-favorite-count>0</span>
       </a>
@@ -97,7 +97,7 @@
   <nav class="bottom-nav" aria-label="Navegacao inferior">
     <a class="nav-item" href="${pageContext.request.contextPath}/consumidor"><i data-lucide="home"></i>Início</a>
     <a class="nav-item" href="${pageContext.request.contextPath}/navegacao"><i data-lucide="car"></i>Veículos</a>
-    <a class="nav-item" href="servicos.html"><i data-lucide="wrench"></i>Serviços</a>
+    <a class="nav-item" href="servicos.jsp"><i data-lucide="wrench"></i>Serviços</a>
     <a class="nav-item active" href="favoritos.jsp"><i data-lucide="heart"></i>Favoritos</a>
     <a class="nav-item" href="perfil.jsp"><i data-lucide="user"></i>Perfil</a>
   </nav>
